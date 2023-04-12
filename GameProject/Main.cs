@@ -13,7 +13,6 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
-using GameProject.Sourse.GamePlay;
 #endregion
 
 namespace GameProject;
@@ -23,9 +22,9 @@ public class Main : Game
     private GraphicsDeviceManager _graphics;
    // private SpriteBatch _spriteBatch;
 
-    World world;
+    private World world;
 
-    Basic2d cursor;
+    private Basic2d cursor;
 
     public Main()
     {
@@ -37,6 +36,14 @@ public class Main : Game
     protected override void Initialize()
     {
         // TODO: Add your initialization logic here
+        Globals.screenWidth = 800; //1600
+        Globals.screenHeight = 500; //900
+
+        _graphics.PreferredBackBufferWidth = Globals.screenWidth;
+        _graphics.PreferredBackBufferHeight = Globals.screenHeight;
+
+
+        _graphics.ApplyChanges();
 
         base.Initialize();
     }
@@ -70,6 +77,7 @@ public class Main : Game
 
         // TODO: Add your update logic here
 
+        Globals.gameTime = gameTime;
         Globals.keyboard.Update();
         Globals.mouse.Update();
 

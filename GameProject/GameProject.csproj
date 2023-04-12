@@ -14,10 +14,13 @@
     <ItemGroup>
       <Compile Remove="Content\2d - Копировать\**" />
       <Compile Remove="Content\2d\**" />
+      <Compile Remove="Content\Projectiles\**" />
       <EmbeddedResource Remove="Content\2d - Копировать\**" />
       <EmbeddedResource Remove="Content\2d\**" />
+      <EmbeddedResource Remove="Content\Projectiles\**" />
       <None Remove="Content\2d - Копировать\**" />
       <None Remove="Content\2d\**" />
+      <None Remove="Content\Projectiles\**" />
     </ItemGroup>
     <ItemGroup>
       <None Remove="Content\bin\Windows\Content\2d\CursorArrow.xnb" />

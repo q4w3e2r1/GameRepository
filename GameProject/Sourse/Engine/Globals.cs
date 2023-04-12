@@ -17,6 +17,10 @@ using GameProject;
 
 namespace GameProject
 {
+
+    public delegate void PassObject(object obj);
+    public delegate object PassObjectAndReturn(object obj);
+
     public class Globals
     {
         public static int screenHeight, screenWidth;
@@ -28,12 +32,27 @@ namespace GameProject
         public static Keyboard keyboard;
         public static MouseControl mouse;
 
+        public static GameTime gameTime;
 
         public static float GetDistance(Vector2 pos, Vector2 target)
         {
             return (float)Math.Sqrt(Math.Pow(pos.X - target.X, 2) + Math.Pow(pos.Y - target.Y, 2));
         }
 
+
+        public static Vector2 RadialMovement(Vector2 focus, Vector2 pos, float speed)
+        {
+            var dist = Globals.GetDistance(pos, focus);
+
+            if(dist <= speed) 
+            {
+                return focus - pos;
+            }
+            else
+            {
+                return (focus - pos) * speed / dist;
+            }
+        }
 
         public static float RotateTowards(Vector2 Pos, Vector2 focus)
         {

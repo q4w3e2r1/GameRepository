@@ -24,10 +24,10 @@ namespace GameProject
 
         public Texture2D model;
 
-        public Basic2d(string path, Vector2 POS, Vector2 DIMS)
+        public Basic2d(string path, Vector2 pos, Vector2 dims)
         {
-            pos = POS;
-            dims = DIMS;
+            this.pos = pos;
+            this.dims = dims;
 
             model = Globals.content.Load<Texture2D>(path);
         }
@@ -38,7 +38,7 @@ namespace GameProject
 
         }
 
-        public virtual void Update() 
+        public virtual void Update(Vector2 OFFSET) 
         {
 
 

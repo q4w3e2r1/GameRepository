@@ -20,11 +20,11 @@ namespace GameProject
         public string key, print, display;
 
         
-        public Key(string KEY, int STATE)
+        public Key(string key, int state)
         {
-            key = KEY;
-            state = STATE;
-            MakePrint(key);
+            this.key = key;
+            this.state = state;
+            MakePrint(this.key);
         }
 
         public virtual void Update()
@@ -33,46 +33,46 @@ namespace GameProject
         }
 
 
-        public void MakePrint(string KEY)
+        public void MakePrint(string key)
         {
-            display = KEY;
+            display = key;
 
             string tempStr = "";
 
-            if(KEY == "A" || KEY == "B" || KEY == "C" || KEY == "D" || KEY == "E" || KEY == "F" || KEY == "G" || KEY == "H" || KEY == "I" || KEY == "J" || KEY == "K" || KEY == "L" || KEY == "M" || KEY == "N" || KEY == "O" || KEY == "P" || KEY == "Q" || KEY == "R" || KEY == "S" || KEY == "T" || KEY == "U" || KEY == "V" || KEY == "W" || KEY == "X" || KEY == "Y" || KEY == "Z")
+            if(key == "A" || key == "B" || key == "C" || key == "D" || key == "E" || key == "F" || key == "G" || key == "H" || key == "I" || key == "J" || key == "K" || key == "L" || key == "M" || key == "N" || key == "O" || key == "P" || key == "Q" || key == "R" || key == "S" || key == "T" || key == "U" || key == "V" || key == "W" || key == "X" || key == "Y" || key == "Z")
             {
-                tempStr = KEY;
+                tempStr = key;
             }
-            if(KEY == "Space")
+            if(key == "Space")
             {
                 tempStr = " ";
             }
-            if(KEY == "OemCloseBrackets")
+            if(key == "OemCloseBrackets")
             {
                 tempStr = "]";
                 display = tempStr;
             }
-            if(KEY == "OemOpenBrackets")
+            if(key == "OemOpenBrackets")
             {
                 tempStr = "[";
                 display = tempStr;
             }
-            if(KEY == "OemMinus")
+            if(key == "OemMinus")
             {
                 tempStr = "-";
                 display = tempStr;
             }
-            if(KEY == "OemPeriod" || KEY == "Decimal")
+            if(key == "OemPeriod" || key == "Decimal")
             {
                 tempStr = ".";
             }
-            if(KEY == "D1" || KEY == "D2" || KEY == "D3" || KEY == "D4" || KEY == "D5" || KEY == "D6" || KEY == "D7" || KEY == "D8" || KEY == "D9" || KEY == "D0")
+            if(key == "D1" || key == "D2" || key == "D3" || key == "D4" || key == "D5" || key == "D6" || key == "D7" || key == "D8" || key == "D9" || key == "D0")
             {
-                tempStr = KEY.Substring(1);
+                tempStr = key.Substring(1);
             }
-            else if(KEY == "NumPad1" || KEY == "NumPad2"  || KEY == "NumPad3" || KEY == "NumPad4" || KEY == "NumPad5" || KEY == "NumPad6" || KEY == "NumPad7" || KEY == "NumPad8" || KEY == "NumPad9" || KEY == "NumPad0")
+            else if(key == "NumPad1" || key == "NumPad2"  || key == "NumPad3" || key == "NumPad4" || key == "NumPad5" || key == "NumPad6" || key == "NumPad7" || key == "NumPad8" || key == "NumPad9" || key == "NumPad0")
             {
-                tempStr = KEY.Substring(6);
+                tempStr = key.Substring(6);
             }
 
 
