@@ -28,8 +28,11 @@ public class World
     public List<Projectile2d> projectiles = new();
     public List<Mob> mobs = new();
     public List<SpawnPoint> spawnPoints = new();
-    public World()
+
+    PassObject ResetWorld;
+    public World(PassObject resetWorld)
     {
+        this.ResetWorld = resetWorld;
         numKilled = 0;
         hero = new Hero("2d\\NormalHero", new Vector2(300, 300), new Vector2(64, 64));
 
@@ -41,51 +44,63 @@ public class World
 
         spawnPoints.Add(new SpawnPoint("2d\\Misc\\circle", new Vector2(50, 50), new Vector2(35, 35)));
 
-        spawnPoints.Add(new SpawnPoint("2d\\Misc\\circle", new Vector2(Globals.screenWidth/2, 50), new Vector2(35, 35)));
+        spawnPoints.Add(new SpawnPoint("2d\\Misc\\circle", new Vector2(Globals.screenWidth / 2, 50), new Vector2(35, 35)));
         spawnPoints[spawnPoints.Count - 1].spawnTimer.AddToTimer(500);
 
         spawnPoints.Add(new SpawnPoint("2d\\Misc\\circle", new Vector2(Globals.screenWidth - 50, 50), new Vector2(35, 35)));
         spawnPoints[spawnPoints.Count - 1].spawnTimer.AddToTimer(1000);
 
         ui = new UI();
+        ResetWorld = resetWorld;
     }
 
     public virtual void Update()
     {
-        hero.Update(offset);
-
-        for (var i = 0; i < spawnPoints.Count; i++)
+        if(!hero.dead)
         {
-            spawnPoints[i].Update(offset);        
-        }
 
+            hero.Update(offset);
 
-        for (var i = 0; i < projectiles.Count; i++)
-        {
-            projectiles[i].Update(offset, mobs.ToList<Unit>());
-
-            if (projectiles[i].done)
+            for (var i = 0; i < spawnPoints.Count; i++)
             {
-                projectiles.RemoveAt(i);
-                i--;
+                spawnPoints[i].Update(offset);
+            }
+
+
+            for (var i = 0; i < projectiles.Count; i++)
+            {
+                projectiles[i].Update(offset, mobs.ToList<Unit>());
+
+                if (projectiles[i].done)
+                {
+                    projectiles.RemoveAt(i);
+                    i--;
+                }
+            }
+
+
+            for (var i = 0; i < mobs.Count; i++)
+            {
+                mobs[i].Update(offset, hero);
+
+                if (mobs[i].dead)
+                {
+                    numKilled++;
+                    mobs.RemoveAt(i);
+                    i--;
+                }
+            }
+
+            ui.Update(this);
+
+        }
+        else
+        {
+            if (Globals.keyboard.GetPress("Enter"))
+            {
+                ResetWorld(null);
             }
         }
-
-
-        for (var i = 0; i < mobs.Count; i++)
-        {
-            mobs[i].Update(offset, hero);
-
-            if (mobs[i].dead)
-            {
-                numKilled++;
-                mobs.RemoveAt(i);
-                i--;
-            }
-        }
-
-        ui.Update(this);
-
     }
 
     public virtual void AddMob(object INFO)
@@ -141,6 +156,7 @@ public class World
         {
             mobs[i].Draw(offset);          
         }
+
 
         ui.Draw(this);
     }

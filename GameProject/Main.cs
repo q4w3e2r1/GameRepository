@@ -20,9 +20,9 @@ namespace GameProject;
 public class Main : Game
 {
     private GraphicsDeviceManager _graphics;
-   // private SpriteBatch _spriteBatch;
+    // private SpriteBatch _spriteBatch;
 
-    private World world;
+    GamePlay gamePlay;
 
     private Basic2d cursor;
 
@@ -60,7 +60,7 @@ public class Main : Game
         Globals.keyboard = new Keyboard();
         Globals.mouse = new MouseControl();
 
-        world = new World();
+        gamePlay = new GamePlay();
     }
 
 
@@ -81,7 +81,7 @@ public class Main : Game
         Globals.keyboard.Update();
         Globals.mouse.Update();
 
-        world.Update();
+        gamePlay.Update();
 
 
         Globals.keyboard.UpdateOld();
@@ -98,9 +98,9 @@ public class Main : Game
         Globals.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend);
 
 
-        world.Draw(Vector2.Zero);
+        gamePlay.Draw();
 
-        cursor.Draw(new Vector2(Globals.mouse.newMousePos.X, Globals.mouse.newMousePos.Y), new Vector2(0,0));
+        cursor.Draw(new Vector2(Globals.mouse.newMousePos.X, Globals.mouse.newMousePos.Y), new Vector2(0,0), Color.White);
         Globals.spriteBatch.End();
         base.Draw(gameTime);
     }

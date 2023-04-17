@@ -18,7 +18,6 @@ namespace GameProject;
 public class Mob : Unit
 {
 
-    public float speed;
     public Mob(string path, Vector2 POS, Vector2 DIMS) : base(path, POS, DIMS)
     {
         speed = 2.0f;
@@ -34,7 +33,14 @@ public class Mob : Unit
     public virtual void AI(Hero HERO)
     {
         pos += Globals.RadialMovement(HERO.pos, pos, speed);
-        rot = Globals.RotateTowards(pos, HERO.pos);
+        //rot = Globals.RotateTowards(pos, HERO.pos);
+
+        if(Globals.GetDistance(pos, HERO.pos) < 15)
+        {
+            HERO.GetHit(1);
+            dead = true;
+        }
+
     }
 
 
