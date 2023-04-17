@@ -34,7 +34,7 @@ public class Mob : Unit
     public virtual void AI(Hero HERO)
     {
         pos += Globals.RadialMovement(HERO.pos, pos, speed);
-        //rot = Globals.RotateTowards(pos, HERO.pos);
+        rot = Globals.RotateTowards(pos, HERO.pos);
     }
 
 

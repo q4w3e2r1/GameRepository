@@ -24,32 +24,46 @@ public class Hero : Unit
 
     public override void Update(Vector2 OFFSET)
     {
+        var checkScroll = false;
+
+
         if (Globals.keyboard.GetPress("A"))
         {
             pos = new Vector2(pos.X - speed, pos.Y);
+            checkScroll = true;
         }
 
         if (Globals.keyboard.GetPress("D"))
         {
             pos = new Vector2(pos.X + speed, pos.Y);
+            checkScroll = true;
         }
 
         if (Globals.keyboard.GetPress("W"))
         {
             pos = new Vector2(pos.X, pos.Y - speed);
+            checkScroll = true;
         }
 
         if (Globals.keyboard.GetPress("S"))
         {
             pos = new Vector2(pos.X, pos.Y + speed);
+            checkScroll = true;
         }
 
-        //rot = Globals.RotateTowards(pos, new Vector2(Globals.mouse.newMousePos.X, Globals.mouse.newMousePos.Y));
+        if(checkScroll)
+        {
+            GameGlobals.CheckScroll(pos);
+        }
+
+
+
+        rot = Globals.RotateTowards(pos, new Vector2(Globals.mouse.newMousePos.X, Globals.mouse.newMousePos.Y) - OFFSET);
 
         if(Globals.mouse.LeftClick())
         {
             GameGlobals.PassProjectile(new Fireball(new Vector2(pos.X, pos.Y), this, 
-                new Vector2(Globals.mouse.newMousePos.X, Globals.mouse.newMousePos.Y)));
+                new Vector2(Globals.mouse.newMousePos.X, Globals.mouse.newMousePos.Y) - OFFSET));
 
         }
 
