@@ -24,10 +24,10 @@ namespace GameProject
 
         public Texture2D model;
 
-        public Basic2d(string path, Vector2 POS, Vector2 DIMS)
+        public Basic2d(string path, Vector2 pos, Vector2 dims)
         {
-            pos = POS;
-            dims = DIMS;
+            this.pos = pos;
+            this.dims = dims;
 
             model = Globals.content.Load<Texture2D>(path);
         }
@@ -38,7 +38,7 @@ namespace GameProject
 
         }
 
-        public virtual void Update() 
+        public virtual void Update(Vector2 OFFSET) 
         {
 
 
@@ -54,11 +54,11 @@ namespace GameProject
 
         }
 
-        public virtual void Draw(Vector2 OFFSET, Vector2 ORIGIN)
+        public virtual void Draw(Vector2 OFFSET, Vector2 ORIGIN, Color COLOR)
         {
             if (model != null)
             {
-                Globals.spriteBatch.Draw(model, new Rectangle((int)(pos.X + OFFSET.X), (int)(pos.Y + OFFSET.Y), (int)dims.X, (int)dims.Y), null, Color.White,
+                Globals.spriteBatch.Draw(model, new Rectangle((int)(pos.X + OFFSET.X), (int)(pos.Y + OFFSET.Y), (int)dims.X, (int)dims.Y), null, COLOR,
                     rot, new Vector2(ORIGIN.X, ORIGIN.Y), new SpriteEffects(), 0);
             }
 

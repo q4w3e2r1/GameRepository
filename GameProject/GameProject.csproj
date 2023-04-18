@@ -14,16 +14,51 @@
     <ItemGroup>
       <Compile Remove="Content\2d - Копировать\**" />
       <Compile Remove="Content\2d\**" />
+      <Compile Remove="Content\Projectiles\**" />
       <EmbeddedResource Remove="Content\2d - Копировать\**" />
       <EmbeddedResource Remove="Content\2d\**" />
+      <EmbeddedResource Remove="Content\Projectiles\**" />
       <None Remove="Content\2d - Копировать\**" />
       <None Remove="Content\2d\**" />
+      <None Remove="Content\Projectiles\**" />
     </ItemGroup>
     <ItemGroup>
+      <None Remove="Content\bin\Windows\2d\CursorArrow.xnb" />
+      <None Remove="Content\bin\Windows\2d\Misc\circle.xnb" />
+      <None Remove="Content\bin\Windows\2d\Misc\shade.xnb" />
+      <None Remove="Content\bin\Windows\2d\Misc\solid.xnb" />
+      <None Remove="Content\bin\Windows\2d\NormalHero.xnb" />
       <None Remove="Content\bin\Windows\Content\2d\CursorArrow.xnb" />
+      <None Remove="Content\obj\Windows\2d\CursorArrow.mgcontent" />
+      <None Remove="Content\obj\Windows\2d\Hero.mgcontent" />
+      <None Remove="Content\obj\Windows\2d\NormalHero.mgcontent" />
     </ItemGroup>
     <ItemGroup>
+      <Content Include="Content\bin\Windows\2d\CursorArrow.xnb">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Content\bin\Windows\2d\Misc\circle.xnb">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Content\bin\Windows\2d\Misc\shade.xnb">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Content\bin\Windows\2d\Misc\solid.xnb">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Content\bin\Windows\2d\NormalHero.xnb">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
       <Content Include="Content\bin\Windows\Content\2d\CursorArrow.xnb">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Content\obj\Windows\2d\CursorArrow.mgcontent">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Content\obj\Windows\2d\Hero.mgcontent">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Content\obj\Windows\2d\NormalHero.mgcontent">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Content>
     </ItemGroup>
