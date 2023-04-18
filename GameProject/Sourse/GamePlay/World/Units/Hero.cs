@@ -17,7 +17,7 @@ namespace GameProject;
 
 public class Hero : Unit
 {
-    public Hero(string path, Vector2 POS, Vector2 DIMS) : base(path, POS, DIMS)
+    public Hero(string path, Vector2 POS, Vector2 DIMS, int OWNERID) : base(path, POS, DIMS, OWNERID)
     {
         speed = 2.0f;
 
@@ -61,7 +61,7 @@ public class Hero : Unit
 
 
 
-        rot = Globals.RotateTowards(pos, new Vector2(Globals.mouse.newMousePos.X, Globals.mouse.newMousePos.Y) - OFFSET);
+       //rot = Globals.RotateTowards(pos, new Vector2(Globals.mouse.newMousePos.X, Globals.mouse.newMousePos.Y) - OFFSET);
 
         if(Globals.mouse.LeftClick())
         {

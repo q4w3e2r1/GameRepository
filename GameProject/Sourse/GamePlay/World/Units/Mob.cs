@@ -18,14 +18,14 @@ namespace GameProject;
 public class Mob : Unit
 {
 
-    public Mob(string path, Vector2 POS, Vector2 DIMS) : base(path, POS, DIMS)
+    public Mob(string path, Vector2 POS, Vector2 DIMS, int OWNERID) : base(path, POS, DIMS, OWNERID)
     {
         speed = 2.0f;
     }
 
-    public virtual void Update(Vector2 OFFSET, Hero HERO)
+    public override void Update(Vector2 OFFSET, Player ENEMY)
     {
-        AI(HERO);
+        AI(ENEMY.hero);
         base.Update(OFFSET);
     }
 

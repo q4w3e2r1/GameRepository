@@ -25,6 +25,8 @@ namespace GameProject
     {
         public static int screenHeight, screenWidth;
 
+        public static Random random = new Random(); 
+
         public static ContentManager content;
         public static SpriteBatch spriteBatch;
 

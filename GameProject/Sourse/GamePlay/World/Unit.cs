@@ -15,35 +15,17 @@ using Microsoft.Xna.Framework.Media;
 namespace GameProject
 {
 
-    public class Unit : Basic2d
+    public class Unit : AttackableObject
     {
-        public bool dead;
 
-        public float speed, hitDist, health, healthMax;
-
-        public Unit(string path, Vector2 POS, Vector2 DIMS) : base(path, POS, DIMS)
+        public Unit(string path, Vector2 POS, Vector2 DIMS, int OWNERID) : base(path, POS, DIMS, OWNERID)
         {
-            dead = false;
-            speed = 2.0f;
-
-            health = 1;
-            healthMax = health;
-
-            hitDist = 35.0f;
         }
 
-        public override void Update(Vector2 OFFSET)
+        public override void Update(Vector2 OFFSET, Player ENEMY)
         {
            
             base.Update(OFFSET);
-        }
-
-        public virtual void GetHit(float DAMAGE)
-        {
-            health -= DAMAGE;
-
-            if(health <= 0)
-                dead = true;
         }
 
         public override void Draw(Vector2 OFFSET)

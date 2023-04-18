@@ -18,37 +18,33 @@ namespace GameProject;
 
 public class World
 {
-    public int numKilled;
-    public Vector2 offset;
 
-    public Hero hero;
+    public Vector2 offset;
 
     public UI ui;
 
+    public User user;
+    public AIPlayer aIPlayer;
+
     public List<Projectile2d> projectiles = new();
-    public List<Mob> mobs = new();
-    public List<SpawnPoint> spawnPoints = new();
 
     PassObject ResetWorld;
     public World(PassObject resetWorld)
     {
         this.ResetWorld = resetWorld;
-        numKilled = 0;
-        hero = new Hero("2d\\NormalHero", new Vector2(300, 300), new Vector2(64, 64));
+      
 
         GameGlobals.PassProjectile = AddProjectile;
         GameGlobals.PassMob = AddMob;
+        GameGlobals.PassSpawnPoint = AddSpawnPoint;
         GameGlobals.CheckScroll = CheckScroll;
+
+        user = new User(1);
+        aIPlayer = new AIPlayer(2);
+
 
         offset = new Vector2(0, 0);
 
-        spawnPoints.Add(new SpawnPoint("2d\\Misc\\circle", new Vector2(50, 50), new Vector2(35, 35)));
-
-        spawnPoints.Add(new SpawnPoint("2d\\Misc\\circle", new Vector2(Globals.screenWidth / 2, 50), new Vector2(35, 35)));
-        spawnPoints[spawnPoints.Count - 1].spawnTimer.AddToTimer(500);
-
-        spawnPoints.Add(new SpawnPoint("2d\\Misc\\circle", new Vector2(Globals.screenWidth - 50, 50), new Vector2(35, 35)));
-        spawnPoints[spawnPoints.Count - 1].spawnTimer.AddToTimer(1000);
 
         ui = new UI();
         ResetWorld = resetWorld;
@@ -56,20 +52,16 @@ public class World
 
     public virtual void Update()
     {
-        if(!hero.dead)
+        if(!user.hero.dead)
         {
 
-            hero.Update(offset);
-
-            for (var i = 0; i < spawnPoints.Count; i++)
-            {
-                spawnPoints[i].Update(offset);
-            }
+            user.Update(aIPlayer, offset);
+            aIPlayer.Update(user, offset);
 
 
             for (var i = 0; i < projectiles.Count; i++)
             {
-                projectiles[i].Update(offset, mobs.ToList<Unit>());
+                projectiles[i].Update(offset, aIPlayer.units.ToList<Unit>());
 
                 if (projectiles[i].done)
                 {
@@ -79,17 +71,7 @@ public class World
             }
 
 
-            for (var i = 0; i < mobs.Count; i++)
-            {
-                mobs[i].Update(offset, hero);
-
-                if (mobs[i].dead)
-                {
-                    numKilled++;
-                    mobs.RemoveAt(i);
-                    i--;
-                }
-            }
+        
 
             ui.Update(this);
 
@@ -105,7 +87,19 @@ public class World
 
     public virtual void AddMob(object INFO)
     {
-        mobs.Add((Mob)INFO);
+        var tempUnit = (Unit)INFO;
+
+        if(user.id == tempUnit.ownerId)
+        {
+            user.AddUnit(tempUnit);
+        }
+        else if(aIPlayer.id == tempUnit.ownerId)
+        {
+            aIPlayer.AddUnit(tempUnit);
+        }
+
+
+        aIPlayer.AddUnit((Mob)INFO);
     }
 
 
@@ -114,49 +108,56 @@ public class World
         projectiles.Add((Projectile2d)INFO);
     }
 
+    public virtual void AddSpawnPoint(object INFO)
+    {
+        var tempSpawnPoint = (SpawnPoint)INFO;
+
+        if (user.id == tempSpawnPoint.ownerId)
+        {
+            user.AddSpawnPoint(tempSpawnPoint);
+        }
+        else if (aIPlayer.id == tempSpawnPoint.ownerId)
+        {
+            aIPlayer.AddSpawnPoint(tempSpawnPoint);
+        }
+
+    }
+
     public virtual void CheckScroll(object INFO)
     {
         var tempPos = (Vector2)INFO;
 
         if(tempPos.X < -offset.X + (Globals.screenWidth * .4f))
         {
-            offset = new Vector2(offset.X + hero.speed * 2, offset.Y );
+            offset = new Vector2(offset.X + user.hero.speed * 2, offset.Y );
         }
 
         if (tempPos.X > -offset.X + (Globals.screenWidth * .6f))
         {
-            offset = new Vector2(offset.X - hero.speed * 2, offset.Y);
+            offset = new Vector2(offset.X - user.hero.speed * 2, offset.Y);
         }
 
         if (tempPos.Y < -offset.Y + (Globals.screenHeight * .4f))
         {
-            offset = new Vector2(offset.X, offset.Y + hero.speed * 2 );
+            offset = new Vector2(offset.X, offset.Y + user.hero.speed * 2 );
         }
 
         if (tempPos.Y > -offset.Y + (Globals.screenHeight * .6f))
         {
-            offset = new Vector2(offset.X, offset.Y - hero.speed * 2);
+            offset = new Vector2(offset.X, offset.Y - user.hero.speed * 2);
         }
     }
 
     public virtual void Draw(Vector2 OFFSET)
     {
-        hero.Draw(offset);
+  
+        user.Draw(offset);
+        aIPlayer.Draw(offset);
+
         for (var i = 0; i < projectiles.Count; i++)
         {
             projectiles[i].Draw(offset);
         }
-
-        for (var i = 0; i < spawnPoints.Count; i++)
-        {
-            spawnPoints[i].Draw(offset);
-        }
-
-        for (var i = 0; i < mobs.Count; i++)
-        {
-            mobs[i].Draw(offset);          
-        }
-
 
         ui.Draw(this);
     }

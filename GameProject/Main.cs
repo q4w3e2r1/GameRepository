@@ -36,8 +36,8 @@ public class Main : Game
     protected override void Initialize()
     {
         // TODO: Add your initialization logic here
-        Globals.screenWidth = 800; //1600
-        Globals.screenHeight = 500; //900
+        Globals.screenWidth = 1600; //1600
+        Globals.screenHeight = 900; //900
 
         _graphics.PreferredBackBufferWidth = Globals.screenWidth;
         _graphics.PreferredBackBufferHeight = Globals.screenHeight;

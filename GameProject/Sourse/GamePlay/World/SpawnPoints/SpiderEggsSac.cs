@@ -15,35 +15,40 @@ using Microsoft.Xna.Framework.Media;
 namespace GameProject
 {
 
-    public class SpawnPoint : AttackableObject
+    public class SpiderEggsSac : SpawnPoint
     {
 
-        public GameTimer spawnTimer = new GameTimer(2200);
-        public SpawnPoint(string path, Vector2 POS, Vector2 DIMS, int OWNERID) : base(path, POS, DIMS, OWNERID)
+        int maxSpawns, totalSpawns;
+
+        public SpiderEggsSac(Vector2 POS, int OWNERID) : base("2d\\Misc\\eggs", POS, new Vector2(45, 45), OWNERID)
         {
-            dead = false;
-
-            health = 3;
-            healthMax = health;
-
-            hitDist = 35.0f;
+            totalSpawns = 0;
+            maxSpawns = 4;
         }
 
         public override void Update(Vector2 OFFSET)
         {
-            spawnTimer.UpdateTimer();
-           if(spawnTimer.Test())
-            {
-                SpawnMob();
-                spawnTimer.ResetToZero();
-            }
+
+
+
             base.Update(OFFSET);
         }
 
 
-        public virtual void SpawnMob()
+        public override void SpawnMob()
         {
-            GameGlobals.PassMob(new Imp(new Vector2(pos.X, pos.Y), ownerId));
+            var tempMob = new Spiderlinq(new Vector2(pos.X, pos.Y), ownerId);
+
+            if(tempMob != null)
+            {
+                GameGlobals.PassMob(tempMob);
+
+                totalSpawns++;
+                if(totalSpawns >= maxSpawns)
+                {
+                    dead = true;
+                }
+            }       
         }
 
         public override void Draw(Vector2 OFFSET)

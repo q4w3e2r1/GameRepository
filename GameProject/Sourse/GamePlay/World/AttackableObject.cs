@@ -15,35 +15,38 @@ using Microsoft.Xna.Framework.Media;
 namespace GameProject
 {
 
-    public class SpawnPoint : AttackableObject
+    public class AttackableObject : Basic2d
     {
+        public bool dead;
 
-        public GameTimer spawnTimer = new GameTimer(2200);
-        public SpawnPoint(string path, Vector2 POS, Vector2 DIMS, int OWNERID) : base(path, POS, DIMS, OWNERID)
+        public int ownerId;
+
+        public float speed, hitDist, health, healthMax;
+
+        public AttackableObject(string path, Vector2 POS, Vector2 DIMS, int OWNERID) : base(path, POS, DIMS)
         {
+            ownerId = OWNERID;
             dead = false;
+            speed = 2.0f;
 
-            health = 3;
+            health = 1;
             healthMax = health;
 
             hitDist = 35.0f;
         }
 
-        public override void Update(Vector2 OFFSET)
+        public virtual void Update(Vector2 OFFSET, Player ENEMY)
         {
-            spawnTimer.UpdateTimer();
-           if(spawnTimer.Test())
-            {
-                SpawnMob();
-                spawnTimer.ResetToZero();
-            }
+           
             base.Update(OFFSET);
         }
 
-
-        public virtual void SpawnMob()
+        public virtual void GetHit(float DAMAGE)
         {
-            GameGlobals.PassMob(new Imp(new Vector2(pos.X, pos.Y), ownerId));
+            health -= DAMAGE;
+
+            if(health <= 0)
+                dead = true;
         }
 
         public override void Draw(Vector2 OFFSET)

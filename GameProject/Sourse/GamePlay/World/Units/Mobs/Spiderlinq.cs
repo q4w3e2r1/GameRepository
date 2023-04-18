@@ -15,17 +15,20 @@ using Microsoft.Xna.Framework.Media;
 namespace GameProject;
 
 
-public class Imp : Mob
+public class Spiderlinq : Mob
 {
+    public GameTimer spawnTimer;
 
-    public Imp(Vector2 POS, int OWNERID) : base("2d\\Units\\Mobs\\Imp", POS, new Vector2(40, 40), OWNERID)
+    public Spiderlinq(Vector2 POS, int OWNERID) : base("2d\\Units\\Mobs\\spider", POS, new Vector2(45, 45), OWNERID)
     {
-        speed = 2.0f;
+        speed = 2.1f;
+
     }
 
     public override void Update(Vector2 OFFSET, Player ENEMY)
     {
-        
+       
+
         base.Update(OFFSET, ENEMY);
     }
 

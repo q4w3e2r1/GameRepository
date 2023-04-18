@@ -2,26 +2,30 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Xml.Linq;
-using System.Threading;
-using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
 
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Input.Touch;
 using Microsoft.Xna.Framework.Media;
-using GameProject;
 #endregion
 
-namespace GameProject
+namespace GameProject;
+
+public class User : Player
 {
-    public class GameGlobals
+ 
+
+    public User(int ID) : base(ID)
     {
-        public static int score = 0;
-        public static PassObject PassProjectile, PassMob, PassSpawnPoint, CheckScroll;
+        hero = new Hero("2d\\NormalHero", new Vector2(300, 300), new Vector2(64, 64), id);
 
     }
-}
 
+    public override void Update(Player ENEMY, Vector2 OFFSET)
+    {
+        base.Update(ENEMY, OFFSET);
+    }
+}

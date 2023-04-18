@@ -29,18 +29,18 @@ public class UI
 
     public void Update(World WORLD)
     {
-        healthBar.Update(WORLD.hero.health, WORLD.hero.healthMax);
+        healthBar.Update(WORLD.user.hero.health, WORLD.user.hero.healthMax);
     }
     public void Draw(World WORLD)
     {
-        var tempStr = "Num killed =" + WORLD.numKilled;
+        var tempStr = "Score =" + GameGlobals.score;
         var strDims = font.MeasureString(tempStr);
         Globals.spriteBatch.DrawString(font, tempStr,
             new Vector2(Globals.screenWidth / 2 - strDims.X / 2, Globals.screenHeight - 40), Color.Black);
 
-        healthBar.Draw(new Vector2(20, Globals.screenHeight - 50));
+        healthBar.Draw(new Vector2(20, Globals.screenHeight - 40));
 
-        if(WORLD.hero.dead)
+        if(WORLD.user.hero.dead)
         {
             tempStr = "Press Enter to Restart....";
             strDims = font.MeasureString(tempStr);
