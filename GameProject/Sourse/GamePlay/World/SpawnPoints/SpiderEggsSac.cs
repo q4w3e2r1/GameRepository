@@ -24,6 +24,11 @@ namespace GameProject
         {
             totalSpawns = 0;
             maxSpawns = 4;
+
+            health = 5;
+            healthMax = health;
+
+            spawnTimer = new GameTimer(3000);
         }
 
         public override void Update(Vector2 OFFSET)

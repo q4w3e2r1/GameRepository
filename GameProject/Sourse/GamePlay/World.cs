@@ -27,6 +27,7 @@ public class World
     public AIPlayer aIPlayer;
 
     public List<Projectile2d> projectiles = new();
+    public List<AttackableObject> allObjects = new();
 
     PassObject ResetWorld;
     public World(PassObject resetWorld)
@@ -52,8 +53,11 @@ public class World
 
     public virtual void Update()
     {
-        if(!user.hero.dead)
+        if(!user.hero.dead && user.buildings.Count > 0)
         {
+            allObjects.Clear();
+            allObjects.AddRange(user.GetAllObjects());
+            allObjects.AddRange(aIPlayer.GetAllObjects());
 
             user.Update(aIPlayer, offset);
             aIPlayer.Update(user, offset);
@@ -61,7 +65,7 @@ public class World
 
             for (var i = 0; i < projectiles.Count; i++)
             {
-                projectiles[i].Update(offset, aIPlayer.units.ToList<Unit>());
+                projectiles[i].Update(offset, allObjects);
 
                 if (projectiles[i].done)
                 {
@@ -78,7 +82,7 @@ public class World
         }
         else
         {
-            if (Globals.keyboard.GetPress("Enter"))
+            if (Globals.keyboard.GetPress("Enter") && (user.hero.dead || user.buildings.Count <= 0))
             {
                 ResetWorld(null);
             }
@@ -153,6 +157,7 @@ public class World
   
         user.Draw(offset);
         aIPlayer.Draw(offset);
+
 
         for (var i = 0; i < projectiles.Count; i++)
         {

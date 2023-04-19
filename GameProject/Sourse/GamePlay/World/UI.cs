@@ -40,7 +40,7 @@ public class UI
 
         healthBar.Draw(new Vector2(20, Globals.screenHeight - 40));
 
-        if(WORLD.user.hero.dead)
+        if(WORLD.user.hero.dead || WORLD.user.buildings.Count <= 0)
         {
             tempStr = "Press Enter to Restart....";
             strDims = font.MeasureString(tempStr);

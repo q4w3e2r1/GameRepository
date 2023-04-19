@@ -19,8 +19,9 @@ public class Player
 {
     public int id;
     public Hero hero;
-    public List<Unit> units = new List<Unit>();
-    public List<SpawnPoint> spawnPoints = new List<SpawnPoint>();
+    public List<Unit> units = new();
+    public List<SpawnPoint> spawnPoints = new();
+    public List<Building> buildings = new();
 
     public Player(int ID)
     {
@@ -57,6 +58,18 @@ public class Player
                 i--;
             }
         }
+
+        for (var i = 0; i < buildings.Count; i++)
+        {
+            buildings[i].Update(OFFSET, ENEMY);
+
+            if (buildings[i].dead)
+            {
+                ChangeScore(1);
+                buildings.RemoveAt(i);
+                i--;
+            }
+        }
     }
 
     public virtual void AddUnit(object INFO)
@@ -78,11 +91,27 @@ public class Player
         
     }
 
+    public virtual List<AttackableObject> GetAllObjects()
+    {
+        var tempObjects = new List<AttackableObject>();
+        tempObjects.AddRange(units.ToList<AttackableObject>());
+        tempObjects.AddRange(spawnPoints.ToList<SpawnPoint>());
+        tempObjects.AddRange(buildings.ToList<Building>());
+
+        return tempObjects;
+
+    }
+
     public virtual void Draw(Vector2 OFFSET)
     {
         if(hero != null)
         {
             hero.Draw(OFFSET);
+        }
+
+        for (var i = 0; i < buildings.Count; i++)
+        {
+            buildings[i].Draw(OFFSET);
         }
 
         for (var i = 0; i < spawnPoints.Count; i++)
@@ -94,6 +123,8 @@ public class Player
         {
             units[i].Draw(OFFSET);
         }
+
+
     
     }
 

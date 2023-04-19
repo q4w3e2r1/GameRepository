@@ -19,9 +19,10 @@ namespace GameProject
     public class Portal : SpawnPoint
     {
 
-        public Portal(Vector2 POS, int OWNERID) : base("2d\\Misc\\portal", POS, new Vector2(45, 45), OWNERID)
+        public Portal(Vector2 POS, int OWNERID) : base("2d\\Misc\\portal", POS, new Vector2(75, 75), OWNERID)
         {
-
+            health = 10;
+            healthMax = health;
         }
 
         public override void Update(Vector2 OFFSET)

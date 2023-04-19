@@ -18,7 +18,7 @@ namespace GameProject
     public class SpawnPoint : AttackableObject
     {
 
-        public GameTimer spawnTimer = new GameTimer(2200);
+        public GameTimer spawnTimer = new GameTimer(2400);
         public SpawnPoint(string path, Vector2 POS, Vector2 DIMS, int OWNERID) : base(path, POS, DIMS, OWNERID)
         {
             dead = false;
