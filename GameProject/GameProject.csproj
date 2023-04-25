@@ -24,20 +24,46 @@
     </ItemGroup>
     <ItemGroup>
       <None Remove="Content\bin\Windows\2d\CursorArrow.xnb" />
+      <None Remove="Content\bin\Windows\2d\Hero.xnb" />
+      <None Remove="Content\bin\Windows\2d\Misc\chestLocked.xnb" />
       <None Remove="Content\bin\Windows\2d\Misc\circle.xnb" />
+      <None Remove="Content\bin\Windows\2d\Misc\eggs.xnb" />
+      <None Remove="Content\bin\Windows\2d\Misc\portal.xnb" />
       <None Remove="Content\bin\Windows\2d\Misc\shade.xnb" />
       <None Remove="Content\bin\Windows\2d\Misc\solid.xnb" />
+      <None Remove="Content\bin\Windows\2d\Misc\tower.xnb" />
       <None Remove="Content\bin\Windows\2d\NormalHero.xnb" />
+      <None Remove="Content\bin\Windows\2d\Projectiles\AcidBall.xnb" />
+      <None Remove="Content\bin\Windows\2d\Projectiles\Fireball2.xnb" />
+      <None Remove="Content\bin\Windows\2d\Units\Mobs\Imp.xnb" />
+      <None Remove="Content\bin\Windows\2d\Units\Mobs\orc.xnb" />
+      <None Remove="Content\bin\Windows\2d\Units\Mobs\spider.xnb" />
+      <None Remove="Content\bin\Windows\2d\Units\Mobs\zombi.xnb" />
+      <None Remove="Content\bin\Windows\2d\Units\Mobs\zombie.xnb" />
       <None Remove="Content\bin\Windows\Content\2d\CursorArrow.xnb" />
+      <None Remove="Content\Effects\Normal.xnb" />
       <None Remove="Content\obj\Windows\2d\CursorArrow.mgcontent" />
       <None Remove="Content\obj\Windows\2d\Hero.mgcontent" />
       <None Remove="Content\obj\Windows\2d\NormalHero.mgcontent" />
+      <None Remove="XML\Levels\Level1.xml" />
     </ItemGroup>
     <ItemGroup>
       <Content Include="Content\bin\Windows\2d\CursorArrow.xnb">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Content>
+      <Content Include="Content\bin\Windows\2d\Hero.xnb">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Content\bin\Windows\2d\Misc\chestLocked.xnb">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
       <Content Include="Content\bin\Windows\2d\Misc\circle.xnb">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Content\bin\Windows\2d\Misc\eggs.xnb">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Content\bin\Windows\2d\Misc\portal.xnb">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Content>
       <Content Include="Content\bin\Windows\2d\Misc\shade.xnb">
@@ -46,7 +72,31 @@
       <Content Include="Content\bin\Windows\2d\Misc\solid.xnb">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Content>
+      <Content Include="Content\bin\Windows\2d\Misc\tower.xnb">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
       <Content Include="Content\bin\Windows\2d\NormalHero.xnb">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Content\bin\Windows\2d\Projectiles\AcidBall.xnb">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Content\bin\Windows\2d\Projectiles\Fireball2.xnb">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Content\bin\Windows\2d\Units\Mobs\Imp.xnb">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Content\bin\Windows\2d\Units\Mobs\orc.xnb">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Content\bin\Windows\2d\Units\Mobs\spider.xnb">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Content\bin\Windows\2d\Units\Mobs\zombi.xnb">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Content\bin\Windows\2d\Units\Mobs\zombie.xnb">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Content>
       <Content Include="Content\bin\Windows\Content\2d\CursorArrow.xnb">
@@ -59,6 +109,9 @@
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Content>
       <Content Include="Content\obj\Windows\2d\NormalHero.mgcontent">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="XML\Levels\Level1.xml">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Content>
     </ItemGroup>

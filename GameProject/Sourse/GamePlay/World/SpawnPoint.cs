@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Xml.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
@@ -17,14 +18,18 @@ namespace GameProject
 
     public class SpawnPoint : AttackableObject
     {
+       public List<MobChoice> mobChoices = new();
 
         public GameTimer spawnTimer = new GameTimer(2400);
-        public SpawnPoint(string path, Vector2 POS, Vector2 DIMS, int OWNERID) : base(path, POS, DIMS, OWNERID)
+        public SpawnPoint(string path, Vector2 POS, Vector2 DIMS, int OWNERID, XElement DATA) 
+            : base(path, POS, DIMS, OWNERID)
         {
             dead = false;
 
             health = 3;
             healthMax = health;
+
+            LoadData(DATA);
 
             hitDist = 35.0f;
         }
@@ -40,6 +45,25 @@ namespace GameProject
             base.Update(OFFSET);
         }
 
+        public virtual void LoadData(XElement DATA)
+        {
+            if(DATA != null)
+            {
+                spawnTimer.AddToTimer(Convert.ToInt32(DATA.Element("timerAdd").Value, Globals.culture));
+
+                var mobList = (from t in DATA.Descendants("mob")
+                                 select t).ToList<XElement>();
+
+
+
+                for (var i = 0; i < mobList.Count; i++)
+                {
+                    mobChoices.Add(new MobChoice(mobList[i].Value, Convert.ToInt32(mobList[i].Attribute("rate").Value, Globals.culture)));
+         
+                }
+
+            }
+        }
 
         public virtual void SpawnMob()
         {

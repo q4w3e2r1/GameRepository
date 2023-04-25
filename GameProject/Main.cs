@@ -55,7 +55,10 @@ public class Main : Game
 
         // TODO: use this.Content to load your game content here
 
-        cursor = new Basic2d("2d\\CursorArrow", new Vector2(0, 0), new Vector2(20, 20));
+        cursor = new Basic2d("2d\\CursorArrow", new Vector2(0, 0), new Vector2(25, 25));
+
+
+        Globals.normalEffect = Globals.content.Load<Effect>("Effects\\Normal");
 
         Globals.keyboard = new Keyboard();
         Globals.mouse = new MouseControl();
@@ -95,7 +98,7 @@ public class Main : Game
         GraphicsDevice.Clear(Color.CornflowerBlue);
 
         // TODO: Add your drawing code here
-        Globals.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend);
+        Globals.spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend);
 
 
         gamePlay.Draw();

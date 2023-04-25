@@ -38,7 +38,8 @@ public class Spiderlinq : Mob
         
         for(var i = 0; i < ENEMY.buildings.Count; i++)
         {
-            if (ENEMY.buildings[i].GetType().ToString() == "GameProject.Tower")
+            if (ENEMY.buildings[i].GetType().ToString() == "GameProject.Tower" ||
+                ENEMY.buildings[i].GetType().ToString() == "GameProject.Player")
             {
                 temp = ENEMY.buildings[i];
             }

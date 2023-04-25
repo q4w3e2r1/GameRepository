@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Xml.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
@@ -20,7 +21,8 @@ namespace GameProject
 
         int maxSpawns, totalSpawns;
 
-        public SpiderEggsSac(Vector2 POS, int OWNERID) : base("2d\\Misc\\eggs", POS, new Vector2(45, 45), OWNERID)
+        public SpiderEggsSac(Vector2 POS, int OWNERID, XElement DATA) 
+            : base("2d\\Misc\\eggs", POS, new Vector2(45, 45), OWNERID, DATA)
         {
             totalSpawns = 0;
             maxSpawns = 4;

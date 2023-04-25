@@ -205,6 +205,12 @@
 /processorParam:TextureFormat=Color
 /build:2d/Units/Mobs/zombie.png
 
+#begin Effects/Normal.fx
+/importer:EffectImporter
+/processor:EffectProcessor
+/processorParam:DebugMode=Auto
+/build:Effects/Normal.fx
+
 #begin Fonts/Arial16.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor

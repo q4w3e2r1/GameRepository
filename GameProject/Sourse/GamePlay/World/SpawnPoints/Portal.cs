@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Xml.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
@@ -19,7 +20,8 @@ namespace GameProject
     public class Portal : SpawnPoint
     {
 
-        public Portal(Vector2 POS, int OWNERID) : base("2d\\Misc\\portal", POS, new Vector2(75, 75), OWNERID)
+        public Portal(Vector2 POS, int OWNERID, XElement DATA) 
+            : base("2d\\Misc\\portal", POS, new Vector2(75, 75), OWNERID, DATA)
         {
             health = 10;
             healthMax = health;
@@ -34,19 +36,29 @@ namespace GameProject
 
         public override void SpawnMob()
         {
-            var num = Globals.random.Next(0, 10 + 1);
+            var num = Globals.random.Next(0, 100 + 1);
 
             Mob tempMob = null;
+            var total = 0;
 
-            if(num < 5)
-            {
-                tempMob = new Imp(new Vector2(pos.X, pos.Y), ownerId);
 
-            }
-            else if(num < 8)
+            for (var i = 0; i < mobChoices.Count;i++)
             {
-                tempMob = new Spider(new Vector2(pos.X, pos.Y), ownerId);
+                total += mobChoices[i].rate;
+
+                if (num < total)
+                {
+
+                    var sType = Type.GetType("GameProject." + mobChoices[i].mobStr, true);
+
+                    tempMob = (Mob)(Activator.CreateInstance(sType, new Vector2(pos.X, pos.Y), ownerId));
+
+
+
+                    break;
+                }
             }
+           
 
             if(tempMob != null)
             {
