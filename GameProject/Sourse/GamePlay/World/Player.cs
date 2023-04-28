@@ -73,11 +73,11 @@ public class Player
         }
     }
 
-    public virtual void AddUnit(object INFO)
+    public virtual void AddBuilding(object INFO)
     {
-        var tempUnit = (Unit)INFO;
-        tempUnit.ownerId = id;
-        units.Add((Unit)INFO);
+        var tempBuilding = (Building)INFO;
+        tempBuilding.ownerId = id;
+        buildings.Add((Building)INFO);
     }
 
     public virtual void AddSpawnPoint(object INFO)
@@ -85,6 +85,13 @@ public class Player
         var tempSpawnPoint = (SpawnPoint)INFO;
         tempSpawnPoint.ownerId = id;
         spawnPoints.Add(tempSpawnPoint);
+    }
+
+    public virtual void AddUnit(object INFO)
+    {
+        var tempUnit = (Unit)INFO;
+        tempUnit.ownerId = id;
+        units.Add((Unit)INFO);
     }
 
     public virtual void ChangeScore(int SCORE) 
@@ -116,7 +123,7 @@ public class Player
             sType = Type.GetType("GameProject."+spawnList[i].Element("type").Value, true);
 
             spawnPoints.Add((SpawnPoint)(Activator.CreateInstance(sType, new Vector2(Convert.ToInt32(spawnList[i].Element("Pos").Element("x").Value, Globals.culture), 
-                Convert.ToInt32(spawnList[i].Element("Pos").Element("y").Value, Globals.culture)), id, spawnList[i])));
+                Convert.ToInt32(spawnList[i].Element("Pos").Element("y").Value, Globals.culture)), new Vector2(1, 1), id, spawnList[i])));
         }
 
         var buildingList = (from t in DATA.Descendants("Building")
@@ -127,13 +134,13 @@ public class Player
             sType = Type.GetType("GameProject." + buildingList[i].Element("type").Value, true);
 
             buildings.Add((Building)(Activator.CreateInstance(sType, new Vector2(Convert.ToInt32(buildingList[i].Element("Pos").Element("x").Value, Globals.culture),
-                Convert.ToInt32(buildingList[i].Element("Pos").Element("y").Value, Globals.culture)), id)));
+                Convert.ToInt32(buildingList[i].Element("Pos").Element("y").Value, Globals.culture)), new Vector2(1, 1), id)));
         }
 
         if(DATA.Element("Hero") != null)
         {
-            hero = new Hero("2d\\NormalHero", new Vector2(Convert.ToInt32(DATA.Element("Hero").Element("Pos").Element("x").Value, Globals.culture),
-                Convert.ToInt32(DATA.Element("Hero").Element("Pos").Element("y").Value, Globals.culture)), new Vector2(64, 64), id);
+            hero = new Hero("2d\\Units\\HeroSheet1", new Vector2(Convert.ToInt32(DATA.Element("Hero").Element("Pos").Element("x").Value, Globals.culture),
+                Convert.ToInt32(DATA.Element("Hero").Element("Pos").Element("y").Value, Globals.culture)), new Vector2(75, 75), new Vector2(4, 1), id);
         }
     }
 

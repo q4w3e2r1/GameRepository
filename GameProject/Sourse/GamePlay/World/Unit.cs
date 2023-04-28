@@ -18,7 +18,8 @@ namespace GameProject
     public class Unit : AttackableObject
     {
 
-        public Unit(string path, Vector2 POS, Vector2 DIMS, int OWNERID) : base(path, POS, DIMS, OWNERID)
+        public Unit(string path, Vector2 POS, Vector2 DIMS, Vector2 FRAMES, int OWNERID)
+            : base(path, POS, DIMS,  FRAMES, OWNERID)
         {
         }
 

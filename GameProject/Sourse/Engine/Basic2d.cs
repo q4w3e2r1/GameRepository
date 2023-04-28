@@ -20,14 +20,15 @@ namespace GameProject
     {
         public float rot;
 
-        public Vector2 pos, dims;
+        public Vector2 pos, dims, frameSize;
 
         public Texture2D model;
 
         public Basic2d(string path, Vector2 pos, Vector2 dims)
         {
-            this.pos = pos;
-            this.dims = dims;
+            this.pos = new Vector2(pos.X, pos.Y);
+            this.dims = new Vector2(dims.X, dims.Y);
+            rot = 0.0f;
 
             model = Globals.content.Load<Texture2D>(path);
         }
@@ -44,6 +45,21 @@ namespace GameProject
 
         }
 
+        public virtual bool Hover(Vector2 OFFSET)
+        {
+            return HoverImg(OFFSET);
+        }
+        public virtual bool HoverImg(Vector2 OFFSET)
+        {
+            var mousePos = new Vector2(Globals.mouse.newMousePos.X, Globals.mouse.newMousePos.Y);
+
+            if(mousePos.X >= pos.X + OFFSET.X - dims.X/2 && mousePos.X <= pos.X + OFFSET.X + dims.X / 2
+                && mousePos.Y >= pos.Y + OFFSET.Y - dims.Y / 2 && mousePos.Y <= pos.Y + OFFSET.Y + dims.Y / 2)
+            {
+                return true;
+            }
+            return false;
+        }
         public virtual void Draw(Vector2 OFFSET)
         {
             if(model != null)

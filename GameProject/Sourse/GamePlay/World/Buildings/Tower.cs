@@ -18,8 +18,8 @@ namespace GameProject;
 public class Tower : Building
 {
 
-    public Tower( Vector2 POS, int OWNERID) 
-        : base("2d\\Misc\\tower", POS, new Vector2(90, 90), OWNERID)
+    public Tower( Vector2 POS, Vector2 FRAMES, int OWNERID)
+        : base("2d\\Misc\\Obelisk1", POS, new Vector2(90, 90), FRAMES , OWNERID)
     {
         health = 20;
         healthMax = health;

@@ -13,6 +13,7 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
+using System.Reflection;
 #endregion
 
 namespace GameProject;
@@ -20,9 +21,10 @@ namespace GameProject;
 public class Main : Game
 {
     private GraphicsDeviceManager _graphics;
-    // private SpriteBatch _spriteBatch;
+    //private SpriteBatch spriteBatch;
 
     GamePlay gamePlay;
+    MainMenu mainMenu;
 
     private Basic2d cursor;
 
@@ -30,7 +32,7 @@ public class Main : Game
     {
         _graphics = new GraphicsDeviceManager(this);
         Content.RootDirectory = "Content";
-        IsMouseVisible = true;
+       // IsMouseVisible = true;
     }
 
     protected override void Initialize()
@@ -63,7 +65,8 @@ public class Main : Game
         Globals.keyboard = new Keyboard();
         Globals.mouse = new MouseControl();
 
-        gamePlay = new GamePlay();
+        mainMenu = new MainMenu(ChangeGameState, ExitGame);
+        gamePlay = new GamePlay(ChangeGameState);
     }
 
 
@@ -84,13 +87,30 @@ public class Main : Game
         Globals.keyboard.Update();
         Globals.mouse.Update();
 
-        gamePlay.Update();
 
+        if (Globals.gameState == 0)
+        {
+            mainMenu.Update();
+        }
+        else if (Globals.gameState == 1)
+        {
+            gamePlay.Update();
+        }
 
         Globals.keyboard.UpdateOld();
         Globals.mouse.UpdateOld();
 
         base.Update(gameTime);
+    }
+    
+    public virtual void ChangeGameState(object INFO)
+    {
+        Globals.gameState = Convert.ToInt32(INFO, Globals.culture);
+    }
+
+    public virtual void ExitGame(object INFO)
+    {
+        System.Environment.Exit(0);
     }
 
     protected override void Draw(GameTime gameTime)
@@ -100,8 +120,23 @@ public class Main : Game
         // TODO: Add your drawing code here
         Globals.spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend);
 
+        if (Globals.gameState == 0)
+        {
+            mainMenu.Draw();
+        }
+        else 
+        if (Globals.gameState == 1)
+        {
+            gamePlay.Draw();
+        }
 
-        gamePlay.Draw();
+
+        Globals.normalEffect.Parameters["xSize"].SetValue((float)cursor.model.Bounds.Width);
+        Globals.normalEffect.Parameters["ySize"].SetValue((float)cursor.model.Bounds.Height);
+        Globals.normalEffect.Parameters["xDraw"].SetValue((float)((int)cursor.dims.X));
+        Globals.normalEffect.Parameters["yDraw"].SetValue((float)((int)cursor.dims.Y));
+        Globals.normalEffect.Parameters["filterColor"].SetValue(Color.White.ToVector4());
+        Globals.normalEffect.CurrentTechnique.Passes[0].Apply();
 
         cursor.Draw(new Vector2(Globals.mouse.newMousePos.X, Globals.mouse.newMousePos.Y), new Vector2(0,0), Color.White);
         Globals.spriteBatch.End();

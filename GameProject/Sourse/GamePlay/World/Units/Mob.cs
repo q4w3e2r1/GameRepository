@@ -18,7 +18,7 @@ namespace GameProject;
 public class Mob : Unit
 {
 
-    public Mob(string path, Vector2 POS, Vector2 DIMS, int OWNERID) : base(path, POS, DIMS, OWNERID)
+    public Mob(string path, Vector2 POS, Vector2 DIMS, Vector2 FRAMES, int OWNERID) : base(path, POS, DIMS, FRAMES, OWNERID)
     {
         speed = 2.0f;
     }

@@ -18,7 +18,7 @@ namespace GameProject;
 public class Building : AttackableObject
 {
 
-    public Building(string path, Vector2 POS, Vector2 DIMS, int OWNERID) : base(path, POS, DIMS, OWNERID)
+    public Building(string path, Vector2 POS, Vector2 DIMS, Vector2 FRAMES, int OWNERID) : base(path, POS, DIMS, FRAMES, OWNERID)
     {
     }
 
@@ -30,6 +30,13 @@ public class Building : AttackableObject
 
     public override void Draw(Vector2 OFFSET)
     {
+        Globals.normalEffect.Parameters["xSize"].SetValue((float)model.Bounds.Width);
+        Globals.normalEffect.Parameters["ySize"].SetValue((float)model.Bounds.Height);
+        Globals.normalEffect.Parameters["xDraw"].SetValue((float)((int)dims.X));
+        Globals.normalEffect.Parameters["yDraw"].SetValue((float)((int)dims.Y));
+        Globals.normalEffect.Parameters["filterColor"].SetValue(Color.White.ToVector4());
+        Globals.normalEffect.CurrentTechnique.Passes[0].Apply();
+
         base.Draw(OFFSET);
     }
 }

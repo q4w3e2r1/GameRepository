@@ -17,12 +17,18 @@ namespace GameProject;
 
 public class Hero : Unit
 {
-    public Hero(string path, Vector2 POS, Vector2 DIMS, int OWNERID) : base(path, POS, DIMS, OWNERID)
+    public Hero(string path, Vector2 POS, Vector2 DIMS, Vector2 FRAMES, int OWNERID) 
+        : base(path, POS, DIMS, FRAMES, OWNERID)
     {
         speed = 2.0f;
 
         health = 5;
         healthMax = health;
+
+        frameAnimations = true;
+        currentAnimation = 0;
+        frameAnimationList.Add(new FrameAnimation(new Vector2(frameSize.X, frameSize.Y), frames, new Vector2(0, 0), 4, 77, 0, "Walk"));
+        frameAnimationList.Add(new FrameAnimation(new Vector2(frameSize.X, frameSize.Y), frames, new Vector2(0, 0), 1, 77, 0, "Stand"));
     }
 
     public override void Update(Vector2 OFFSET)
@@ -54,14 +60,26 @@ public class Hero : Unit
             checkScroll = true;
         }
 
-        if(checkScroll)
+        if (Globals.keyboard.GetSinglePress("D1"))
+        {
+            GameGlobals.PassBuilding(new ArrowTower(new Vector2(pos.X, pos.Y + 10), new Vector2(1, 1), ownerId));
+        }
+
+
+        if (checkScroll)
         {
             GameGlobals.CheckScroll(pos);
+
+            SetAnimationByName("Walk");
+        }
+        else
+        {
+            SetAnimationByName("Stand");
         }
 
 
 
-       //rot = Globals.RotateTowards(pos, new Vector2(Globals.mouse.newMousePos.X, Globals.mouse.newMousePos.Y) - OFFSET);
+      // rot = Globals.RotateTowards(pos, new Vector2(Globals.mouse.newMousePos.X, Globals.mouse.newMousePos.Y) - OFFSET);
 
         if(Globals.mouse.LeftClick())
         {

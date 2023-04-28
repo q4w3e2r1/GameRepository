@@ -30,31 +30,31 @@ public class World
     public List<Projectile2d> projectiles = new();
     public List<AttackableObject> allObjects = new();
 
-    PassObject ResetWorld;
-    public World(PassObject resetWorld)
+    PassObject ResetWorld, ChangeGameState;
+    public World(PassObject RESETWORLD, PassObject CHANGEGAMESTATE)
     {
-        this.ResetWorld = resetWorld;
-      
+        ResetWorld = RESETWORLD;
+        ChangeGameState = CHANGEGAMESTATE;
 
         GameGlobals.PassProjectile = AddProjectile;
         GameGlobals.PassMob = AddMob;
+        GameGlobals.PassBuilding = AddBuilding;
         GameGlobals.PassSpawnPoint = AddSpawnPoint;
         GameGlobals.CheckScroll = CheckScroll;
 
-       
 
+        GameGlobals.paused = false;
 
         offset = new Vector2(0, 0);
 
         LoadData(1);
 
-        ui = new UI();
-        ResetWorld = resetWorld;
+        ui = new UI(ResetWorld);
     }
 
     public virtual void Update()
     {
-        if(!user.hero.dead && user.buildings.Count > 0)
+        if(!user.hero.dead && user.buildings.Count > 0 && !GameGlobals.paused)
         {
             allObjects.Clear();
             allObjects.AddRange(user.GetAllObjects());
@@ -76,7 +76,7 @@ public class World
             }
 
 
-            ui.Update(this);
+            //ui.Update(this);
 
         }
         else
@@ -86,6 +86,36 @@ public class World
                 ResetWorld(null);
             }
         }
+
+        if (Globals.keyboard.GetSinglePress("Back"))
+        {
+            ResetWorld(null);
+            ChangeGameState(0);
+        }
+
+        if (Globals.keyboard.GetSinglePress("Space"))
+        {
+            GameGlobals.paused = !GameGlobals.paused;
+        }
+
+        ui.Update(this);
+    }
+
+    public virtual void AddBuilding(object INFO)
+    {
+        var tempBuilding = (Building)INFO;
+
+        if (user.id == tempBuilding.ownerId)
+        {
+            user.AddBuilding(tempBuilding);
+        }
+        else if (aIPlayer.id == tempBuilding.ownerId)
+        {
+            aIPlayer.AddBuilding(tempBuilding);
+        }
+
+
+       // aIPlayer.AddUnit((Mob)INFO);
     }
 
     public virtual void AddMob(object INFO)
@@ -102,7 +132,7 @@ public class World
         }
 
 
-        aIPlayer.AddUnit((Mob)INFO);
+       // aIPlayer.AddUnit((Mob)INFO);
     }
 
 

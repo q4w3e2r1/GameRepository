@@ -20,8 +20,8 @@ namespace GameProject
     public class Portal : SpawnPoint
     {
 
-        public Portal(Vector2 POS, int OWNERID, XElement DATA) 
-            : base("2d\\Misc\\portal", POS, new Vector2(75, 75), OWNERID, DATA)
+        public Portal(Vector2 POS, Vector2 FRAMES, int OWNERID, XElement DATA) 
+            : base("2d\\Misc\\portal", POS, new Vector2(75, 75), FRAMES, OWNERID, DATA)
         {
             health = 10;
             healthMax = health;
@@ -51,7 +51,7 @@ namespace GameProject
 
                     var sType = Type.GetType("GameProject." + mobChoices[i].mobStr, true);
 
-                    tempMob = (Mob)(Activator.CreateInstance(sType, new Vector2(pos.X, pos.Y), ownerId));
+                    tempMob = (Mob)(Activator.CreateInstance(sType, new Vector2(pos.X, pos.Y), new Vector2(1, 1), ownerId));
 
 
 

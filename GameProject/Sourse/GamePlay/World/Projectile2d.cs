@@ -22,12 +22,12 @@ public class Projectile2d : Basic2d
 
     public float speed;
 
-    public Unit owner;
+    public AttackableObject owner;
 
     public Vector2 direction;
 
     public GameTimer timer;
-    public Projectile2d(string path, Vector2 POS, Vector2 DIMS, Unit owner, Vector2 TARGET) 
+    public Projectile2d(string path, Vector2 POS, Vector2 DIMS, AttackableObject owner, Vector2 TARGET) 
         : base(path, POS, DIMS)
     {
         done = false;

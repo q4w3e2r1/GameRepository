@@ -21,8 +21,8 @@ namespace GameProject
 
         int maxSpawns, totalSpawns;
 
-        public SpiderEggsSac(Vector2 POS, int OWNERID, XElement DATA) 
-            : base("2d\\Misc\\eggs", POS, new Vector2(45, 45), OWNERID, DATA)
+        public SpiderEggsSac(Vector2 POS, Vector2 FRAMES, int OWNERID, XElement DATA) 
+            : base("2d\\Misc\\eggs", POS, new Vector2(45, 45), FRAMES, OWNERID, DATA)
         {
             totalSpawns = 0;
             maxSpawns = 4;
@@ -44,7 +44,7 @@ namespace GameProject
 
         public override void SpawnMob()
         {
-            var tempMob = new Spiderlinq(new Vector2(pos.X, pos.Y), ownerId);
+            var tempMob = new Spiderlinq(new Vector2(pos.X, pos.Y), new Vector2(1, 1), ownerId);
 
             if(tempMob != null)
             {

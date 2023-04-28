@@ -21,8 +21,8 @@ namespace GameProject
        public List<MobChoice> mobChoices = new();
 
         public GameTimer spawnTimer = new GameTimer(2400);
-        public SpawnPoint(string path, Vector2 POS, Vector2 DIMS, int OWNERID, XElement DATA) 
-            : base(path, POS, DIMS, OWNERID)
+        public SpawnPoint(string path, Vector2 POS, Vector2 DIMS, Vector2 FRAMES, int OWNERID, XElement DATA) 
+            : base(path, POS, DIMS, FRAMES, OWNERID)
         {
             dead = false;
 
@@ -67,11 +67,18 @@ namespace GameProject
 
         public virtual void SpawnMob()
         {
-            GameGlobals.PassMob(new Imp(new Vector2(pos.X, pos.Y), ownerId));
+            GameGlobals.PassMob(new Imp(new Vector2(pos.X, pos.Y), new Vector2(1, 1), ownerId));
         }
 
         public override void Draw(Vector2 OFFSET)
         {
+            Globals.normalEffect.Parameters["xSize"].SetValue((float)model.Bounds.Width);
+            Globals.normalEffect.Parameters["ySize"].SetValue((float)model.Bounds.Height);
+            Globals.normalEffect.Parameters["xDraw"].SetValue((float)((int)dims.X));
+            Globals.normalEffect.Parameters["yDraw"].SetValue((float)((int)dims.Y));
+            Globals.normalEffect.Parameters["filterColor"].SetValue(Color.White.ToVector4());
+            Globals.normalEffect.CurrentTechnique.Passes[0].Apply();
+
             base.Draw(OFFSET);
         }
     }
