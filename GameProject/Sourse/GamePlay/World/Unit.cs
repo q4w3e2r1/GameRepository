@@ -31,8 +31,6 @@ namespace GameProject
 
         public override void Draw(Vector2 OFFSET)
         {
-
-
             base.Draw(OFFSET);
         }
     }

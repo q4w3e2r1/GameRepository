@@ -33,7 +33,10 @@ public class Mob : Unit
     public virtual void AI(Player ENEMY)
     {
         pos += Globals.RadialMovement(ENEMY.hero.pos, pos, speed);
-        //rot = Globals.RotateTowards(pos, HERO.pos);
+        rot = Globals.RotateTowards(pos, ENEMY.hero.pos);
+
+
+        rot = 0;
 
         if(Globals.GetDistance(pos, ENEMY.hero.pos) < 15)
         {

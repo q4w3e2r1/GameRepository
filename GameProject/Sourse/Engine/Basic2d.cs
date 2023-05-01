@@ -24,6 +24,8 @@ namespace GameProject
 
         public Texture2D model;
 
+        public bool flipped;
+
         public Basic2d(string path, Vector2 pos, Vector2 dims)
         {
             this.pos = new Vector2(pos.X, pos.Y);
@@ -60,24 +62,67 @@ namespace GameProject
             }
             return false;
         }
+
+
         public virtual void Draw(Vector2 OFFSET)
         {
-            if(model != null)
+            if (model != null)
             {
                 Globals.spriteBatch.Draw(model, new Rectangle((int)(pos.X + OFFSET.X), (int)(pos.Y + OFFSET.Y), (int)dims.X, (int)dims.Y), null, Color.White,
-                    rot, new Vector2(model.Bounds.Width/2, model.Bounds.Height/2), new SpriteEffects(), 0);
+                       rot, new Vector2(model.Bounds.Width / 2, model.Bounds.Height / 2), SpriteEffects.None, 0);
+                
             }
-
         }
 
         public virtual void Draw(Vector2 OFFSET, Vector2 ORIGIN, Color COLOR)
         {
             if (model != null)
             {
-                Globals.spriteBatch.Draw(model, new Rectangle((int)(pos.X + OFFSET.X), (int)(pos.Y + OFFSET.Y), (int)dims.X, (int)dims.Y), null, COLOR,
-                    rot, new Vector2(ORIGIN.X, ORIGIN.Y), new SpriteEffects(), 0);
+                   Globals.spriteBatch.Draw(model, new Rectangle((int)(pos.X + OFFSET.X), (int)(pos.Y + OFFSET.Y), (int)dims.X, (int)dims.Y), null, COLOR,
+                       rot, new Vector2(ORIGIN.X, ORIGIN.Y), SpriteEffects.None, 0);
+                
             }
-
         }
+
+
+
+
+
+
+
+
+        //public virtual void Draw(Vector2 OFFSET)
+        //{
+        //    if (model != null)
+        //    {
+        //        if (flipped)
+        //        {
+        //            Globals.spriteBatch.Draw(model, new Rectangle((int)(pos.X + OFFSET.X + dims.X), (int)(pos.Y + OFFSET.Y), (int)dims.X * -1, (int)dims.Y), null, Color.White,
+        //                rot, new Vector2(model.Bounds.Width / 2, model.Bounds.Height / 2), SpriteEffects.FlipHorizontally, 0);
+        //        }
+        //        else
+        //        {
+        //            Globals.spriteBatch.Draw(model, new Rectangle((int)(pos.X + OFFSET.X), (int)(pos.Y + OFFSET.Y), (int)dims.X, (int)dims.Y), null, Color.White,
+        //                rot, new Vector2(model.Bounds.Width / 2, model.Bounds.Height / 2), SpriteEffects.None, 0);
+        //        }
+        //    }
+        //}
+
+        //public virtual void Draw(Vector2 OFFSET, Vector2 ORIGIN, Color COLOR)
+        //{
+        //    if (model != null)
+        //    {
+        //        if (flipped)
+        //        {
+        //            Globals.spriteBatch.Draw(model, new Rectangle((int)(pos.X + OFFSET.X + dims.X), (int)(pos.Y + OFFSET.Y), (int)dims.X * -1, (int)dims.Y), null, COLOR,
+        //                rot, new Vector2(ORIGIN.X, ORIGIN.Y), SpriteEffects.FlipHorizontally, 0);
+        //        }
+        //        else
+        //        {
+        //            Globals.spriteBatch.Draw(model, new Rectangle((int)(pos.X + OFFSET.X), (int)(pos.Y + OFFSET.Y), (int)dims.X, (int)dims.Y), null, COLOR,
+        //                rot, new Vector2(ORIGIN.X, ORIGIN.Y), SpriteEffects.None, 0);
+        //        }
+        //    }
+        //}
     }
 }

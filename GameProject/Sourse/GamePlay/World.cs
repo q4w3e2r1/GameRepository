@@ -27,6 +27,8 @@ public class World
     public User user;
     public AIPlayer aIPlayer;
 
+    public SquareGrid grid;
+
     public List<Projectile2d> projectiles = new();
     public List<AttackableObject> allObjects = new();
 
@@ -48,6 +50,8 @@ public class World
         offset = new Vector2(0, 0);
 
         LoadData(1);
+
+        grid = new SquareGrid(new Vector2(25, 25), new Vector2(-100, -100), new Vector2(Globals.screenWidth + 200, Globals.screenHeight + 200));
 
         ui = new UI(ResetWorld);
     }
@@ -87,6 +91,11 @@ public class World
             }
         }
 
+        if(grid != null)
+        {
+            grid.Update(offset);
+        }
+
         if (Globals.keyboard.GetSinglePress("Back"))
         {
             ResetWorld(null);
@@ -96,6 +105,11 @@ public class World
         if (Globals.keyboard.GetSinglePress("Space"))
         {
             GameGlobals.paused = !GameGlobals.paused;
+        }
+
+        if (Globals.keyboard.GetSinglePress("G"))
+        {
+            grid.showGrid = !grid.showGrid;
         }
 
         ui.Update(this);
@@ -204,7 +218,8 @@ public class World
 
     public virtual void Draw(Vector2 OFFSET)
     {
-  
+
+        grid.DrawGrid(offset);
         user.Draw(offset);
         aIPlayer.Draw(offset);
 

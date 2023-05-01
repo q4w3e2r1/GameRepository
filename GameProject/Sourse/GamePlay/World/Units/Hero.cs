@@ -27,6 +27,8 @@ public class Hero : Unit
 
         frameAnimations = true;
         currentAnimation = 0;
+       
+
         frameAnimationList.Add(new FrameAnimation(new Vector2(frameSize.X, frameSize.Y), frames, new Vector2(0, 0), 4, 77, 0, "Walk"));
         frameAnimationList.Add(new FrameAnimation(new Vector2(frameSize.X, frameSize.Y), frames, new Vector2(0, 0), 1, 77, 0, "Stand"));
     }
@@ -40,12 +42,14 @@ public class Hero : Unit
         {
             pos = new Vector2(pos.X - speed, pos.Y);
             checkScroll = true;
+            flipped = true;
         }
 
         if (Globals.keyboard.GetPress("D"))
         {
             pos = new Vector2(pos.X + speed, pos.Y);
             checkScroll = true;
+            flipped = false;
         }
 
         if (Globals.keyboard.GetPress("W"))
