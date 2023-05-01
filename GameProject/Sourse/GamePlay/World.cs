@@ -12,6 +12,7 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
+using System.ComponentModel.Design.Serialization;
 #endregion
 
 namespace GameProject;
@@ -26,34 +27,42 @@ public class World
     public User user;
     public AIPlayer aIPlayer;
 
-    public List<Projectile2d> projectiles = new();
+    public SquareGrid grid;
 
-    PassObject ResetWorld;
-    public World(PassObject resetWorld)
+    public List<Projectile2d> projectiles = new();
+    public List<AttackableObject> allObjects = new();
+
+    PassObject ResetWorld, ChangeGameState;
+    public World(PassObject RESETWORLD, PassObject CHANGEGAMESTATE)
     {
-        this.ResetWorld = resetWorld;
-      
+        ResetWorld = RESETWORLD;
+        ChangeGameState = CHANGEGAMESTATE;
 
         GameGlobals.PassProjectile = AddProjectile;
         GameGlobals.PassMob = AddMob;
+        GameGlobals.PassBuilding = AddBuilding;
         GameGlobals.PassSpawnPoint = AddSpawnPoint;
         GameGlobals.CheckScroll = CheckScroll;
 
-        user = new User(1);
-        aIPlayer = new AIPlayer(2);
 
+        GameGlobals.paused = false;
 
         offset = new Vector2(0, 0);
 
+        LoadData(1);
 
-        ui = new UI();
-        ResetWorld = resetWorld;
+        grid = new SquareGrid(new Vector2(25, 25), new Vector2(-100, -100), new Vector2(Globals.screenWidth + 200, Globals.screenHeight + 200));
+
+        ui = new UI(ResetWorld);
     }
 
     public virtual void Update()
     {
-        if(!user.hero.dead)
+        if(!user.hero.dead && user.buildings.Count > 0 && !GameGlobals.paused)
         {
+            allObjects.Clear();
+            allObjects.AddRange(user.GetAllObjects());
+            allObjects.AddRange(aIPlayer.GetAllObjects());
 
             user.Update(aIPlayer, offset);
             aIPlayer.Update(user, offset);
@@ -61,7 +70,7 @@ public class World
 
             for (var i = 0; i < projectiles.Count; i++)
             {
-                projectiles[i].Update(offset, aIPlayer.units.ToList<Unit>());
+                projectiles[i].Update(offset, allObjects);
 
                 if (projectiles[i].done)
                 {
@@ -71,18 +80,56 @@ public class World
             }
 
 
-        
-
-            ui.Update(this);
+            //ui.Update(this);
 
         }
         else
         {
-            if (Globals.keyboard.GetPress("Enter"))
+            if (Globals.keyboard.GetPress("Enter") && (user.hero.dead || user.buildings.Count <= 0))
             {
                 ResetWorld(null);
             }
         }
+
+        if(grid != null)
+        {
+            grid.Update(offset);
+        }
+
+        if (Globals.keyboard.GetSinglePress("Back"))
+        {
+            ResetWorld(null);
+            ChangeGameState(0);
+        }
+
+        if (Globals.keyboard.GetSinglePress("Space"))
+        {
+            GameGlobals.paused = !GameGlobals.paused;
+        }
+
+        if (Globals.keyboard.GetSinglePress("G"))
+        {
+            grid.showGrid = !grid.showGrid;
+        }
+
+        ui.Update(this);
+    }
+
+    public virtual void AddBuilding(object INFO)
+    {
+        var tempBuilding = (Building)INFO;
+
+        if (user.id == tempBuilding.ownerId)
+        {
+            user.AddBuilding(tempBuilding);
+        }
+        else if (aIPlayer.id == tempBuilding.ownerId)
+        {
+            aIPlayer.AddBuilding(tempBuilding);
+        }
+
+
+       // aIPlayer.AddUnit((Mob)INFO);
     }
 
     public virtual void AddMob(object INFO)
@@ -99,7 +146,7 @@ public class World
         }
 
 
-        aIPlayer.AddUnit((Mob)INFO);
+       // aIPlayer.AddUnit((Mob)INFO);
     }
 
 
@@ -148,11 +195,34 @@ public class World
         }
     }
 
+    public virtual void LoadData(int LEVEL)
+    {
+        var xml = XDocument.Load("XML\\Levels\\Level" + LEVEL + ".xml");
+
+        XElement tempElement = null;
+        if (xml.Element("Root").Element("User") != null)
+        {
+            tempElement = xml.Element("Root").Element("User");
+        }
+        user = new User(1, tempElement);
+
+        tempElement = null;
+        if (xml.Element("Root").Element("AIPlayer") != null)
+        {
+            tempElement = xml.Element("Root").Element("AIPlayer");
+        }
+
+        aIPlayer = new AIPlayer(2, tempElement);
+    }
+
+
     public virtual void Draw(Vector2 OFFSET)
     {
-  
+
+        grid.DrawGrid(offset);
         user.Draw(offset);
         aIPlayer.Draw(offset);
+
 
         for (var i = 0; i < projectiles.Count; i++)
         {

@@ -15,7 +15,7 @@ using Microsoft.Xna.Framework.Media;
 namespace GameProject
 {
 
-    public class AttackableObject : Basic2d
+    public class AttackableObject : Animated2d
     {
         public bool dead;
 
@@ -23,7 +23,8 @@ namespace GameProject
 
         public float speed, hitDist, health, healthMax;
 
-        public AttackableObject(string path, Vector2 POS, Vector2 DIMS, int OWNERID) : base(path, POS, DIMS)
+        public AttackableObject(string path, Vector2 POS, Vector2 DIMS,Vector2 FRAMES, int OWNERID)
+            : base(path, POS, DIMS, FRAMES, Color.White)
         {
             ownerId = OWNERID;
             dead = false;
@@ -51,6 +52,14 @@ namespace GameProject
 
         public override void Draw(Vector2 OFFSET)
         {
+            Globals.normalEffect.Parameters["xSize"].SetValue((float)model.Bounds.Width);
+            Globals.normalEffect.Parameters["ySize"].SetValue((float)model.Bounds.Height);
+            Globals.normalEffect.Parameters["xDraw"].SetValue((float)((int)dims.X));
+            Globals.normalEffect.Parameters["yDraw"].SetValue((float)((int)dims.Y));
+            Globals.normalEffect.Parameters["filterColor"].SetValue(Color.White.ToVector4());
+            Globals.normalEffect.CurrentTechnique.Passes[0].Apply();
+
+
             base.Draw(OFFSET);
         }
     }

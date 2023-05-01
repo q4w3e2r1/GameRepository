@@ -18,26 +18,29 @@ namespace GameProject;
 public class Mob : Unit
 {
 
-    public Mob(string path, Vector2 POS, Vector2 DIMS, int OWNERID) : base(path, POS, DIMS, OWNERID)
+    public Mob(string path, Vector2 POS, Vector2 DIMS, Vector2 FRAMES, int OWNERID) : base(path, POS, DIMS, FRAMES, OWNERID)
     {
         speed = 2.0f;
     }
 
     public override void Update(Vector2 OFFSET, Player ENEMY)
     {
-        AI(ENEMY.hero);
+        AI(ENEMY);
         base.Update(OFFSET);
     }
 
 
-    public virtual void AI(Hero HERO)
+    public virtual void AI(Player ENEMY)
     {
-        pos += Globals.RadialMovement(HERO.pos, pos, speed);
-        //rot = Globals.RotateTowards(pos, HERO.pos);
+        pos += Globals.RadialMovement(ENEMY.hero.pos, pos, speed);
+        rot = Globals.RotateTowards(pos, ENEMY.hero.pos);
 
-        if(Globals.GetDistance(pos, HERO.pos) < 15)
+
+        rot = 0;
+
+        if(Globals.GetDistance(pos, ENEMY.hero.pos) < 15)
         {
-            HERO.GetHit(1);
+            ENEMY.hero.GetHit(1);
             dead = true;
         }
 

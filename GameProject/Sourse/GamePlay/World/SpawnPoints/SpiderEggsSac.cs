@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Xml.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
@@ -20,10 +21,16 @@ namespace GameProject
 
         int maxSpawns, totalSpawns;
 
-        public SpiderEggsSac(Vector2 POS, int OWNERID) : base("2d\\Misc\\eggs", POS, new Vector2(45, 45), OWNERID)
+        public SpiderEggsSac(Vector2 POS, Vector2 FRAMES, int OWNERID, XElement DATA) 
+            : base("2d\\Misc\\eggs", POS, new Vector2(45, 45), FRAMES, OWNERID, DATA)
         {
             totalSpawns = 0;
             maxSpawns = 4;
+
+            health = 5;
+            healthMax = health;
+
+            spawnTimer = new GameTimer(3000);
         }
 
         public override void Update(Vector2 OFFSET)
@@ -37,7 +44,7 @@ namespace GameProject
 
         public override void SpawnMob()
         {
-            var tempMob = new Spiderlinq(new Vector2(pos.X, pos.Y), ownerId);
+            var tempMob = new Spiderlinq(new Vector2(pos.X, pos.Y), new Vector2(1, 1), ownerId);
 
             if(tempMob != null)
             {

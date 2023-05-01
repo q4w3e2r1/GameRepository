@@ -23,13 +23,16 @@ namespace GameProject
 
     public class Globals
     {
-        public static int screenHeight, screenWidth;
+        public static int screenHeight, screenWidth, gameState = 0;
 
         public static Random random = new Random(); 
+
+        public static System.Globalization.CultureInfo culture = new System.Globalization.CultureInfo("en-US");
 
         public static ContentManager content;
         public static SpriteBatch spriteBatch;
 
+        public static Effect normalEffect;
 
         public static Keyboard keyboard;
         public static MouseControl mouse;

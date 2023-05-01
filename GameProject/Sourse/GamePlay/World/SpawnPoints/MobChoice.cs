@@ -12,18 +12,20 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
-using GameProject;
+using System.ComponentModel.Design.Serialization;
 #endregion
 
-namespace GameProject
+namespace GameProject;
+
+public class MobChoice
 {
-    public class GameGlobals
+    public int rate;
+    public string mobStr;
+
+    public MobChoice(string MOBSTR, int RATE) 
     {
-        public static bool paused = false;
-
-        public static int score = 0;
-        public static PassObject PassProjectile, PassMob, PassBuilding, PassSpawnPoint, CheckScroll;
-
+        rate = RATE;
+        mobStr = MOBSTR;
+   
     }
 }
-

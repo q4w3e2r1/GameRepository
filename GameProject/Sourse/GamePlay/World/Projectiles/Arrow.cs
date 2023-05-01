@@ -16,15 +16,15 @@ using Microsoft.Xna.Framework.Media;
 
 namespace GameProject;
 
-public class Fireball : Projectile2d
+public class Arrow : Projectile2d
 {
    
-    public Fireball(Vector2 POS, AttackableObject owner, Vector2 TARGET) 
-        : base("2d\\Projectiles\\Fireball2", POS, new Vector2(20, 20), owner, TARGET)
+    public Arrow(Vector2 POS, AttackableObject owner, Vector2 TARGET) 
+        : base("2d\\Projectiles\\Arrow", POS, new Vector2(20, 20), owner, TARGET)
     {
-      
+        speed = 7.5f;
 
-
+        timer = new GameTimer(800);
     }
 
     public override void Update(Vector2 OFFSET, List<AttackableObject> UNITS)

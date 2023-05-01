@@ -12,7 +12,6 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
-using GameProject;
 #endregion
 
 namespace GameProject;
@@ -23,12 +22,12 @@ public class Projectile2d : Basic2d
 
     public float speed;
 
-    public Unit owner;
+    public AttackableObject owner;
 
     public Vector2 direction;
 
     public GameTimer timer;
-    public Projectile2d(string path, Vector2 POS, Vector2 DIMS, Unit owner, Vector2 TARGET) 
+    public Projectile2d(string path, Vector2 POS, Vector2 DIMS, AttackableObject owner, Vector2 TARGET) 
         : base(path, POS, DIMS)
     {
         done = false;
@@ -45,10 +44,10 @@ public class Projectile2d : Basic2d
         rot = Globals.RotateTowards(pos, new Vector2(TARGET.X, TARGET.Y));
 
 
-        timer = new GameTimer(1200);
+        timer = new GameTimer(1500);
     }
 
-    public virtual void Update(Vector2 OFFSET, List<Unit> UNITS)
+    public virtual void Update(Vector2 OFFSET, List<AttackableObject> UNITS)
     {
         pos += direction * speed;
 
@@ -67,12 +66,12 @@ public class Projectile2d : Basic2d
         }
     }
 
-    public virtual bool HitSomething(List<Unit> UNITS) 
+    public virtual bool HitSomething(List<AttackableObject> UNITS) 
     {
         for(var i = 0; i < UNITS.Count;i++)
         {
 
-            if(Globals.GetDistance(pos, UNITS[i].pos) < UNITS[i].hitDist)
+            if(owner.ownerId != UNITS[i].ownerId && Globals.GetDistance(pos, UNITS[i].pos) < UNITS[i].hitDist)
             {
                 UNITS[i].GetHit(1);
 
@@ -86,6 +85,13 @@ public class Projectile2d : Basic2d
 
     public override void Draw(Vector2 OFFSET)
     {
+        Globals.normalEffect.Parameters["xSize"].SetValue((float)model.Bounds.Width);
+        Globals.normalEffect.Parameters["ySize"].SetValue((float)model.Bounds.Height);
+        Globals.normalEffect.Parameters["xDraw"].SetValue((float)((int)dims.X));
+        Globals.normalEffect.Parameters["yDraw"].SetValue((float)((int)dims.Y));
+        Globals.normalEffect.Parameters["filterColor"].SetValue(Color.White.ToVector4());
+        Globals.normalEffect.CurrentTechnique.Passes[0].Apply();
+
         base.Draw(OFFSET);
     }
 }

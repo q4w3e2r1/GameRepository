@@ -20,10 +20,14 @@ public class GamePlay
 {
     int playState;
     World world;
-    public GamePlay() 
+
+    PassObject ChangeGameState;
+    public GamePlay(PassObject CHANGEGAMESTATE) 
     {
-         playState = 0;
-         ResetWorld(null);
+        playState = 0;
+        ChangeGameState = CHANGEGAMESTATE;
+        ResetWorld(null);
+       
     }
 
     public virtual void Update()
@@ -36,7 +40,7 @@ public class GamePlay
 
     public virtual void ResetWorld(object INFO)
     {
-        world = new World(ResetWorld);
+        world = new World(ResetWorld, ChangeGameState);
     }
 
     public void Draw()

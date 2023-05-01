@@ -19,7 +19,8 @@ public class Spider : Mob
 {
     public GameTimer spawnTimer;
 
-    public Spider(Vector2 POS, int OWNERID) : base("2d\\Units\\Mobs\\spider", POS, new Vector2(60, 60), OWNERID)
+    public Spider(Vector2 POS, Vector2 FRAMES, int OWNERID) 
+        : base("2d\\Units\\Mobs\\spider", POS, new Vector2(60, 60), FRAMES ,OWNERID)
     {
         speed = 1.5f;
 
@@ -44,7 +45,7 @@ public class Spider : Mob
 
     public virtual void SpawnEggSac()
     {
-        GameGlobals.PassSpawnPoint(new SpiderEggsSac(new Vector2(pos.X, pos.Y), ownerId));
+        GameGlobals.PassSpawnPoint(new SpiderEggsSac(new Vector2(pos.X, pos.Y), new Vector2(1, 1), ownerId, null));
     }
 
     public override void Draw(Vector2 OFFSET)
