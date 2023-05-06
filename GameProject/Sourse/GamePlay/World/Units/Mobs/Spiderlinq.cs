@@ -26,14 +26,14 @@ public class Spiderlinq : Mob
 
     }
 
-    public override void Update(Vector2 OFFSET, Player ENEMY)
+    public override void Update(Vector2 OFFSET, Player ENEMY, SquareGrid GRID)
     {
        
 
-        base.Update(OFFSET, ENEMY);
+        base.Update(OFFSET, ENEMY, GRID);
     }
 
-    public override void AI(Player ENEMY)
+    public override void AI(Player ENEMY, SquareGrid GRID)
     {
         Building temp = null;
         
@@ -48,13 +48,23 @@ public class Spiderlinq : Mob
 
         if (temp != null)
         {
-            pos += Globals.RadialMovement(temp.pos, pos, speed);
-           // rot = Globals.RotateTowards(pos, temp.pos);
-
-            if (Globals.GetDistance(pos, temp.pos) < 15)
+            if (pathNodes == null || (pathNodes.Count == 0 && pos.X == moveTo.X && pos.Y == moveTo.Y))
             {
-                temp.GetHit(1);
-                dead = true;
+                pathNodes = FindPath(GRID, GRID.GetSlotFromPixel(temp.pos, Vector2.Zero));
+                moveTo = pathNodes[0];
+                pathNodes.RemoveAt(0);
+            }
+            else
+            {
+
+                MoveUnit();
+
+
+                if (Globals.GetDistance(pos, temp.pos) < GRID.slotDims.X * 1.2f)
+                {
+                    temp.GetHit(1);
+                    dead = true;
+                }
             }
         }
 

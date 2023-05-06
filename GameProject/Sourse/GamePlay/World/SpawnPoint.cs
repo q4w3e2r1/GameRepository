@@ -34,7 +34,7 @@ namespace GameProject
             hitDist = 35.0f;
         }
 
-        public override void Update(Vector2 OFFSET)
+        public override void Update(Vector2 OFFSET, Player ENEMY, SquareGrid GRID)
         {
             spawnTimer.UpdateTimer();
            if(spawnTimer.Test())
@@ -42,7 +42,7 @@ namespace GameProject
                 SpawnMob();
                 spawnTimer.ResetToZero();
             }
-            base.Update(OFFSET);
+            base.Update(OFFSET, ENEMY, GRID);
         }
 
         public virtual void LoadData(XElement DATA)

@@ -31,6 +31,7 @@ public class World
 
     public List<Projectile2d> projectiles = new();
     public List<AttackableObject> allObjects = new();
+    public List<Effect2d> effects = new();
 
     PassObject ResetWorld, ChangeGameState;
     public World(PassObject RESETWORLD, PassObject CHANGEGAMESTATE)
@@ -40,6 +41,7 @@ public class World
 
         GameGlobals.PassProjectile = AddProjectile;
         GameGlobals.PassMob = AddMob;
+        GameGlobals.PassEffect = AddEffect;
         GameGlobals.PassBuilding = AddBuilding;
         GameGlobals.PassSpawnPoint = AddSpawnPoint;
         GameGlobals.CheckScroll = CheckScroll;
@@ -64,8 +66,8 @@ public class World
             allObjects.AddRange(user.GetAllObjects());
             allObjects.AddRange(aIPlayer.GetAllObjects());
 
-            user.Update(aIPlayer, offset);
-            aIPlayer.Update(user, offset);
+            user.Update(aIPlayer, offset, grid);
+            aIPlayer.Update(user, offset, grid);
 
 
             for (var i = 0; i < projectiles.Count; i++)
@@ -75,6 +77,17 @@ public class World
                 if (projectiles[i].done)
                 {
                     projectiles.RemoveAt(i);
+                    i--;
+                }
+            }
+
+            for (var i = 0; i < effects.Count; i++)
+            {
+                effects[i].Update(offset);
+
+                if (effects[i].done)
+                {
+                    effects.RemoveAt(i);
                     i--;
                 }
             }
@@ -111,6 +124,7 @@ public class World
         {
             grid.showGrid = !grid.showGrid;
         }
+        // grid.showGrid = true;
 
         ui.Update(this);
     }
@@ -130,6 +144,11 @@ public class World
 
 
        // aIPlayer.AddUnit((Mob)INFO);
+    }
+
+    public virtual void AddEffect(object INFO)
+    {
+        effects.Add((Effect2d)INFO);
     }
 
     public virtual void AddMob(object INFO)
@@ -154,6 +173,8 @@ public class World
     {
         projectiles.Add((Projectile2d)INFO);
     }
+
+  
 
     public virtual void AddSpawnPoint(object INFO)
     {
@@ -227,6 +248,11 @@ public class World
         for (var i = 0; i < projectiles.Count; i++)
         {
             projectiles[i].Draw(offset);
+        }
+
+        for (var i = 0; i < effects.Count; i++)
+        {
+            effects[i].Draw(offset);
         }
 
         ui.Draw(this);

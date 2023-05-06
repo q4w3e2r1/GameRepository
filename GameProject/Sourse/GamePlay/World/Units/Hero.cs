@@ -31,9 +31,13 @@ public class Hero : Unit
 
         frameAnimationList.Add(new FrameAnimation(new Vector2(frameSize.X, frameSize.Y), frames, new Vector2(0, 0), 4, 77, 0, "Walk"));
         frameAnimationList.Add(new FrameAnimation(new Vector2(frameSize.X, frameSize.Y), frames, new Vector2(0, 0), 1, 77, 0, "Stand"));
+
+        skills.Add(new FlameWave());
+    
     }
 
-    public override void Update(Vector2 OFFSET)
+
+    public override void Update(Vector2 OFFSET, Player ENEMY, SquareGrid GRID)
     {
         var checkScroll = false;
 
@@ -64,9 +68,25 @@ public class Hero : Unit
             checkScroll = true;
         }
 
+        if (Globals.keyboard.GetSinglePress("T"))
+        {
+            var tempLoc = GRID.GetSlotFromPixel(new Vector2(pos.X - 10, pos.Y - 50), Vector2.Zero);
+            var loc = GRID.GetSlotFromLocation(tempLoc);
+
+            if (loc != null && !loc.filled && !loc.impassable)
+            {
+                loc.SetToFilled(false);
+                var tempBuilding = new ArrowTower(new Vector2(0, 0), new Vector2(1, 1), ownerId);
+                tempBuilding.pos = GRID.GetPosFromLoc(tempLoc) + GRID.slotDims / 2 + new Vector2(0, -tempBuilding.dims.Y * .25f);
+
+                GameGlobals.PassBuilding(tempBuilding);
+            }
+        }
+
         if (Globals.keyboard.GetSinglePress("D1"))
         {
-            GameGlobals.PassBuilding(new ArrowTower(new Vector2(pos.X, pos.Y + 10), new Vector2(1, 1), ownerId));
+            currentSkill = skills[0];
+            currentSkill.Active = true;
         }
 
 
@@ -83,17 +103,39 @@ public class Hero : Unit
 
 
 
-      // rot = Globals.RotateTowards(pos, new Vector2(Globals.mouse.newMousePos.X, Globals.mouse.newMousePos.Y) - OFFSET);
-
-        if(Globals.mouse.LeftClick())
+        // rot = Globals.RotateTowards(pos, new Vector2(Globals.mouse.newMousePos.X, Globals.mouse.newMousePos.Y) - OFFSET);
+        if (currentSkill == null)
         {
-            GameGlobals.PassProjectile(new Fireball(new Vector2(pos.X, pos.Y), this, 
-                new Vector2(Globals.mouse.newMousePos.X, Globals.mouse.newMousePos.Y) - OFFSET));
+
+            if (Globals.mouse.LeftClick())
+            {
+                GameGlobals.PassProjectile(new Fireball(new Vector2(pos.X, pos.Y), this,
+                    new Vector2(Globals.mouse.newMousePos.X, Globals.mouse.newMousePos.Y) - OFFSET));
+
+            }
 
         }
+        else
+        {
+            currentSkill.Update(OFFSET, ENEMY);
+
+            if (currentSkill.done)
+            {
+                currentSkill.Reset();
+                currentSkill = null;
+            }
 
 
-        base.Update(OFFSET);
+            if (Globals.mouse.RightClick())
+            {
+
+                currentSkill.Reset();
+                currentSkill = null;
+            }
+        }
+
+        base.Update(OFFSET, ENEMY, GRID);
+        
     }
 
 

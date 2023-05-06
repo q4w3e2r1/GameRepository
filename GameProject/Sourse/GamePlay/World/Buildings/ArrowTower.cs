@@ -20,11 +20,11 @@ public class ArrowTower : Building
 
     int range;
 
-    GameTimer shotTimer = new GameTimer(1200);
+    GameTimer shotTimer = new GameTimer(12000);
 
 
     public ArrowTower( Vector2 POS, Vector2 FRAMES, int OWNERID)
-        : base("2d\\Misc\\Tower", POS, new Vector2(90, 90), FRAMES, OWNERID)
+        : base("2d\\Buildings\\tower", POS, new Vector2(90, 90), FRAMES, OWNERID)
     {
         range = 220;
         health = 10;
@@ -34,7 +34,7 @@ public class ArrowTower : Building
 
     }
 
-    public override void Update(Vector2 OFFSET, Player ENEMY)
+    public override void Update(Vector2 OFFSET, Player ENEMY, SquareGrid GRID)
     {
         shotTimer.UpdateTimer();
         if(shotTimer.Test())
@@ -43,7 +43,7 @@ public class ArrowTower : Building
             shotTimer.ResetToZero();
         }
 
-        base.Update(OFFSET);
+        base.Update(OFFSET, ENEMY, GRID);
     }
 
     public virtual void FireArrow(Player ENEMY)

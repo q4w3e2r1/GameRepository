@@ -27,8 +27,8 @@ public class User : Player
 
     }
 
-    public override void Update(Player ENEMY, Vector2 OFFSET)
+    public override void Update(Player ENEMY, Vector2 OFFSET, SquareGrid GRID)
     {
-        base.Update(ENEMY, OFFSET);
+        base.Update(ENEMY, OFFSET, GRID);
     }
 }
