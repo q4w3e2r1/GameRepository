@@ -36,7 +36,7 @@ namespace GameProject
             hitDist = 35.0f;
         }
 
-        public virtual void Update(Vector2 OFFSET, Player ENEMY)
+        public virtual void Update(Vector2 OFFSET, Player ENEMY, SquareGrid GRID)
         {
            
             base.Update(OFFSET);

@@ -12,18 +12,22 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
-using GameProject;
 #endregion
 
-namespace GameProject
-{
-    public class GameGlobals
-    {
-        public static bool paused = false;
+namespace GameProject;
 
-        public static int score = 0;
-        public static PassObject PassProjectile, PassEffect, PassMob, PassBuilding, PassSpawnPoint, CheckScroll;
+public class FlameCircle : Effect2d
+{
+    public FlameCircle(Vector2 POS, Vector2 DIMS)
+        : base("2d\\Effects\\FireNova", POS, DIMS, new Vector2(1, 1), 400)
+    {
 
     }
-}
 
+    public override void Update(Vector2 OFFSET)
+    {
+        rot += (float)Math.PI*2.0f / 60.0f;
+
+        base.Update(OFFSET);
+    }
+}

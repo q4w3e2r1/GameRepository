@@ -12,18 +12,17 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
-using GameProject;
 #endregion
 
-namespace GameProject
+namespace GameProject;
+
+public class TargetingCircle : Effect2d
 {
-    public class GameGlobals
-    {
-        public static bool paused = false;
+     public TargetingCircle(Vector2 POS, Vector2 DIMS)
+        : base("2d\\Effects\\TargetCircle", POS, DIMS, new Vector2(1, 1), 400)
+     {
 
-        public static int score = 0;
-        public static PassObject PassProjectile, PassEffect, PassMob, PassBuilding, PassSpawnPoint, CheckScroll;
 
-    }
+
+     }
 }
-

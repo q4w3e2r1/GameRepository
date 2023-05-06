@@ -19,7 +19,7 @@ public class Tower : Building
 {
 
     public Tower( Vector2 POS, Vector2 FRAMES, int OWNERID)
-        : base("2d\\Misc\\Obelisk1", POS, new Vector2(90, 90), FRAMES , OWNERID)
+        : base("2d\\Buildings\\Obelisk1", POS, new Vector2(90, 90), FRAMES , OWNERID)
     {
         health = 20;
         healthMax = health;
@@ -28,10 +28,10 @@ public class Tower : Building
 
     }
 
-    public override void Update(Vector2 OFFSET, Player ENEMY)
+    public override void Update(Vector2 OFFSET, Player ENEMY, SquareGrid GRID)
     {
 
-        base.Update(OFFSET);
+        base.Update(OFFSET, ENEMY, GRID);
     }
 
     public override void Draw(Vector2 OFFSET)
