@@ -164,10 +164,7 @@ public class Player
         for (var i = 0; i < units.Count; i++)
         {
             units[i].Draw(OFFSET);
-        }
-
-
-    
+        }  
     }
 
 }

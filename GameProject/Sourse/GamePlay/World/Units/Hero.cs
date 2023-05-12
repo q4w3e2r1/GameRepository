@@ -128,9 +128,10 @@ public class Hero : Unit
 
             if (Globals.mouse.RightClick())
             {
-
+                
                 currentSkill.Reset();
                 currentSkill = null;
+                
             }
         }
 

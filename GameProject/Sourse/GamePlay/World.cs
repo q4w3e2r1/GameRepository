@@ -32,6 +32,7 @@ public class World
     public List<Projectile2d> projectiles = new();
     public List<AttackableObject> allObjects = new();
     public List<Effect2d> effects = new();
+    public List<SceneItem> sceneItems = new();
 
     PassObject ResetWorld, ChangeGameState;
     public World(PassObject RESETWORLD, PassObject CHANGEGAMESTATE)
@@ -53,7 +54,6 @@ public class World
 
         LoadData(1);
 
-        grid = new SquareGrid(new Vector2(25, 25), new Vector2(-100, -100), new Vector2(Globals.screenWidth + 200, Globals.screenHeight + 200));
 
         ui = new UI(ResetWorld);
     }
@@ -92,7 +92,10 @@ public class World
                 }
             }
 
-
+            for (var i = 0; i < sceneItems.Count; i++)
+            {
+                sceneItems[i].Update(offset);
+            }
             //ui.Update(this);
 
         }
@@ -233,7 +236,24 @@ public class World
             tempElement = xml.Element("Root").Element("AIPlayer");
         }
 
+        grid = new SquareGrid(new Vector2(25, 25), new Vector2(-100, -100), new Vector2(Globals.screenWidth + 200, Globals.screenHeight + 200), xml.Element("Root").Element("GridItems"));
+
         aIPlayer = new AIPlayer(2, tempElement);
+
+
+
+        Type sType = null;
+        var sceneItemsList = (from t in xml.Element("Root").Element("Scene").Descendants("SceneItem")
+                            select t).ToList<XElement>();
+
+        for (var i = 0; i < sceneItemsList.Count; i++)
+        {
+            sType = Type.GetType("GameProject." + sceneItemsList[i].Element("type").Value, true);
+
+            sceneItems.Add((SceneItem)(Activator.CreateInstance(sType, new Vector2(Convert.ToInt32(sceneItemsList[i].Element("Pos").Element("x").Value, Globals.culture), Convert.ToInt32(sceneItemsList[i].Element("Pos").Element("y").Value, Globals.culture)), new Vector2((float)Convert.ToDouble(sceneItemsList[i].Element("scale").Value, Globals.culture)))));
+        }
+
+
     }
 
 
@@ -244,6 +264,10 @@ public class World
         user.Draw(offset);
         aIPlayer.Draw(offset);
 
+        for(var i = 0; i < sceneItems.Count;i++)
+        {
+            sceneItems[i].Draw(offset);
+        }
 
         for (var i = 0; i < projectiles.Count; i++)
         {
