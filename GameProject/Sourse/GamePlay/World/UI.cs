@@ -54,8 +54,14 @@ public class UI
         Globals.normalEffect.Parameters["filterColor"].SetValue(Color.Black.ToVector4());
         Globals.normalEffect.CurrentTechnique.Passes[0].Apply();
 
-        var tempStr = "Score = " + GameGlobals.score;
+        var tempStr = "Gold = " + WORLD.user.gold;
         var strDims = font.MeasureString(tempStr);
+        Globals.spriteBatch.DrawString(font, tempStr,
+            new Vector2(40, 40), Color.Black);
+
+
+        tempStr = "Score = " + GameGlobals.score;
+        strDims = font.MeasureString(tempStr);
         Globals.spriteBatch.DrawString(font, tempStr,
             new Vector2(Globals.screenWidth / 2 - strDims.X / 2, Globals.screenHeight - 40), Color.Black);
 

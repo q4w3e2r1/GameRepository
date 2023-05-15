@@ -4,26 +4,29 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
 using System.Threading;
-using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
 
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+#if WINDOWS_PHONE
+using Microsoft.Xna.Framework.Input.Touch;
+#endif
 using Microsoft.Xna.Framework.Media;
-using GameProject;
 #endregion
 
 namespace GameProject
 {
-    public class GameGlobals
+    public class DrawSlotUpdatePackage
     {
-        public static bool paused = false;
+        public bool drawing;
+        public Vector2 offset;
 
-        public static int score = 0;
-        public static PassObject PassProjectile, PassEffect, PassGold, PassMob, PassBuilding, PassSpawnPoint, CheckScroll;
-
+        public DrawSlotUpdatePackage(Vector2 OFFSET, bool DRAWING)
+        {
+            drawing = DRAWING;
+            offset = OFFSET;
+        }
     }
 }
-

@@ -289,6 +289,42 @@
 /processorParam:TextureFormat=Color
 /build:2d/UI/BackGrounds/MainMenu.png
 
+#begin 2d/UI/BackGrounds/StandardDirt.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:2d/UI/BackGrounds/StandardDirt.png
+
+#begin 2d/UI/BackGrounds/StandardGrass.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:2d/UI/BackGrounds/StandardGrass.png
+
+#begin 2d/UI/BackGrounds/StandardSnow.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:2d/UI/BackGrounds/StandardSnow.png
+
 #begin 2d/UI/Scene/OakTree.png
 /importer:TextureImporter
 /processor:TextureProcessor

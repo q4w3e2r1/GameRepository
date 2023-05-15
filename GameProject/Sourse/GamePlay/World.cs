@@ -29,16 +29,24 @@ public class World
 
     public SquareGrid grid;
 
+    public TileBkg2d bkg;
+
+    public LevelDrawManager levelDrawManager;
+
     public List<Projectile2d> projectiles = new();
     public List<AttackableObject> allObjects = new();
     public List<Effect2d> effects = new();
     public List<SceneItem> sceneItems = new();
 
     PassObject ResetWorld, ChangeGameState;
+
+
     public World(PassObject RESETWORLD, PassObject CHANGEGAMESTATE)
     {
         ResetWorld = RESETWORLD;
         ChangeGameState = CHANGEGAMESTATE;
+
+        levelDrawManager = new LevelDrawManager();
 
         GameGlobals.PassProjectile = AddProjectile;
         GameGlobals.PassMob = AddMob;
@@ -46,6 +54,7 @@ public class World
         GameGlobals.PassBuilding = AddBuilding;
         GameGlobals.PassSpawnPoint = AddSpawnPoint;
         GameGlobals.CheckScroll = CheckScroll;
+        GameGlobals.PassGold = AddGold;
 
 
         GameGlobals.paused = false;
@@ -56,12 +65,16 @@ public class World
 
 
         ui = new UI(ResetWorld);
+
+        bkg = new TileBkg2d("2d\\UI\\Backgrounds\\StandardDirt", new Vector2(-100, -100), new Vector2(120, 100), new Vector2(grid.totalPhysicalDims.X + 100, grid.totalPhysicalDims.Y + 100) );
     }
 
     public virtual void Update()
     {
         if(!user.hero.dead && user.buildings.Count > 0 && !GameGlobals.paused)
         {
+            levelDrawManager.Update();
+
             allObjects.Clear();
             allObjects.AddRange(user.GetAllObjects());
             allObjects.AddRange(aIPlayer.GetAllObjects());
@@ -95,6 +108,8 @@ public class World
             for (var i = 0; i < sceneItems.Count; i++)
             {
                 sceneItems[i].Update(offset);
+
+                sceneItems[i].UpdateDraw(offset, levelDrawManager);
             }
             //ui.Update(this);
 
@@ -152,6 +167,21 @@ public class World
     public virtual void AddEffect(object INFO)
     {
         effects.Add((Effect2d)INFO);
+    }
+
+    public virtual void AddGold(object INFO)
+    {
+        var packet = (PlayerValuePacket)INFO;
+
+        if (user.id == packet.playerId)
+        {
+            user.gold += (int)packet.value;
+        }
+        else if (aIPlayer.id == packet.playerId)
+        {
+            aIPlayer.gold += (int)packet.value;
+        }
+
     }
 
     public virtual void AddMob(object INFO)
@@ -259,14 +289,19 @@ public class World
 
     public virtual void Draw(Vector2 OFFSET)
     {
-
+        bkg.Draw(offset);
         grid.DrawGrid(offset);
         user.Draw(offset);
         aIPlayer.Draw(offset);
 
-        for(var i = 0; i < sceneItems.Count;i++)
+        //for(var i = 0; i < sceneItems.Count;i++)
+        //{
+        //    sceneItems[i].Draw(offset);
+        //}
+
+        if(levelDrawManager != null)
         {
-            sceneItems[i].Draw(offset);
+            levelDrawManager.Draw();
         }
 
         for (var i = 0; i < projectiles.Count; i++)

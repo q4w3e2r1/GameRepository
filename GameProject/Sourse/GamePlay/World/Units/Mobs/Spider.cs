@@ -27,6 +27,8 @@ public class Spider : Mob
         health = 3;
         healthMax = health;
 
+        killValue = 3;
+
         spawnTimer = new GameTimer(8000);
         spawnTimer.AddToTimer(4000);
     }

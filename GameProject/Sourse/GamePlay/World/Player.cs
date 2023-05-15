@@ -18,7 +18,7 @@ namespace GameProject;
 
 public class Player
 {
-    public int id;
+    public int id, gold;
     public Hero hero;
     public List<Unit> units = new();
     public List<SpawnPoint> spawnPoints = new();
@@ -27,6 +27,7 @@ public class Player
     public Player(int ID, XElement DATA)
     {
         id = ID;
+        gold = 10;
         LoadData(DATA);
     }
 

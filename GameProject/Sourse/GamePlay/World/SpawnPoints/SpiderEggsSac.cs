@@ -30,6 +30,8 @@ namespace GameProject
             health = 5;
             healthMax = health;
 
+            killValue = 2;
+
             spawnTimer = new GameTimer(3000);
         }
 

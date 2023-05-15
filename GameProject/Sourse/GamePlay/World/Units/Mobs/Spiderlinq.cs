@@ -62,7 +62,7 @@ public class Spiderlinq : Mob
 
                 if (Globals.GetDistance(pos, temp.pos) < GRID.slotDims.X * 1.2f)
                 {
-                    temp.GetHit(1);
+                    temp.GetHit(this, 1);
                     dead = true;
                 }
             }
