@@ -18,20 +18,24 @@ namespace GameProject;
 
 public class Mob : Unit
 {
-    public bool currentlyPathing;
+    public bool currentlyPathing, isAttacking;
 
-    public GameTimer rePathTimer = new(200);
+    public float attackRange;
+
+    public GameTimer rePathTimer = new(200), attackTimer = new GameTimer(350);
 
     public Mob(string path, Vector2 POS, Vector2 DIMS, Vector2 FRAMES, int OWNERID) : base(path, POS, DIMS, FRAMES, OWNERID)
     {
+        attackRange = 50;
+        isAttacking = false;
         currentlyPathing = false;
         speed = 2.0f;
     }
 
-    public override void Update(Vector2 OFFSET, Player ENEMY, SquareGrid GRID)
+    public override void Update(Vector2 OFFSET, Player ENEMY, SquareGrid GRID, LevelDrawManager LEVELDRAWMANAGER)
     {
         AI(ENEMY, GRID);
-        base.Update(OFFSET, ENEMY, GRID);
+        base.Update(OFFSET, ENEMY, GRID, LEVELDRAWMANAGER);
     }
 
 

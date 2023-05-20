@@ -15,7 +15,7 @@ using Microsoft.Xna.Framework.Media;
 namespace GameProject
 {
 
-    public class AttackableObject : Animated2d
+    public class AttackableObject : SceneItem
     {
         public bool dead;
 
@@ -24,7 +24,7 @@ namespace GameProject
         public float speed, hitDist, health, healthMax;
 
         public AttackableObject(string path, Vector2 POS, Vector2 DIMS,Vector2 FRAMES, int OWNERID)
-            : base(path, POS, DIMS, FRAMES, Color.White)
+            : base(path, POS, DIMS, FRAMES, new Vector2(1, 1))
         {
             ownerId = OWNERID;
             dead = false;
@@ -38,10 +38,10 @@ namespace GameProject
             hitDist = 35.0f;
         }
 
-        public virtual void Update(Vector2 OFFSET, Player ENEMY, SquareGrid GRID)
+        public virtual void Update(Vector2 OFFSET, Player ENEMY, SquareGrid GRID, LevelDrawManager LEVELDRAWMANAGER)
         {
            
-            base.Update(OFFSET);
+            base.Update(OFFSET, LEVELDRAWMANAGER);
         }
 
         public virtual void GetHit(AttackableObject ATTACKER, float DAMAGE)

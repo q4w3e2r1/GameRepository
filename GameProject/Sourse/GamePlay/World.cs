@@ -19,6 +19,7 @@ namespace GameProject;
 
 public class World
 {
+    public int levelId;
 
     public Vector2 offset;
 
@@ -41,8 +42,10 @@ public class World
     PassObject ResetWorld, ChangeGameState;
 
 
-    public World(PassObject RESETWORLD, PassObject CHANGEGAMESTATE)
+    public World(PassObject RESETWORLD, int LEVELID, PassObject CHANGEGAMESTATE)
     {
+
+        levelId = LEVELID;
         ResetWorld = RESETWORLD;
         ChangeGameState = CHANGEGAMESTATE;
 
@@ -61,7 +64,7 @@ public class World
 
         offset = new Vector2(0, 0);
 
-        LoadData(1);
+        LoadData(levelId);
 
 
         ui = new UI(ResetWorld);
@@ -79,8 +82,8 @@ public class World
             allObjects.AddRange(user.GetAllObjects());
             allObjects.AddRange(aIPlayer.GetAllObjects());
 
-            user.Update(aIPlayer, offset, grid);
-            aIPlayer.Update(user, offset, grid);
+            user.Update(aIPlayer, offset, grid, levelDrawManager);
+            aIPlayer.Update(user, offset, grid, levelDrawManager);
 
 
             for (var i = 0; i < projectiles.Count; i++)
@@ -228,7 +231,42 @@ public class World
     {
         var tempPos = (Vector2)INFO;
 
-        if(tempPos.X < -offset.X + (Globals.screenWidth * .4f))
+        float maxMovement = user.hero.speed * 4.5f;
+
+        float diff = 0;
+
+
+        if (tempPos.X < -offset.X + (Globals.screenWidth * .4f))
+        {
+            diff = -offset.X + (Globals.screenWidth * .4f) - tempPos.X;
+
+            offset = new Vector2(offset.X +Math.Min(maxMovement, diff) , offset.Y);
+        }
+
+        if (tempPos.X > -offset.X + (Globals.screenWidth * .6f))
+        {
+            diff = tempPos.X - (-offset.X + (Globals.screenWidth * .6f));
+
+            offset = new Vector2(offset.X - Math.Min(maxMovement, diff), offset.Y);
+        }
+
+        if (tempPos.Y < -offset.Y + (Globals.screenHeight * .4f))
+        {
+
+            diff = -offset.Y + (Globals.screenHeight * .4f) - tempPos.Y;
+
+            offset = new Vector2(offset.X, offset.Y + Math.Min(maxMovement, diff));
+        }
+
+        if (tempPos.Y > -offset.Y + (Globals.screenHeight * .6f))
+        {
+            diff = tempPos.Y - (-offset.Y + (Globals.screenHeight * .6f));
+
+            offset = new Vector2(offset.X, offset.Y - Math.Min(maxMovement, diff));
+        }
+
+
+       /* if (tempPos.X < -offset.X + (Globals.screenWidth * .4f))
         {
             offset = new Vector2(offset.X + user.hero.speed * 2, offset.Y );
         }
@@ -246,7 +284,7 @@ public class World
         if (tempPos.Y > -offset.Y + (Globals.screenHeight * .6f))
         {
             offset = new Vector2(offset.X, offset.Y - user.hero.speed * 2);
-        }
+        }*/
     }
 
     public virtual void LoadData(int LEVEL)

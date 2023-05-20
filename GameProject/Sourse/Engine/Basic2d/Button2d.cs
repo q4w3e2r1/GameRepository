@@ -109,9 +109,12 @@ namespace GameProject
 
 
             base.Draw(OFFSET);
-            var strDims = font.MeasureString(text);
-            Globals.spriteBatch.DrawString(font, text,
-               pos + OFFSET + new Vector2( -strDims.X / 2, -strDims.Y / 2), Color.Red);
+
+            if (font != null) {
+                var strDims = font.MeasureString(text);
+                Globals.spriteBatch.DrawString(font, text,
+                   pos + OFFSET + new Vector2(-strDims.X / 2, -strDims.Y / 2), Color.Red);
+            }
         }
     }
 }

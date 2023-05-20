@@ -20,7 +20,9 @@ namespace GameProject
     public class Skill
     {
         protected bool active;
-        public bool done;
+        public bool done, targetSkill;
+
+        public Animated2d icon;
 
         public AttackableObject owner;
 
@@ -32,7 +34,7 @@ namespace GameProject
             done = false;
 
             owner = OWNER;
-
+            targetSkill = true;
             targetEffect = new TargetingCircle(new Vector2(0, 0), new Vector2(150, 150));
         }
 
@@ -49,8 +51,10 @@ namespace GameProject
             {
                 if (value && !active)
                 {
+                    if(targetSkill)
+                        GameGlobals.PassEffect(targetEffect);
                     targetEffect.done = false;
-                    GameGlobals.PassEffect(targetEffect);
+                    
                 }
 
                 active = value;

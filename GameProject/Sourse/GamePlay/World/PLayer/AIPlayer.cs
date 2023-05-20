@@ -31,9 +31,9 @@ public class AIPlayer : Player
         //spawnPoints[spawnPoints.Count - 1].spawnTimer.AddToTimer(1000);
     }
 
-    public override void Update(Player ENEMY, Vector2 OFFSET, SquareGrid GRID)
+    public override void Update(Player ENEMY, Vector2 OFFSET, SquareGrid GRID, LevelDrawManager LEVELDRAWMANAGER)
     {
-        base.Update(ENEMY, OFFSET, GRID);
+        base.Update(ENEMY, OFFSET, GRID, LEVELDRAWMANAGER);
     }
 
     public override void ChangeScore(int SCORE)

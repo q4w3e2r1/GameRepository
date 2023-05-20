@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?> 
+<Root>
+	<Level id ="1">
+		<name>Level 1 Name</name>
+		<file>Level1</file>
+		<Pos>
+			<x>150</x>
+			<y>500</y>
+		</Pos>	
+	</Level>
+	<Level id ="2">
+		<name>Level 2 Name</name>
+		<file>Level2</file>
+		<Pos>
+			<x>180</x>
+			<y>400</y>
+		</Pos>
+	</Level>
+</Root>	

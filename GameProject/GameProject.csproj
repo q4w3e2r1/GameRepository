@@ -57,7 +57,9 @@
       <None Remove="Content\obj\Windows\2d\UI\BackGrounds\StandardSnow.mgcontent" />
       <None Remove="Content\obj\Windows\2d\UI\Scene\OakTree.mgcontent" />
       <None Remove="Content\obj\Windows\2d\UI\Scene\OakTree1.mgcontent" />
+      <None Remove="XML\Levels.xml" />
       <None Remove="XML\Levels\Level1.xml" />
+      <None Remove="XML\Levels\Level2.xml" />
     </ItemGroup>
     <ItemGroup>
       <Content Include="Content\bin\Windows\2d\CursorArrow.xnb">
@@ -157,6 +159,12 @@
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Content>
       <Content Include="Content\obj\Windows\2d\UI\Scene\OakTree1.mgcontent">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="XML\Levels.xml">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="XML\Levels\Level2.xml">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Content>
       <Content Include="XML\Levels\Level1.xml">

@@ -72,9 +72,13 @@ namespace GameProject
 
             //if (model != null)
             //{
+            //    if(!flipped)
             //    Globals.spriteBatch.Draw(model, new Rectangle((int)(pos.X + OFFSET.X), (int)(pos.Y + OFFSET.Y), (int)dims.X, (int)dims.Y), null, Color.White,
             //           rot, new Vector2(model.Bounds.Width / 2, model.Bounds.Height / 2), SpriteEffects.None, 0);
-                
+            //    else
+            //        Globals.spriteBatch.Draw(model, new Rectangle((int)(pos.X + OFFSET.X), (int)(pos.Y + OFFSET.Y), (int)dims.X, (int)dims.Y), null, Color.White,
+            //           rot, new Vector2(model.Bounds.Width / 2, model.Bounds.Height / 2), SpriteEffects.FlipHorizontally, 0);
+
             //}
         }
 

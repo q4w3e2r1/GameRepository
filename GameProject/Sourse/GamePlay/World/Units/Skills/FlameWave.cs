@@ -20,7 +20,7 @@ public class FlameWave : Skill
     public FlameWave(AttackableObject OWNER) : base(OWNER)
     {
 
-
+        icon = new Animated2d("2d\\UI\\Icons\\Skills\\Fire", new Vector2(0, 0), new Vector2(40, 40), new Vector2(1, 1), Color.White);
     }
 
     public override void Targeting(Vector2 OFFSET, Player ENEMY)
