@@ -19,6 +19,7 @@ namespace GameProject;
 
 public class World
 {
+    public int levelId;
 
     public Vector2 offset;
 
@@ -29,15 +30,26 @@ public class World
 
     public SquareGrid grid;
 
+    public TileBkg2d bkg;
+
+    public LevelDrawManager levelDrawManager;
+
     public List<Projectile2d> projectiles = new();
     public List<AttackableObject> allObjects = new();
     public List<Effect2d> effects = new();
+    public List<SceneItem> sceneItems = new();
 
     PassObject ResetWorld, ChangeGameState;
-    public World(PassObject RESETWORLD, PassObject CHANGEGAMESTATE)
+
+
+    public World(PassObject RESETWORLD, int LEVELID, PassObject CHANGEGAMESTATE)
     {
+
+        levelId = LEVELID;
         ResetWorld = RESETWORLD;
         ChangeGameState = CHANGEGAMESTATE;
+
+        levelDrawManager = new LevelDrawManager();
 
         GameGlobals.PassProjectile = AddProjectile;
         GameGlobals.PassMob = AddMob;
@@ -45,29 +57,33 @@ public class World
         GameGlobals.PassBuilding = AddBuilding;
         GameGlobals.PassSpawnPoint = AddSpawnPoint;
         GameGlobals.CheckScroll = CheckScroll;
+        GameGlobals.PassGold = AddGold;
 
 
         GameGlobals.paused = false;
 
         offset = new Vector2(0, 0);
 
-        LoadData(1);
+        LoadData(levelId);
 
-        grid = new SquareGrid(new Vector2(25, 25), new Vector2(-100, -100), new Vector2(Globals.screenWidth + 200, Globals.screenHeight + 200));
 
         ui = new UI(ResetWorld);
+
+        bkg = new TileBkg2d("2d\\UI\\Backgrounds\\StandardDirt", new Vector2(-100, -100), new Vector2(120, 100), new Vector2(grid.totalPhysicalDims.X + 100, grid.totalPhysicalDims.Y + 100) );
     }
 
     public virtual void Update()
     {
         if(!user.hero.dead && user.buildings.Count > 0 && !GameGlobals.paused)
         {
+            levelDrawManager.Update();
+
             allObjects.Clear();
             allObjects.AddRange(user.GetAllObjects());
             allObjects.AddRange(aIPlayer.GetAllObjects());
 
-            user.Update(aIPlayer, offset, grid);
-            aIPlayer.Update(user, offset, grid);
+            user.Update(aIPlayer, offset, grid, levelDrawManager);
+            aIPlayer.Update(user, offset, grid, levelDrawManager);
 
 
             for (var i = 0; i < projectiles.Count; i++)
@@ -92,7 +108,12 @@ public class World
                 }
             }
 
+            for (var i = 0; i < sceneItems.Count; i++)
+            {
+                sceneItems[i].Update(offset);
 
+                sceneItems[i].UpdateDraw(offset, levelDrawManager);
+            }
             //ui.Update(this);
 
         }
@@ -151,6 +172,21 @@ public class World
         effects.Add((Effect2d)INFO);
     }
 
+    public virtual void AddGold(object INFO)
+    {
+        var packet = (PlayerValuePacket)INFO;
+
+        if (user.id == packet.playerId)
+        {
+            user.gold += (int)packet.value;
+        }
+        else if (aIPlayer.id == packet.playerId)
+        {
+            aIPlayer.gold += (int)packet.value;
+        }
+
+    }
+
     public virtual void AddMob(object INFO)
     {
         var tempUnit = (Unit)INFO;
@@ -195,7 +231,42 @@ public class World
     {
         var tempPos = (Vector2)INFO;
 
-        if(tempPos.X < -offset.X + (Globals.screenWidth * .4f))
+        float maxMovement = user.hero.speed * 4.5f;
+
+        float diff = 0;
+
+
+        if (tempPos.X < -offset.X + (Globals.screenWidth * .4f))
+        {
+            diff = -offset.X + (Globals.screenWidth * .4f) - tempPos.X;
+
+            offset = new Vector2(offset.X +Math.Min(maxMovement, diff) , offset.Y);
+        }
+
+        if (tempPos.X > -offset.X + (Globals.screenWidth * .6f))
+        {
+            diff = tempPos.X - (-offset.X + (Globals.screenWidth * .6f));
+
+            offset = new Vector2(offset.X - Math.Min(maxMovement, diff), offset.Y);
+        }
+
+        if (tempPos.Y < -offset.Y + (Globals.screenHeight * .4f))
+        {
+
+            diff = -offset.Y + (Globals.screenHeight * .4f) - tempPos.Y;
+
+            offset = new Vector2(offset.X, offset.Y + Math.Min(maxMovement, diff));
+        }
+
+        if (tempPos.Y > -offset.Y + (Globals.screenHeight * .6f))
+        {
+            diff = tempPos.Y - (-offset.Y + (Globals.screenHeight * .6f));
+
+            offset = new Vector2(offset.X, offset.Y - Math.Min(maxMovement, diff));
+        }
+
+
+       /* if (tempPos.X < -offset.X + (Globals.screenWidth * .4f))
         {
             offset = new Vector2(offset.X + user.hero.speed * 2, offset.Y );
         }
@@ -213,7 +284,7 @@ public class World
         if (tempPos.Y > -offset.Y + (Globals.screenHeight * .6f))
         {
             offset = new Vector2(offset.X, offset.Y - user.hero.speed * 2);
-        }
+        }*/
     }
 
     public virtual void LoadData(int LEVEL)
@@ -233,17 +304,43 @@ public class World
             tempElement = xml.Element("Root").Element("AIPlayer");
         }
 
+        grid = new SquareGrid(new Vector2(25, 25), new Vector2(-100, -100), new Vector2(Globals.screenWidth + 200, Globals.screenHeight + 200), xml.Element("Root").Element("GridItems"));
+
         aIPlayer = new AIPlayer(2, tempElement);
+
+
+
+        Type sType = null;
+        var sceneItemsList = (from t in xml.Element("Root").Element("Scene").Descendants("SceneItem")
+                            select t).ToList<XElement>();
+
+        for (var i = 0; i < sceneItemsList.Count; i++)
+        {
+            sType = Type.GetType("GameProject." + sceneItemsList[i].Element("type").Value, true);
+
+            sceneItems.Add((SceneItem)(Activator.CreateInstance(sType, new Vector2(Convert.ToInt32(sceneItemsList[i].Element("Pos").Element("x").Value, Globals.culture), Convert.ToInt32(sceneItemsList[i].Element("Pos").Element("y").Value, Globals.culture)), new Vector2((float)Convert.ToDouble(sceneItemsList[i].Element("scale").Value, Globals.culture)))));
+        }
+
+
     }
 
 
     public virtual void Draw(Vector2 OFFSET)
     {
-
+        bkg.Draw(offset);
         grid.DrawGrid(offset);
         user.Draw(offset);
         aIPlayer.Draw(offset);
 
+        //for(var i = 0; i < sceneItems.Count;i++)
+        //{
+        //    sceneItems[i].Draw(offset);
+        //}
+
+        if(levelDrawManager != null)
+        {
+            levelDrawManager.Draw();
+        }
 
         for (var i = 0; i < projectiles.Count; i++)
         {

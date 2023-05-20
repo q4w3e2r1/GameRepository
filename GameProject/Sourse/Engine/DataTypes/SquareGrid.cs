@@ -34,9 +34,12 @@ namespace GameProject
 
         public List<List<GridLocation>> slots = new List<List<GridLocation>>();
 
+        public List<GridItem> gridItems = new();
+
         public GameTimer highlightUpdateTimer = new GameTimer(67);
 
-        public SquareGrid(Vector2 SLOTDIMS, Vector2 STARTPOS, Vector2 TOTALDIMS)
+
+        public SquareGrid(Vector2 SLOTDIMS, Vector2 STARTPOS, Vector2 TOTALDIMS, XElement DATA)
         {
             showGrid = false;
 
@@ -52,6 +55,8 @@ namespace GameProject
             SetBaseGrid(null);
 
             gridImg = new Basic2d("2d\\Misc\\shade", slotDims / 2, new Vector2(slotDims.X - 2, slotDims.Y - 2));
+
+            LoadData(DATA);
         }
 
         public virtual void Update(Vector2 OFFSET)
@@ -59,6 +64,13 @@ namespace GameProject
 
 
             currentHoverSlot = GetSlotFromPixel(new Vector2(Globals.mouse.newMousePos.X, Globals.mouse.newMousePos.Y), -OFFSET);
+        }
+
+        public virtual void AddGridItem(string PATH, Vector2 LOC)
+        {
+            gridItems.Add(new GridItem(PATH, GetPosFromLoc(LOC) + slotDims / 2, new Vector2(slotDims.X, slotDims.Y), new Vector2(1, 1)));
+
+            GetSlotFromLocation(LOC).SetToFilled(true);
         }
 
         public virtual Vector2 GetPosFromLoc(Vector2 LOC)
@@ -87,7 +99,22 @@ namespace GameProject
             return tempVec;
         }
 
+        public virtual void LoadData(XElement DATA)
+        {
+            if(DATA != null)
+            {
+                var gridItemsList = (from t in DATA.Descendants("GridItem")
+                                    select t).ToList<XElement>();
 
+                for(var i = 0; i < gridItemsList.Count; i++)
+                {
+                    AddGridItem("2d\\Grid\\Hill", new Vector2(Convert.ToInt32(gridItemsList[i].Element("Loc").Element("x").Value, Globals.culture),
+                Convert.ToInt32(gridItemsList[i].Element("Loc").Element("y").Value, Globals.culture)));
+                }
+
+               
+            }
+        }
 
         public virtual void SetBaseGrid(List<Unit> UNITS)
         {
@@ -382,6 +409,11 @@ namespace GameProject
                         gridImg.Draw(OFFSET + physicalStartPos + new Vector2(j * slotDims.X, k * slotDims.Y));
                     }
                 }
+            }
+
+            for(var i = 0; i < gridItems.Count; i++)
+            {
+                gridItems[i].Draw(OFFSET);
             }
         }
     }

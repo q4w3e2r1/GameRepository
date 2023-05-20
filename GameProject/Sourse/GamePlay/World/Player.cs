@@ -18,7 +18,7 @@ namespace GameProject;
 
 public class Player
 {
-    public int id;
+    public int id, gold;
     public Hero hero;
     public List<Unit> units = new();
     public List<SpawnPoint> spawnPoints = new();
@@ -27,21 +27,23 @@ public class Player
     public Player(int ID, XElement DATA)
     {
         id = ID;
+        gold = 10;
         LoadData(DATA);
     }
 
-    public virtual void Update(Player ENEMY, Vector2 OFFSET, SquareGrid GRID)
+    public virtual void Update(Player ENEMY, Vector2 OFFSET, SquareGrid GRID, LevelDrawManager LEVELDRAWMANAGER)
     {
         if (hero != null)
         {
-            hero.Update(OFFSET, ENEMY, GRID);
+            hero.Update(OFFSET, ENEMY, GRID, LEVELDRAWMANAGER);
         }
 
         for (var i = 0; i < spawnPoints.Count; i++)
         {
-            spawnPoints[i].Update(OFFSET, ENEMY, GRID);
+            spawnPoints[i].Update(OFFSET, ENEMY, GRID, LEVELDRAWMANAGER);
             if (spawnPoints[i].dead)
             {
+                LEVELDRAWMANAGER.Remove(spawnPoints[i]);
                 spawnPoints.RemoveAt(i);
                 i--;
             }
@@ -50,10 +52,11 @@ public class Player
 
         for (var i = 0; i < units.Count; i++)
         {
-            units[i].Update(OFFSET, ENEMY, GRID);
+            units[i].Update(OFFSET, ENEMY, GRID, LEVELDRAWMANAGER);
 
             if (units[i].dead)
             {
+                LEVELDRAWMANAGER.Remove(units[i]);
                 ChangeScore(1);
                 units.RemoveAt(i);
                 i--;
@@ -62,10 +65,12 @@ public class Player
 
         for (var i = 0; i < buildings.Count; i++)
         {
-            buildings[i].Update(OFFSET, ENEMY, GRID);
+            buildings[i].Update(OFFSET, ENEMY, GRID, LEVELDRAWMANAGER);
 
             if (buildings[i].dead)
             {
+
+                LEVELDRAWMANAGER.Remove(buildings[i]);
                 ChangeScore(1);
                 buildings.RemoveAt(i);
                 i--;
@@ -106,6 +111,10 @@ public class Player
         tempObjects.AddRange(spawnPoints.ToList<SpawnPoint>());
         tempObjects.AddRange(buildings.ToList<Building>());
 
+        if(hero != null)
+        {
+            tempObjects.Add(hero);
+        }
         return tempObjects;
 
     }
@@ -146,28 +155,25 @@ public class Player
 
     public virtual void Draw(Vector2 OFFSET)
     {
-        if(hero != null)
-        {
-            hero.Draw(OFFSET);
-        }
+        //if(hero != null)
+        //{
+        //    hero.Draw(OFFSET);
+        //}
 
-        for (var i = 0; i < buildings.Count; i++)
-        {
-            buildings[i].Draw(OFFSET);
-        }
+        //for (var i = 0; i < buildings.Count; i++)
+        //{
+        //    buildings[i].Draw(OFFSET);
+        //}
 
-        for (var i = 0; i < spawnPoints.Count; i++)
-        {
-            spawnPoints[i].Draw(OFFSET);
-        }
+        //for (var i = 0; i < spawnPoints.Count; i++)
+        //{
+        //    spawnPoints[i].Draw(OFFSET);
+        //}
 
-        for (var i = 0; i < units.Count; i++)
-        {
-            units[i].Draw(OFFSET);
-        }
-
-
-    
+        //for (var i = 0; i < units.Count; i++)
+        //{
+        //    units[i].Draw(OFFSET);
+        //}  
     }
 
 }

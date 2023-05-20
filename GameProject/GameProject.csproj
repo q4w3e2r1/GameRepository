@@ -37,6 +37,11 @@
       <None Remove="Content\bin\Windows\2d\NormalHero.xnb" />
       <None Remove="Content\bin\Windows\2d\Projectiles\AcidBall.xnb" />
       <None Remove="Content\bin\Windows\2d\Projectiles\Fireball2.xnb" />
+      <None Remove="Content\bin\Windows\2d\UI\BackGrounds\StandardDirt.xnb" />
+      <None Remove="Content\bin\Windows\2d\UI\BackGrounds\StandardGrass.xnb" />
+      <None Remove="Content\bin\Windows\2d\UI\BackGrounds\StandardSnow.xnb" />
+      <None Remove="Content\bin\Windows\2d\UI\Scene\OakTree.xnb" />
+      <None Remove="Content\bin\Windows\2d\UI\Scene\OakTree1.xnb" />
       <None Remove="Content\bin\Windows\2d\Units\Mobs\Imp.xnb" />
       <None Remove="Content\bin\Windows\2d\Units\Mobs\orc.xnb" />
       <None Remove="Content\bin\Windows\2d\Units\Mobs\spider.xnb" />
@@ -47,7 +52,14 @@
       <None Remove="Content\obj\Windows\2d\CursorArrow.mgcontent" />
       <None Remove="Content\obj\Windows\2d\Hero.mgcontent" />
       <None Remove="Content\obj\Windows\2d\NormalHero.mgcontent" />
+      <None Remove="Content\obj\Windows\2d\UI\BackGrounds\StandardDirt.mgcontent" />
+      <None Remove="Content\obj\Windows\2d\UI\BackGrounds\StandardGrass.mgcontent" />
+      <None Remove="Content\obj\Windows\2d\UI\BackGrounds\StandardSnow.mgcontent" />
+      <None Remove="Content\obj\Windows\2d\UI\Scene\OakTree.mgcontent" />
+      <None Remove="Content\obj\Windows\2d\UI\Scene\OakTree1.mgcontent" />
+      <None Remove="XML\Levels.xml" />
       <None Remove="XML\Levels\Level1.xml" />
+      <None Remove="XML\Levels\Level2.xml" />
     </ItemGroup>
     <ItemGroup>
       <Content Include="Content\bin\Windows\2d\CursorArrow.xnb">
@@ -92,6 +104,21 @@
       <Content Include="Content\bin\Windows\2d\Projectiles\Fireball2.xnb">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Content>
+      <Content Include="Content\bin\Windows\2d\UI\BackGrounds\StandardDirt.xnb">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Content\bin\Windows\2d\UI\BackGrounds\StandardGrass.xnb">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Content\bin\Windows\2d\UI\BackGrounds\StandardSnow.xnb">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Content\bin\Windows\2d\UI\Scene\OakTree.xnb">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Content\bin\Windows\2d\UI\Scene\OakTree1.xnb">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
       <Content Include="Content\bin\Windows\2d\Units\Mobs\Imp.xnb">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Content>
@@ -117,6 +144,27 @@
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Content>
       <Content Include="Content\obj\Windows\2d\NormalHero.mgcontent">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Content\obj\Windows\2d\UI\BackGrounds\StandardDirt.mgcontent">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Content\obj\Windows\2d\UI\BackGrounds\StandardGrass.mgcontent">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Content\obj\Windows\2d\UI\BackGrounds\StandardSnow.mgcontent">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Content\obj\Windows\2d\UI\Scene\OakTree.mgcontent">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Content\obj\Windows\2d\UI\Scene\OakTree1.mgcontent">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="XML\Levels.xml">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="XML\Levels\Level2.xml">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Content>
       <Content Include="XML\Levels\Level1.xml">

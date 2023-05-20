@@ -35,16 +35,72 @@
 				<mob rate ="50">Imp</mob>
 				<mob rate ="30">Spider</mob>
 				<timerAdd>500</timerAdd>
-		</SpawnPoint>
-		<SpawnPoint>
-			<type>Portal</type>
-				<Pos>
-					<x>1560</x>
-					<y>40</y>	 
-				</Pos>
-				<mob rate ="50">Imp</mob>
-				<mob rate ="40">Spider</mob>
-				<timerAdd>0</timerAdd>
-		</SpawnPoint>
+		</SpawnPoint>		
 	</AIPlayer>
+
+	<GridItems>
+		<GridItem>
+			<type>Hill</type>
+			<Loc>
+				<x>9</x>
+				<y>9</y>	
+			</Loc>
+		</GridItem>
+	<GridItem>
+			<type>Hill</type>
+			<Loc>
+				<x>10</x>
+				<y>8</y>	
+			</Loc>
+		</GridItem>
+	<GridItem>
+			<type>Hill</type>
+			<Loc>
+				<x>10</x>
+				<y>7</y>	
+			</Loc>
+		</GridItem>
+	<GridItem>
+			<type>Hill</type>
+			<Loc>
+				<x>8</x>
+				<y>10</y>	
+			</Loc>
+		</GridItem>
+	<GridItem>
+			<type>Hill</type>
+			<Loc>
+				<x>7</x>
+				<y>10</y>	
+			</Loc>
+		</GridItem>
+	</GridItems>
+
+	<Scene>
+		<SceneItem>
+			<type>OakTree</type>
+			<Pos>
+				<x>-60</x>
+				<y>200</y>				
+			</Pos>
+			<scale>.8</scale>
+		</SceneItem>
+	<SceneItem>
+			<type>OakTree</type>
+			<Pos>
+				<x>-60</x>
+				<y>300</y>				
+			</Pos>
+			<scale>1</scale>
+		</SceneItem>
+<SceneItem>
+			<type>OakTree</type>
+			<Pos>
+				<x>-60</x>
+				<y>150</y>				
+			</Pos>
+			<scale>.7</scale>
+		</SceneItem>
+	</Scene>	
+
 </Root>	

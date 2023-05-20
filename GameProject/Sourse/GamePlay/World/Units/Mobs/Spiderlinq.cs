@@ -26,11 +26,11 @@ public class Spiderlinq : Mob
 
     }
 
-    public override void Update(Vector2 OFFSET, Player ENEMY, SquareGrid GRID)
+    public override void Update(Vector2 OFFSET, Player ENEMY, SquareGrid GRID, LevelDrawManager LEVELDRAWMANAGER)
     {
        
 
-        base.Update(OFFSET, ENEMY, GRID);
+        base.Update(OFFSET, ENEMY, GRID, LEVELDRAWMANAGER);
     }
 
     public override void AI(Player ENEMY, SquareGrid GRID)
@@ -62,7 +62,7 @@ public class Spiderlinq : Mob
 
                 if (Globals.GetDistance(pos, temp.pos) < GRID.slotDims.X * 1.2f)
                 {
-                    temp.GetHit(1);
+                    temp.GetHit(this, 1);
                     dead = true;
                 }
             }

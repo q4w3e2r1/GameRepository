@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Xml.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
@@ -9,69 +11,84 @@ using Microsoft.Xna.Framework.Content;
 
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using Microsoft.Xna.Framework.Input.Touch;
 using Microsoft.Xna.Framework.Media;
+using GameProject;
 #endregion
 
-namespace GameProject;
-
-public class Skill
+namespace GameProject
 {
-    protected bool active;
-    public bool done;
-
-    public Effect2d targetEffect;
-
-    public Skill()
+    public class Skill
     {
-        active = false;
-        done = false;
+        protected bool active;
+        public bool done, targetSkill;
 
-        targetEffect = new TargetingCircle(new Vector2(0, 0), new Vector2(150, 150));
-    }
+        public Animated2d icon;
 
-    #region Properties
-    public bool Active
-    {
-        get
+        public AttackableObject owner;
+
+        public Effect2d targetEffect;
+
+        public Skill(AttackableObject OWNER)
         {
-            return active;
+            active = false;
+            done = false;
+
+            owner = OWNER;
+            targetSkill = true;
+            targetEffect = new TargetingCircle(new Vector2(0, 0), new Vector2(150, 150));
         }
 
-        set
+        #region Properties
+
+        public bool Active
         {
-            if(value && !active)
+            get
             {
-                targetEffect.done = false;
-                GameGlobals.PassEffect(targetEffect);
+                return active;
             }
 
-            active = value;
+            set
+            {
+                if (value && !active)
+                {
+                    if(targetSkill)
+                        GameGlobals.PassEffect(targetEffect);
+                    targetEffect.done = false;
+                    
+                }
+
+                active = value;
+            }
         }
-    }
 
-    #endregion
+        #endregion
 
-    public virtual void Update(Vector2 OFFSET, Player ENEMY)
-    {
-        if(active && !done)
+
+        public virtual void Update(Vector2 OFFSET, Player ENEMY)
         {
-            Targeting(OFFSET, ENEMY);
+
+            if (active && !done)
+            {
+                Targeting(OFFSET, ENEMY);
+            }
         }
-    }
 
-    public virtual void Reset()
-    {
-        active = false;
-        done = false;
-    }
-
-    public virtual void Targeting(Vector2 OFFSET, Player ENEMY)
-    {
-        if(Globals.mouse.LeftClickRelease())
+        public virtual void Reset()
         {
-            Active = false;
+
+            active = false;
             done = false;
+        }
+
+        public virtual void Targeting(Vector2 OFFSET, Player ENEMY)
+        {
+
+            if (Globals.mouse.LeftClickRelease())
+            {
+                Active = false;
+                done = false;
+
+            }
         }
     }
 }

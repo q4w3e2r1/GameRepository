@@ -18,20 +18,24 @@ namespace GameProject;
 
 public class Mob : Unit
 {
-    public bool currentlyPathing;
+    public bool currentlyPathing, isAttacking;
 
-    public GameTimer rePathTimer = new(200);
+    public float attackRange;
+
+    public GameTimer rePathTimer = new(200), attackTimer = new GameTimer(350);
 
     public Mob(string path, Vector2 POS, Vector2 DIMS, Vector2 FRAMES, int OWNERID) : base(path, POS, DIMS, FRAMES, OWNERID)
     {
+        attackRange = 50;
+        isAttacking = false;
         currentlyPathing = false;
         speed = 2.0f;
     }
 
-    public override void Update(Vector2 OFFSET, Player ENEMY, SquareGrid GRID)
+    public override void Update(Vector2 OFFSET, Player ENEMY, SquareGrid GRID, LevelDrawManager LEVELDRAWMANAGER)
     {
         AI(ENEMY, GRID);
-        base.Update(OFFSET, ENEMY, GRID);
+        base.Update(OFFSET, ENEMY, GRID, LEVELDRAWMANAGER);
     }
 
 
@@ -52,13 +56,18 @@ public class Mob : Unit
                     pathNodes = FindPath(GRID, GRID.GetSlotFromPixel(ENEMY.hero.pos, Vector2.Zero));
                     //if (pathNodes.Count <= 0)
 
+                    //try
+                    //{ moveTo = pathNodes[0];
+                        pathNodes.RemoveAt(0);
+
+                        rePathTimer.ResetToZero();
+
+                        currentlyPathing = false;
+                    //}
+                    //catch(ArgumentOutOfRangeException)
+                    //{
                         
-                    moveTo = pathNodes[0];
-                    pathNodes.RemoveAt(0);
-
-                    rePathTimer.ResetToZero();
-
-                    currentlyPathing = false;
+                    //}                
                 });
 
                 repathTask.Start();
@@ -72,7 +81,7 @@ public class Mob : Unit
 
             if (Globals.GetDistance(pos, ENEMY.hero.pos) < GRID.slotDims.X * 1.2f)
             {
-                ENEMY.hero.GetHit(1);
+                ENEMY.hero.GetHit(this,1);
                 dead = true;
             }
         }

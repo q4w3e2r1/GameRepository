@@ -12,17 +12,19 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
+using GameProject;
 #endregion
 
-namespace GameProject;
 
-public class TargetingCircle : Effect2d
+namespace GameProject
 {
-     public TargetingCircle(Vector2 POS, Vector2 DIMS)
-        : base("2d\\Effects\\TargetCircle", POS, DIMS, new Vector2(1, 1), 400)
-     {
+    public class TargetingCircle : Effect2d
+    {
 
+        public TargetingCircle(Vector2 POS, Vector2 DIMS) : base("2d\\Effects\\TargetCircle", POS, DIMS, new Vector2(1, 1), 400)
+        {
+            noTimer = true;
+        }
 
-
-     }
+    }
 }

@@ -12,86 +12,90 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
+using GameProject;
 #endregion
 
-namespace GameProject;
-
-public class Projectile2d : Basic2d
+namespace GameProject
 {
-    public bool done;
-
-    public float speed;
-
-    public AttackableObject owner;
-
-    public Vector2 direction;
-
-    public GameTimer timer;
-    public Projectile2d(string path, Vector2 POS, Vector2 DIMS, AttackableObject owner, Vector2 TARGET) 
-        : base(path, POS, DIMS)
+    public class Projectile2d : Basic2d
     {
-        done = false;
+        public bool done;
 
-        speed = 5.0f;
+        public float speed;
 
-        this.owner = owner;
+        public Vector2 direction;
 
-        direction = TARGET - owner.pos;
-        direction.Normalize();
-        
+        public AttackableObject owner;
 
+        public GameTimer timer;
 
-        rot = Globals.RotateTowards(pos, new Vector2(TARGET.X, TARGET.Y));
-
-
-        timer = new GameTimer(1500);
-    }
-
-    public virtual void Update(Vector2 OFFSET, List<AttackableObject> UNITS)
-    {
-        pos += direction * speed;
-
-
-
-        timer.UpdateTimer();
-
-        if(timer.Test())
+        public Projectile2d(string PATH, Vector2 POS, Vector2 DIMS, AttackableObject OWNER, Vector2 TARGET)
+            : base(PATH, POS, DIMS)
         {
-            done = true;
+            done = false;
+
+            speed = 5.0f;
+
+            owner = OWNER;
+
+            direction = TARGET - owner.pos;
+            direction.Normalize();
+
+            rot = Globals.RotateTowards(pos, new Vector2(TARGET.X, TARGET.Y));
+
+            timer = new GameTimer(1500);
         }
 
-        if(HitSomething(UNITS))
-        {
-            done = true;
-        }
-    }
-
-    public virtual bool HitSomething(List<AttackableObject> UNITS) 
-    {
-        for(var i = 0; i < UNITS.Count;i++)
+        public virtual void Update(Vector2 OFFSET, List<AttackableObject> UNITS)
         {
 
-            if(owner.ownerId != UNITS[i].ownerId && Globals.GetDistance(pos, UNITS[i].pos) < UNITS[i].hitDist)
+            ChangePosition();
+
+
+            timer.UpdateTimer();
+            if (timer.Test())
             {
-                UNITS[i].GetHit(1);
 
-                return true;
+                done = true;
             }
 
+            if (HitSomething(UNITS))
+            {
+
+                done = true;
+            }
         }
 
-        return false;
-    }
+        public virtual void ChangePosition()
+        {
+            pos += direction * speed;
+        }
 
-    public override void Draw(Vector2 OFFSET)
-    {
-        Globals.normalEffect.Parameters["xSize"].SetValue((float)model.Bounds.Width);
-        Globals.normalEffect.Parameters["ySize"].SetValue((float)model.Bounds.Height);
-        Globals.normalEffect.Parameters["xDraw"].SetValue((float)((int)dims.X));
-        Globals.normalEffect.Parameters["yDraw"].SetValue((float)((int)dims.Y));
-        Globals.normalEffect.Parameters["filterColor"].SetValue(Color.White.ToVector4());
-        Globals.normalEffect.CurrentTechnique.Passes[0].Apply();
+        public virtual bool HitSomething(List<AttackableObject> UNITS)
+        {
+            for (int i = 0; i < UNITS.Count; i++)
+            {
+                if (owner.ownerId != UNITS[i].ownerId && Globals.GetDistance(pos, UNITS[i].pos) < UNITS[i].hitDist)
+                {
+                    UNITS[i].GetHit(owner, 1);
+                    return true;
+                }
+            }
 
-        base.Draw(OFFSET);
+            return false;
+        }
+
+
+        public override void Draw(Vector2 OFFSET)
+        {
+            Globals.normalEffect.Parameters["xSize"].SetValue((float)model.Bounds.Width);
+            Globals.normalEffect.Parameters["ySize"].SetValue((float)model.Bounds.Height);
+            Globals.normalEffect.Parameters["xDraw"].SetValue((float)((int)dims.X));
+            Globals.normalEffect.Parameters["yDraw"].SetValue((float)((int)dims.Y));
+            Globals.normalEffect.Parameters["filterColor"].SetValue(Color.White.ToVector4());
+            Globals.normalEffect.CurrentTechnique.Passes[0].Apply();
+
+            base.Draw(OFFSET);
+        }
     }
 }

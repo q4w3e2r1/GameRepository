@@ -28,10 +28,10 @@ public class Imp : Mob
         frameAnimationList.Add(new FrameAnimation(new Vector2(frameSize.X, frameSize.Y), frames, new Vector2(0, 0), 8, 66, 0, "Walk"));
     }
 
-    public override void Update(Vector2 OFFSET, Player ENEMY, SquareGrid GRID)
+    public override void Update(Vector2 OFFSET, Player ENEMY, SquareGrid GRID, LevelDrawManager LEVELDRAWMANAGER)
     {
         
-        base.Update(OFFSET, ENEMY, GRID);
+        base.Update(OFFSET, ENEMY, GRID, LEVELDRAWMANAGER);
         if (Math.Cos(rot) >= 0 || Math.Sin(rot) <= 0)
         {
             flipped = true;

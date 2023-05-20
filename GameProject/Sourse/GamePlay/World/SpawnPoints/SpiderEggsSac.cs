@@ -30,15 +30,17 @@ namespace GameProject
             health = 5;
             healthMax = health;
 
+            killValue = 2;
+
             spawnTimer = new GameTimer(3000);
         }
 
-        public override void Update(Vector2 OFFSET, Player ENEMY, SquareGrid GRID)
+        public override void Update(Vector2 OFFSET, Player ENEMY, SquareGrid GRID, LevelDrawManager LEVELDRAWMANAGER)
         {
 
 
 
-            base.Update(OFFSET, ENEMY, GRID);
+            base.Update(OFFSET, ENEMY, GRID, LEVELDRAWMANAGER);
         }
 
 

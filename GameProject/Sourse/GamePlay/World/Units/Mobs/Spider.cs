@@ -27,11 +27,13 @@ public class Spider : Mob
         health = 3;
         healthMax = health;
 
+        killValue = 3;
+
         spawnTimer = new GameTimer(8000);
         spawnTimer.AddToTimer(4000);
     }
 
-    public override void Update(Vector2 OFFSET, Player ENEMY, SquareGrid GRID)
+    public override void Update(Vector2 OFFSET, Player ENEMY, SquareGrid GRID, LevelDrawManager LEVELDRAWMANAGER)
     {
         spawnTimer.UpdateTimer();
         if (spawnTimer.Test())
@@ -39,7 +41,7 @@ public class Spider : Mob
             SpawnEggSac();
             spawnTimer.ResetToZero();
         }
-        base.Update(OFFSET, ENEMY, GRID);
+        base.Update(OFFSET, ENEMY, GRID, LEVELDRAWMANAGER);
     }
 
     public virtual void SpawnEggSac()

@@ -15,16 +15,16 @@ using Microsoft.Xna.Framework.Media;
 namespace GameProject
 {
 
-    public class AttackableObject : Animated2d
+    public class AttackableObject : SceneItem
     {
         public bool dead;
 
-        public int ownerId;
+        public int ownerId, killValue;
 
         public float speed, hitDist, health, healthMax;
 
         public AttackableObject(string path, Vector2 POS, Vector2 DIMS,Vector2 FRAMES, int OWNERID)
-            : base(path, POS, DIMS, FRAMES, Color.White)
+            : base(path, POS, DIMS, FRAMES, new Vector2(1, 1))
         {
             ownerId = OWNERID;
             dead = false;
@@ -33,21 +33,26 @@ namespace GameProject
             health = 1;
             healthMax = health;
 
+            killValue = 1;
+
             hitDist = 35.0f;
         }
 
-        public virtual void Update(Vector2 OFFSET, Player ENEMY, SquareGrid GRID)
+        public virtual void Update(Vector2 OFFSET, Player ENEMY, SquareGrid GRID, LevelDrawManager LEVELDRAWMANAGER)
         {
            
-            base.Update(OFFSET);
+            base.Update(OFFSET, LEVELDRAWMANAGER);
         }
 
-        public virtual void GetHit(float DAMAGE)
+        public virtual void GetHit(AttackableObject ATTACKER, float DAMAGE)
         {
             health -= DAMAGE;
 
-            if(health <= 0)
+            if (health <= 0)
+            {
                 dead = true;
+                GameGlobals.PassGold(new PlayerValuePacket(ATTACKER.ownerId, killValue));
+            }
         }
 
         public override void Draw(Vector2 OFFSET)
