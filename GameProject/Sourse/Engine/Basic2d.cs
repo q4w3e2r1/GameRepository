@@ -66,7 +66,6 @@ namespace GameProject
 
         public virtual void Draw(Vector2 OFFSET)
         {
-
             var render = new Render(rot,  pos,  dims, model);
             render.Draw(OFFSET);
 

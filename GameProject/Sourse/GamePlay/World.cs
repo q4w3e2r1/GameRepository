@@ -23,6 +23,10 @@ public class World
 
     public Vector2 offset;
 
+    public CharacterMenu charachetMenu;
+
+    public ExitMenu exitMenu;
+
     public UI ui;
 
     public User user;
@@ -39,15 +43,16 @@ public class World
     public List<Effect2d> effects = new();
     public List<SceneItem> sceneItems = new();
 
-    PassObject ResetWorld, ChangeGameState;
+    PassObject ResetWorld, ChangeGameState, ChangePlayState;
 
 
-    public World(PassObject RESETWORLD, int LEVELID, PassObject CHANGEGAMESTATE)
+    public World(PassObject RESETWORLD, int LEVELID, PassObject CHANGEGAMESTATE, PassObject CHANGEPLAYSTATE)
     {
 
         levelId = LEVELID;
         ResetWorld = RESETWORLD;
         ChangeGameState = CHANGEGAMESTATE;
+        ChangePlayState = CHANGEPLAYSTATE;
 
         levelDrawManager = new LevelDrawManager();
 
@@ -66,15 +71,20 @@ public class World
 
         LoadData(levelId);
 
+        charachetMenu = new CharacterMenu(user.hero);
 
-        ui = new UI(ResetWorld);
+        exitMenu = new ExitMenu(ExiLevel);
+
+        ui = new UI(ResetWorld, user.hero);
 
         bkg = new TileBkg2d("2d\\UI\\Backgrounds\\StandardDirt", new Vector2(-100, -100), new Vector2(120, 100), new Vector2(grid.totalPhysicalDims.X + 100, grid.totalPhysicalDims.Y + 100) );
     }
 
     public virtual void Update()
     {
-        if(!user.hero.dead && user.buildings.Count > 0 && !GameGlobals.paused)
+        ui.Update(this);
+
+        if (!DontUpdate())
         {
             levelDrawManager.Update();
 
@@ -84,6 +94,8 @@ public class World
 
             user.Update(aIPlayer, offset, grid, levelDrawManager);
             aIPlayer.Update(user, offset, grid, levelDrawManager);
+
+
 
 
             for (var i = 0; i < projectiles.Count; i++)
@@ -125,6 +137,9 @@ public class World
             }
         }
 
+        charachetMenu.Update();
+        exitMenu.Update();
+
         if(grid != null)
         {
             grid.Update(offset);
@@ -141,13 +156,34 @@ public class World
             GameGlobals.paused = !GameGlobals.paused;
         }
 
+        if (Globals.keyboard.GetSinglePress("Escape"))
+        {
+            exitMenu.Active = !exitMenu.Active;
+
+            charachetMenu.Active = false;
+        }
+
         if (Globals.keyboard.GetSinglePress("G"))
         {
             grid.showGrid = !grid.showGrid;
         }
-        // grid.showGrid = true;
 
-        ui.Update(this);
+        if (Globals.keyboard.GetSinglePress("C"))
+        {
+            charachetMenu.Active = true;
+
+            exitMenu.Active = false;
+        }
+
+
+        if(aIPlayer.defeated)
+        {
+            Globals.msgList.Add(new DismissibleMessage(new Vector2(Globals.screenWidth/2, Globals.screenHeight/2), new Vector2(250, 110), "You\'ve completed the level!", Color.Black, true, WinConfirm));
+
+            //WinConfirm(null);
+        }
+
+        
     }
 
     public virtual void AddBuilding(object INFO)
@@ -287,6 +323,21 @@ public class World
         }*/
     }
 
+    public virtual bool DontUpdate()
+    {
+        if(user.hero.dead || user.buildings.Count <= 0 || GameGlobals.paused || ui.skillMenu.active || charachetMenu.Active || exitMenu.Active)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    public virtual void ExiLevel(object INFO)
+    {
+        ChangePlayState(INFO);
+    }
+
     public virtual void LoadData(int LEVEL)
     {
         var xml = XDocument.Load("XML\\Levels\\Level" + LEVEL + ".xml");
@@ -324,6 +375,12 @@ public class World
 
     }
 
+    public virtual void WinConfirm(object INFO)
+    {
+        ResetWorld(null);
+        ChangePlayState(1);
+    }
+
 
     public virtual void Draw(Vector2 OFFSET)
     {
@@ -352,6 +409,10 @@ public class World
             effects[i].Draw(offset);
         }
 
+
         ui.Draw(this);
+
+        charachetMenu.Draw();
+        exitMenu.Draw();
     }
 }

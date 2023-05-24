@@ -19,21 +19,28 @@ public class UI
 {
     public Basic2d pausedOvelay;
 
-    public Button2d resetBtn;
+    public Button2d resetBtn, skillMenuBtn;
+
+
+    public SkillMenu skillMenu;
 
     public SpriteFont font;
 
     public QuantityDisplayBar healthBar;
 
-    public UI(PassObject RESET) 
+    public UI(PassObject RESET, Hero HERO) 
     {
         pausedOvelay = new Basic2d("2d\\Misc\\PauseOvelay", new Vector2(Globals.screenWidth/2, Globals.screenHeight/2), new Vector2(300, 300));
 
         font = Globals.content.Load<SpriteFont>("Fonts\\Arial16");
 
-        resetBtn = new Button2d("2d\\Misc\\SimpleBtn", new Vector2(0, 0), new Vector2(150, 100), "Fonts\\Arial16", "Reset", RESET, null);
+        resetBtn = new Button2d("2d\\Misc\\SimpleBtn", new Vector2(0, 0), new Vector2(150, 100), new Vector2(1, 1), "Fonts\\Arial16", "Reset", RESET, null);
+        skillMenuBtn = new Button2d("2d\\Misc\\SimpleBtn", new Vector2(0, 0), new Vector2(150, 100), new Vector2(1, 1), "Fonts\\Arial16", "Skills", ToggleSkillMenu, null);
+
+        skillMenu = new SkillMenu(HERO);
 
         healthBar = new QuantityDisplayBar(new Vector2(150, 40), 2, Color.Red);
+
     }
 
     public void Update(World WORLD)
@@ -44,7 +51,17 @@ public class UI
         {
             resetBtn.Update(new Vector2(Globals.screenWidth / 2, Globals.screenHeight / 2 + 100));
         }
+
+        skillMenuBtn.Update(new Vector2(Globals.screenWidth-100, Globals.screenHeight-100));
+
+        skillMenu.Update();
     }
+
+    public virtual void ToggleSkillMenu(object INFO)
+    {
+        skillMenu.ToggleActive();
+    }
+
     public void Draw(World WORLD)
     {
         Globals.normalEffect.Parameters["xSize"].SetValue(1.0f);
@@ -77,7 +94,11 @@ public class UI
 
         healthBar.Draw(new Vector2(20, Globals.screenHeight - 40));
 
-        if(GameGlobals.paused)
+        skillMenuBtn.Draw(new Vector2(Globals.screenWidth - 100, Globals.screenHeight - 100));
+
+        skillMenu.Draw();
+
+        if (GameGlobals.paused)
         {
             pausedOvelay.Draw(Vector2.Zero);
         }

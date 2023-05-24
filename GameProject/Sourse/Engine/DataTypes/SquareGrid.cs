@@ -155,7 +155,10 @@ namespace GameProject
 
                     if (slots[i][j].impassable || slots[i][j].filled)
                     {
-                        impassable = true;
+                        if (i != (int)END.X || j != (int)END.Y)
+                        {
+                            impassable = true;
+                        }
                     }
 
                     cost = slots[i][j].cost;

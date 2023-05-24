@@ -109,6 +109,42 @@
 /processorParam:TextureFormat=Color
 /build:2d/Hero.png
 
+#begin 2d/Misc/ArrowLeft.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:2d/Misc/ArrowLeft.png
+
+#begin 2d/Misc/ArrowRight.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:2d/Misc/ArrowRight.png
+
+#begin 2d/Misc/CheckBox.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:2d/Misc/CheckBox.png
+
 #begin 2d/Misc/chestLocked.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -144,6 +180,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:2d/Misc/eggs.png
+
+#begin 2d/Misc/Guide.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:2d/Misc/Guide.png
 
 #begin 2d/Misc/Obelisk1.png
 /importer:TextureImporter
@@ -229,6 +277,30 @@
 /processorParam:TextureFormat=Color
 /build:2d/Misc/solid.png
 
+#begin 2d/Misc/solidLevels.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:2d/Misc/solidLevels.png
+
+#begin 2d/Misc/solidSkills.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:2d/Misc/solidSkills.png
+
 #begin 2d/Misc/tower.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -240,6 +312,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:2d/Misc/tower.png
+
+#begin 2d/Misc/XButton.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:2d/Misc/XButton.png
 
 #begin 2d/NormalHero.png
 /importer:TextureImporter
@@ -529,11 +613,53 @@
 /processorParam:TextureFormat=Color
 /build:2d/Units/WizardSheet.png
 
+#begin Audio/BackGroundMusic.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/BackGroundMusic.mp3
+
+#begin Audio/Sounds/Projectiles/Hit.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/Sounds/Projectiles/Hit.mp3
+
+#begin Audio/Sounds/Projectiles/Hit2.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/Sounds/Projectiles/Hit2.mp3
+
+#begin Audio/Sounds/Projectiles/Shoot.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/Sounds/Projectiles/Shoot.mp3
+
+#begin Audio/TestMusic.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/TestMusic.mp3
+
 #begin Effects/Normal.fx
 /importer:EffectImporter
 /processor:EffectProcessor
 /processorParam:DebugMode=Auto
 /build:Effects/Normal.fx
+
+#begin Effects/NormalHighlight.fx
+/importer:EffectImporter
+/processor:EffectProcessor
+/processorParam:DebugMode=Auto
+/build:Effects/NormalHighlight.fx
+
+#begin Effects/Throb.fx
+/importer:EffectImporter
+/processor:EffectProcessor
+/processorParam:DebugMode=Auto
+/build:Effects/Throb.fx
 
 #begin Fonts/Arial16.spritefont
 /importer:FontDescriptionImporter

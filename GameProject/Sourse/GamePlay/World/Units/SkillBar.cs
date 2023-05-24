@@ -79,6 +79,7 @@ public class SkillBar
 
     public virtual void Draw(Vector2 OFFSET)
     {
+        
 
         for (var i = 0; i < slots.Count; i++)
         {

@@ -48,13 +48,36 @@
       <None Remove="Content\bin\Windows\2d\Units\Mobs\zombi.xnb" />
       <None Remove="Content\bin\Windows\2d\Units\Mobs\zombie.xnb" />
       <None Remove="Content\bin\Windows\Content\2d\CursorArrow.xnb" />
+      <None Remove="Content\Effects\Normal.fx" />
       <None Remove="Content\Effects\Normal.xnb" />
+      <None Remove="Content\Effects\NormalHighlight.fx" />
+      <None Remove="Content\Effects\Throb.fx" />
+      <None Remove="Content\obj\Windows\2d\Buildings\Obelisk1.mgcontent" />
+      <None Remove="Content\obj\Windows\2d\Buildings\tower.mgcontent" />
       <None Remove="Content\obj\Windows\2d\CursorArrow.mgcontent" />
       <None Remove="Content\obj\Windows\2d\Hero.mgcontent" />
+      <None Remove="Content\obj\Windows\2d\Misc\ArrowLeft.mgcontent" />
+      <None Remove="Content\obj\Windows\2d\Misc\ArrowRight.mgcontent" />
+      <None Remove="Content\obj\Windows\2d\Misc\CheckBox.mgcontent" />
+      <None Remove="Content\obj\Windows\2d\Misc\chestLocked.mgcontent" />
+      <None Remove="Content\obj\Windows\2d\Misc\circle.mgcontent" />
+      <None Remove="Content\obj\Windows\2d\Misc\eggs.mgcontent" />
+      <None Remove="Content\obj\Windows\2d\Misc\Obelisk1.mgcontent" />
+      <None Remove="Content\obj\Windows\2d\Misc\PauseOvelay.mgcontent" />
+      <None Remove="Content\obj\Windows\2d\Misc\portal.mgcontent" />
+      <None Remove="Content\obj\Windows\2d\Misc\shade.mgcontent" />
+      <None Remove="Content\obj\Windows\2d\Misc\shadeHealth.mgcontent" />
+      <None Remove="Content\obj\Windows\2d\Misc\SimpleBtn.mgcontent" />
+      <None Remove="Content\obj\Windows\2d\Misc\solid.mgcontent" />
+      <None Remove="Content\obj\Windows\2d\Misc\solidSkills.mgcontent" />
+      <None Remove="Content\obj\Windows\2d\Misc\tower.mgcontent" />
+      <None Remove="Content\obj\Windows\2d\Misc\XButton.mgcontent" />
       <None Remove="Content\obj\Windows\2d\NormalHero.mgcontent" />
+      <None Remove="Content\obj\Windows\2d\UI\BackGrounds\MainMenu.mgcontent" />
       <None Remove="Content\obj\Windows\2d\UI\BackGrounds\StandardDirt.mgcontent" />
       <None Remove="Content\obj\Windows\2d\UI\BackGrounds\StandardGrass.mgcontent" />
       <None Remove="Content\obj\Windows\2d\UI\BackGrounds\StandardSnow.mgcontent" />
+      <None Remove="Content\obj\Windows\2d\UI\BackGrounds\WorldMap.mgcontent" />
       <None Remove="Content\obj\Windows\2d\UI\Scene\OakTree.mgcontent" />
       <None Remove="Content\obj\Windows\2d\UI\Scene\OakTree1.mgcontent" />
       <None Remove="XML\Levels.xml" />
@@ -137,13 +160,79 @@
       <Content Include="Content\bin\Windows\Content\2d\CursorArrow.xnb">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Content>
+      <Content Include="Content\Effects\Normal.fx">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Content\Effects\NormalHighlight.fx">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Content\Effects\Throb.fx">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Content\obj\Windows\2d\Buildings\Obelisk1.mgcontent">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Content\obj\Windows\2d\Buildings\tower.mgcontent">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
       <Content Include="Content\obj\Windows\2d\CursorArrow.mgcontent">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Content>
       <Content Include="Content\obj\Windows\2d\Hero.mgcontent">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Content>
+      <Content Include="Content\obj\Windows\2d\Misc\ArrowLeft.mgcontent">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Content\obj\Windows\2d\Misc\ArrowRight.mgcontent">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Content\obj\Windows\2d\Misc\CheckBox.mgcontent">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Content\obj\Windows\2d\Misc\chestLocked.mgcontent">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Content\obj\Windows\2d\Misc\circle.mgcontent">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Content\obj\Windows\2d\Misc\eggs.mgcontent">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Content\obj\Windows\2d\Misc\Obelisk1.mgcontent">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Content\obj\Windows\2d\Misc\PauseOvelay.mgcontent">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Content\obj\Windows\2d\Misc\portal.mgcontent">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Content\obj\Windows\2d\Misc\shade.mgcontent">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Content\obj\Windows\2d\Misc\shadeHealth.mgcontent">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Content\obj\Windows\2d\Misc\SimpleBtn.mgcontent">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Content\obj\Windows\2d\Misc\solid.mgcontent">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Content\obj\Windows\2d\Misc\solidSkills.mgcontent">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Content\obj\Windows\2d\Misc\tower.mgcontent">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Content\obj\Windows\2d\Misc\XButton.mgcontent">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
       <Content Include="Content\obj\Windows\2d\NormalHero.mgcontent">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Content\obj\Windows\2d\UI\BackGrounds\MainMenu.mgcontent">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Content>
       <Content Include="Content\obj\Windows\2d\UI\BackGrounds\StandardDirt.mgcontent">
@@ -153,6 +242,9 @@
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Content>
       <Content Include="Content\obj\Windows\2d\UI\BackGrounds\StandardSnow.mgcontent">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Content\obj\Windows\2d\UI\BackGrounds\WorldMap.mgcontent">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Content>
       <Content Include="Content\obj\Windows\2d\UI\Scene\OakTree.mgcontent">

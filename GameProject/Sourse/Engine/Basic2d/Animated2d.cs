@@ -61,6 +61,17 @@ namespace GameProject
             base.Update(OFFSET);
         }
 
+        public virtual void CreatePerFrameAnimation()
+        {
+            for(var j = 0; j < frames.Y; j++)
+            {
+                for(var i =0; i < frames.X; i++)
+                {
+                    frameAnimationList.Add(new FrameAnimation(new Vector2(frameSize.X, frameSize.Y), new Vector2(1, 1), new Vector2(i, j), 1, 100, 0, ""));
+                }
+            }
+        }
+
         public virtual int GetAnimationFromName(string ANIMATIONNAME)
         {
             for (int i = 0; i < frameAnimationList.Count; i++)

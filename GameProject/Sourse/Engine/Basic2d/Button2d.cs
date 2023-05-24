@@ -15,7 +15,7 @@ using Microsoft.Xna.Framework.Media;
 namespace GameProject
 {
 
-    public class Button2d : Basic2d
+    public class Button2d : Animated2d
     {
         public bool isPressed, isHovered;
         public string text;
@@ -25,10 +25,10 @@ namespace GameProject
         public SpriteFont font;
 
         public object info;
-        PassObject ButtonClicked;
+        public PassObject ButtonClicked;
 
-        public Button2d(string path, Vector2 POS, Vector2 DIMS, string FONTPATH, string TEXT, PassObject BUTTONCLICKED, object INFO) 
-            : base(path, POS, DIMS)
+        public Button2d(string path, Vector2 POS, Vector2 DIMS, Vector2 FRAMES, string FONTPATH, string TEXT, PassObject BUTTONCLICKED, object INFO) 
+            : base(path, POS, DIMS, FRAMES, Color.White)
         {
             info = INFO;
             text = TEXT;
@@ -41,6 +41,9 @@ namespace GameProject
 
             isPressed = false;
             hoverColor = new Color(200, 230, 255);
+
+            CreatePerFrameAnimation();
+            frameAnimations = true;
         }
 
         public override void Update(Vector2 OFFSET)
@@ -113,7 +116,7 @@ namespace GameProject
             if (font != null) {
                 var strDims = font.MeasureString(text);
                 Globals.spriteBatch.DrawString(font, text,
-                   pos + OFFSET + new Vector2(-strDims.X / 2, -strDims.Y / 2), Color.Red);
+                   pos + OFFSET + new Vector2(-strDims.X / 2, -strDims.Y / 2), Color.Blue);
             }
         }
     }

@@ -32,9 +32,11 @@ public class MainMenu
 
         bkg = new Basic2d("2d\\UI\\BackGrounds\\MainMenu", new Vector2(Globals.screenWidth/2, Globals.screenHeight/2), new Vector2(Globals.screenWidth, Globals.screenHeight));
 
-        buttons.Add(new Button2d("2d\\Misc\\SimpleBtn", new Vector2(0, 0), new Vector2(175, 150), "Fonts\\Arial16", "PLay", PLayClickDel, 1));
+        buttons.Add(new Button2d("2d\\Misc\\SimpleBtn", new Vector2(0, 0), new Vector2(175, 130), new Vector2(1, 1), "Fonts\\Arial16", "PLay", PLayClickDel, 1));
 
-        buttons.Add(new Button2d("2d\\Misc\\SimpleBtn", new Vector2(0, 0), new Vector2(175, 150), "Fonts\\Arial16", "Exit", ExitClickDel, null));
+        buttons.Add(new Button2d("2d\\Misc\\SimpleBtn", new Vector2(0, 0), new Vector2(175, 130), new Vector2(1, 1), "Fonts\\Arial16", "Options", PLayClickDel, 2));
+
+        buttons.Add(new Button2d("2d\\Misc\\SimpleBtn", new Vector2(0, 0), new Vector2(175, 130), new Vector2(1, 1), "Fonts\\Arial16", "Exit", ExitClickDel, null));
     }
 
 
@@ -42,7 +44,7 @@ public class MainMenu
     {
         for (var i = 0; i < buttons.Count; i++)
         {
-            buttons[i].Update(new Vector2(290, 550 + 150 * i));
+            buttons[i].Update(new Vector2(290, 530 + 130 * i));
         }
 
     }
@@ -53,7 +55,7 @@ public class MainMenu
 
         for (var i = 0; i < buttons.Count; i++)
         {
-            buttons[i].Draw(new Vector2(290, 550 + 150 * i));
+            buttons[i].Draw(new Vector2(290, 530 + 130 * i));
         }
     }
 

@@ -61,7 +61,7 @@ public class WorldMap
 
         for(var i = 0; i < levelList.Count;i++)
         {
-            levels.Add(new Button2d("2d\\Misc\\solid", new Vector2(Convert.ToInt32(levelList[i].Element("Pos").Element("x").Value, Globals.culture), Convert.ToInt32(levelList[i].Element("Pos").Element("y").Value, Globals.culture)), new Vector2(40, 40), "Fonts\\Arial16", levelList[i].Attribute("id").Value, LevelClicked, levelList[i].Attribute("id").Value));
+            levels.Add(new Button2d("2d\\Misc\\solidLevels", new Vector2(Convert.ToInt32(levelList[i].Element("Pos").Element("x").Value, Globals.culture), Convert.ToInt32(levelList[i].Element("Pos").Element("y").Value, Globals.culture)), new Vector2(80, 80), new Vector2(1, 1), "Fonts\\Arial16", levelList[i].Attribute("id").Value, LevelClicked, levelList[i].Attribute("id").Value));
         }
     }
 

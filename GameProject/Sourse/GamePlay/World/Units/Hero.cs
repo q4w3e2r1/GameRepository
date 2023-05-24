@@ -20,12 +20,15 @@ namespace GameProject
 {
     public class Hero : Unit
     {
-        SkillBar skillBar;
+        public string name;
+
+        public SkillBar skillBar;
 
         public Hero(string PATH, Vector2 POS, Vector2 DIMS, Vector2 FRAMES, int OWNERID)
             : base(PATH, POS, DIMS, FRAMES, OWNERID)
         {
             speed = 2.0f;
+            name = "Zed";
 
             health = 5;
             healthMax = health;
@@ -44,7 +47,7 @@ namespace GameProject
             {
                 if(i < skillBar.slots.Count)
                 {
-                    skillBar.slots[i].skillButton = new SkillButton("2d\\Misc\\solid", new Vector2(0, 0), new Vector2(40, 40), SetSkill, skills[i]);
+                    skillBar.slots[i].skillButton = new SkillButton("2d\\Misc\\solid", new Vector2(0, 0), new Vector2(40, 40), new Vector2(1, 1), SetSkill, skills[i]);
                 }
                 else
                 {
@@ -57,27 +60,27 @@ namespace GameProject
         {
             bool checkScoll = false;
 
-            if (Globals.keyboard.GetPress("A"))
+            if (Globals.keyboard.GetPress(GameGlobals.keyBinds.GetKeyName("Move Left")))
             {
                 pos = new Vector2(pos.X - speed, pos.Y);
                 checkScoll = true;
                 flipped = true;
             }
 
-            if (Globals.keyboard.GetPress("D"))
+            if (Globals.keyboard.GetPress(GameGlobals.keyBinds.GetKeyName("Move Right")))
             {
                 pos = new Vector2(pos.X + speed, pos.Y);
                 checkScoll = true;
                 flipped = false;
             }
 
-            if (Globals.keyboard.GetPress("W"))
+            if (Globals.keyboard.GetPress(GameGlobals.keyBinds.GetKeyName("Move Up")))
             {
                 pos = new Vector2(pos.X, pos.Y - speed);
                 checkScoll = true;
             }
 
-            if (Globals.keyboard.GetPress("S"))
+            if (Globals.keyboard.GetPress(GameGlobals.keyBinds.GetKeyName("Move Down")))
             {
                 pos = new Vector2(pos.X, pos.Y + speed);
                 checkScoll = true;
@@ -119,6 +122,8 @@ namespace GameProject
                 if (Globals.mouse.LeftClick())
                 {
                     GameGlobals.PassProjectile(new Fireball(new Vector2(pos.X, pos.Y), this, new Vector2(Globals.mouse.newMousePos.X, Globals.mouse.newMousePos.Y) - OFFSET));
+                    Globals.soundControl.PlaySound("Shoot");
+                
                 }
             }
             else
@@ -150,8 +155,11 @@ namespace GameProject
         {
             if (INFO != null) 
             {
-                currentSkill = (Skill)INFO;
+                var tempPacket = (SkillSelectionTypePacket)INFO;
+
+                currentSkill = tempPacket.skill;
                 currentSkill.Active = true;
+                currentSkill.selectionType = tempPacket.selectionType;
             }
         }
 

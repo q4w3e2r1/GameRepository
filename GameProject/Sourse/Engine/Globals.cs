@@ -25,6 +25,8 @@ namespace GameProject
     {
         public static int screenHeight, screenWidth, gameState = 0;
 
+        public static string appDataFilePath;
+
         public static Random random = new Random(); 
 
         public static System.Globalization.CultureInfo culture = new System.Globalization.CultureInfo("en-US");
@@ -32,10 +34,17 @@ namespace GameProject
         public static ContentManager content;
         public static SpriteBatch spriteBatch;
 
-        public static Effect normalEffect;
+        public static Effect normalEffect, throbEffect, highlightEffect;
+
+        public static OptionsMenu optionsMenu;
+
+        public static Save save;
 
         public static Keyboard keyboard;
         public static MouseControl mouse;
+        public static SoundControl soundControl;
+
+        public static List<Message> msgList = new();
 
         public static GameTime gameTime;
 

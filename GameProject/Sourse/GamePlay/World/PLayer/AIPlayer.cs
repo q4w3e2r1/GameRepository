@@ -41,4 +41,12 @@ public class AIPlayer : Player
         GameGlobals.score += SCORE;
     }
 
+    public override void CheckIfDefeated()
+    {
+        if(spawnPoints.Count <= 0 && units.Count <= 0)
+        {
+            defeated = true;
+        }
+    }
+
 }

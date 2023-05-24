@@ -5,15 +5,15 @@
 		<file>Level1</file>
 		<Pos>
 			<x>150</x>
-			<y>500</y>
+			<y>480</y>
 		</Pos>	
 	</Level>
 	<Level id ="2">
 		<name>Level 2 Name</name>
 		<file>Level2</file>
 		<Pos>
-			<x>180</x>
-			<y>400</y>
+			<x>250</x>
+			<y>350</y>
 		</Pos>
 	</Level>
 </Root>	

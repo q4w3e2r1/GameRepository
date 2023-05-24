@@ -18,6 +18,7 @@ namespace GameProject;
 
 public class Player
 {
+    public bool defeated;
     public int id, gold;
     public Hero hero;
     public List<Unit> units = new();
@@ -28,6 +29,8 @@ public class Player
     {
         id = ID;
         gold = 10;
+
+        defeated = false;
         LoadData(DATA);
     }
 
@@ -76,6 +79,8 @@ public class Player
                 i--;
             }
         }
+
+        CheckIfDefeated();
     }
 
     public virtual void AddBuilding(object INFO)
@@ -102,6 +107,11 @@ public class Player
     public virtual void ChangeScore(int SCORE) 
     {
         
+    }
+
+    public virtual void CheckIfDefeated()
+    {
+
     }
 
     public virtual List<AttackableObject> GetAllObjects()

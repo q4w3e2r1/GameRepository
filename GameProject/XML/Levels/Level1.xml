@@ -101,6 +101,14 @@
 			</Pos>
 			<scale>.7</scale>
 		</SceneItem>
+		<SceneItem>
+			<type>Guide</type>
+			<Pos>
+				<x>500</x>
+				<y>500</y>
+			</Pos>
+			<scale>.9</scale>
+		</SceneItem>
 	</Scene>	
 
 </Root>	

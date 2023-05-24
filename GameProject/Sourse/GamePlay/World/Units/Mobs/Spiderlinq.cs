@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
@@ -63,6 +64,44 @@ public class Spiderlinq : Mob
                 if (Globals.GetDistance(pos, temp.pos) < GRID.slotDims.X * 1.2f)
                 {
                     temp.GetHit(this, 1);
+                    dead = true;
+                }
+            }
+        }
+        else
+        {
+            rePathTimer.UpdateTimer();
+
+            if (pathNodes == null || (pathNodes.Count == 0 && pos.X == moveTo.X && pos.Y == moveTo.Y) || rePathTimer.Test())
+            {
+                if (!currentlyPathing)
+                {
+                    var repathTask = new Task(() =>
+                    {
+                        currentlyPathing = true;
+
+                        pathNodes = FindPath(GRID, GRID.GetSlotFromPixel(ENEMY.hero.pos, Vector2.Zero));
+
+                        pathNodes.RemoveAt(0);
+
+                        rePathTimer.ResetToZero();
+
+                        currentlyPathing = false;
+
+                    });
+
+                    repathTask.Start();
+                }
+            }
+            else
+            {
+
+                MoveUnit();
+
+
+                if (Globals.GetDistance(pos, ENEMY.hero.pos) < GRID.slotDims.X * 1.2f)
+                {
+                    ENEMY.hero.GetHit(this, 1);
                     dead = true;
                 }
             }

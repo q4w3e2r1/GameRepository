@@ -10,6 +10,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Input.Touch;
 using Microsoft.Xna.Framework.Media;
+using SharpDX.MediaFoundation;
 #endregion
 
 namespace GameProject
@@ -17,11 +18,13 @@ namespace GameProject
 
     public class SkillButton : Button2d
     {
+
+        public Vector2 lastOffset;
         public Skill skill;
         public SkillButtonSlot slot;
 
-        public SkillButton(string path, Vector2 POS, Vector2 DIMS, PassObject BUTTONCLICKED, object INFO) 
-            : base(path, POS, DIMS, "", "", BUTTONCLICKED, INFO)
+        public SkillButton(string path, Vector2 POS, Vector2 DIMS, Vector2 FRAMES, PassObject BUTTONCLICKED, object INFO) 
+            : base(path, POS, DIMS, FRAMES, "", "", BUTTONCLICKED, INFO)
         {
            skill = (Skill)INFO;
             slot = null;
@@ -29,13 +32,30 @@ namespace GameProject
 
         public override void Update(Vector2 OFFSET)
         {
+            lastOffset = OFFSET;
+
             if (skill != null)
             {
                 base.Update(OFFSET);
             }
         }
 
-       
+        public override void RunBtnClick()
+        {
+            if (ButtonClicked != null)
+            {
+
+                var tempPacket = new SkillSelectionTypePacket(1, (Skill)info);
+                if (Hover(lastOffset))
+                {
+                    tempPacket.selectionType = 0;
+                }
+
+                ButtonClicked(tempPacket);
+            }
+
+            Reset();
+        }
 
         public override void Draw(Vector2 OFFSET)
         {
