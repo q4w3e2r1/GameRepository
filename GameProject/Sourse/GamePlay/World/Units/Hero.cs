@@ -14,6 +14,7 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using GameProject;
 using SharpDX.Direct3D9;
+using System.Diagnostics.Eventing.Reader;
 #endregion
 
 namespace GameProject
@@ -54,6 +55,11 @@ namespace GameProject
                     break;
                 }
             }
+
+            for(var i=0; i< 24; i++)
+            {
+                inventorySlots.Add(new InventorySlot(new Vector2(0, 0), new Vector2(48, 48)));
+            }
         }
 
         public override void Update(Vector2 OFFSET, Player ENEMY, SquareGrid GRID, LevelDrawManager LEVELDRAWMANAGER)
@@ -62,43 +68,45 @@ namespace GameProject
 
             if (Globals.keyboard.GetPress(GameGlobals.keyBinds.GetKeyName("Move Left")))
             {
-                pos = new Vector2(pos.X - speed, pos.Y);
-                checkScoll = true;
-                flipped = true;
+                var newpos = new Vector2(pos.X - speed, pos.Y);
+                if (newpos.X < GRID.totalPhysicalDims.X && newpos.X > 0)
+                {
+                    pos = new Vector2(pos.X - speed, pos.Y);
+                    checkScoll = true;
+                    flipped = true;
+                }
             }
 
             if (Globals.keyboard.GetPress(GameGlobals.keyBinds.GetKeyName("Move Right")))
             {
-                pos = new Vector2(pos.X + speed, pos.Y);
-                checkScoll = true;
-                flipped = false;
+                var newpos = new Vector2(pos.X + speed, pos.Y);
+                if (newpos.X < GRID.totalPhysicalDims.X - 50 && newpos.X > 0)
+                {
+                    pos = new Vector2(pos.X + speed, pos.Y);
+                    checkScoll = true;
+                    flipped = false;
+                }
             }
 
             if (Globals.keyboard.GetPress(GameGlobals.keyBinds.GetKeyName("Move Up")))
             {
-                pos = new Vector2(pos.X, pos.Y - speed);
-                checkScoll = true;
+                var newpos = new Vector2(pos.X, pos.Y - speed);
+                if (newpos.Y < GRID.totalPhysicalDims.Y - 50 && newpos.Y > 0)
+                {
+                    pos = new Vector2(pos.X, pos.Y - speed);
+                    checkScoll = true;
+                }
             }
 
             if (Globals.keyboard.GetPress(GameGlobals.keyBinds.GetKeyName("Move Down")))
             {
-                pos = new Vector2(pos.X, pos.Y + speed);
-                checkScoll = true;
+                var newpos = new Vector2(pos.X, pos.Y + speed);
+                if (newpos.Y < GRID.totalPhysicalDims.Y - 100 && newpos.X > 0)
+                {
+                    pos = new Vector2(pos.X, pos.Y + speed);
+                    checkScoll = true;
+                }
             }
-
-
-
-           /* if (Globals.keyboard.GetSinglePress("D1"))
-            {
-                currentSkill = skills[0];
-                currentSkill.Active = true;
-            }
-
-            if (Globals.keyboard.GetSinglePress("D2"))
-            {
-                currentSkill = skills[1];
-                currentSkill.Active = true;
-            }*/
 
             GameGlobals.CheckScroll(pos);
 
@@ -114,7 +122,6 @@ namespace GameProject
             }
 
 
-            //rot = Globals.RotateTowards(pos, new Vector2(Globals.mouse.newMousePos.X, Globals.mouse.newMousePos.Y) - OFFSET);
 
 
             if (currentSkill == null)

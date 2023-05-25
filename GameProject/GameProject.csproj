@@ -56,6 +56,7 @@
       <None Remove="Content\obj\Windows\2d\Buildings\tower.mgcontent" />
       <None Remove="Content\obj\Windows\2d\CursorArrow.mgcontent" />
       <None Remove="Content\obj\Windows\2d\Hero.mgcontent" />
+      <None Remove="Content\obj\Windows\2d\Loot\LootBag.mgcontent" />
       <None Remove="Content\obj\Windows\2d\Misc\ArrowLeft.mgcontent" />
       <None Remove="Content\obj\Windows\2d\Misc\ArrowRight.mgcontent" />
       <None Remove="Content\obj\Windows\2d\Misc\CheckBox.mgcontent" />
@@ -181,6 +182,9 @@
       <Content Include="Content\obj\Windows\2d\Hero.mgcontent">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Content>
+      <Content Include="Content\obj\Windows\2d\Loot\LootBag.mgcontent">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
       <Content Include="Content\obj\Windows\2d\Misc\ArrowLeft.mgcontent">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Content>
@@ -266,6 +270,7 @@
     <ItemGroup>
         <PackageReference Include="MonoGame.Framework.WindowsDX" Version="3.8.1.303" />
         <PackageReference Include="MonoGame.Content.Builder.Task" Version="3.8.1.303" />
+        <PackageReference Include="NUnit" Version="3.13.3" />
         <PackageReference Include="System.Linq" Version="4.3.0" />
         <PackageReference Include="System.Xml.XDocument" Version="4.3.0" />
     </ItemGroup>

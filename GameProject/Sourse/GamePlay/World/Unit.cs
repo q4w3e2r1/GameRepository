@@ -23,6 +23,7 @@ namespace GameProject
 
         protected List<Vector2> pathNodes = new();
         public List<Skill> skills = new();
+        public List<InventorySlot> inventorySlots = new();
 
         public Unit(string path, Vector2 POS, Vector2 DIMS, Vector2 FRAMES, int OWNERID)
             : base(path, POS, DIMS,  FRAMES, OWNERID)
@@ -34,6 +35,28 @@ namespace GameProject
         {
            
             base.Update(OFFSET, ENEMY, GRID, LEVELDRAWMANAGER);
+        }
+
+        public virtual void AddToInventory(object INFO)
+        {
+            // inventorySlots.Add((InventoryItem)INFO);
+            var added = false;
+
+            for(var i=0; i < inventorySlots.Count;i++)
+            {
+                if (inventorySlots[i].item == null)
+                {
+                    inventorySlots[i].item = (InventoryItem)INFO;
+                    added = true;
+                    break;
+                }
+            }
+
+            if(!added)
+            {
+
+            }
+                
         }
 
         public virtual List<Vector2> FindPath(SquareGrid GRID, Vector2 ENDSLOT)

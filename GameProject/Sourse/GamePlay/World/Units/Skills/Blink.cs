@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows.Forms;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
@@ -41,11 +42,18 @@ public class Blink : Skill
 
     public virtual void TargetingBase(Vector2 OFFSET)
     {
-        GameGlobals.PassEffect(new BlinkEffect(Globals.mouse.newMousePos - OFFSET, new Vector2(owner.dims.X, owner.dims.Y), 266));
-        GameGlobals.PassEffect(new BlinkEffect(new Vector2(owner.pos.X, owner.pos.Y), new Vector2(owner.dims.X, owner.dims.Y), 266));
+        var temp = new Vector2(Globals.mouse.newMousePos.X, Globals.mouse.newMousePos.Y) -OFFSET;
+        if (temp.X > 0 && temp.X <= Globals.screenWidth + 200 && temp.Y > 0 && temp.Y <= Globals.screenHeight + 150)
+        {
 
-        owner.pos = new Vector2(Globals.mouse.newMousePos.X, Globals.mouse.newMousePos.Y) - OFFSET;
+            GameGlobals.PassEffect(new BlinkEffect(Globals.mouse.newMousePos - OFFSET, new Vector2(owner.dims.X, owner.dims.Y), 266));
+            GameGlobals.PassEffect(new BlinkEffect(new Vector2(owner.pos.X, owner.pos.Y), new Vector2(owner.dims.X, owner.dims.Y), 266));
 
+            owner.pos = new Vector2(Globals.mouse.newMousePos.X, Globals.mouse.newMousePos.Y) - OFFSET;
+
+            done = true;
+            active = false;
+        }
         done = true;
         active = false;
     }

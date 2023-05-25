@@ -38,6 +38,8 @@ namespace GameProject
 
         public static OptionsMenu optionsMenu;
 
+        public static DragAndDropPacket dragAndDropPacket;
+
         public static Save save;
 
         public static Keyboard keyboard;

@@ -42,6 +42,7 @@ public class World
     public List<AttackableObject> allObjects = new();
     public List<Effect2d> effects = new();
     public List<SceneItem> sceneItems = new();
+    public List<LootBag> lootBags = new();
 
     PassObject ResetWorld, ChangeGameState, ChangePlayState;
 
@@ -63,6 +64,7 @@ public class World
         GameGlobals.PassSpawnPoint = AddSpawnPoint;
         GameGlobals.CheckScroll = CheckScroll;
         GameGlobals.PassGold = AddGold;
+        GameGlobals.PassLootBag = AddLootBag;
 
 
         GameGlobals.paused = false;
@@ -96,6 +98,18 @@ public class World
             aIPlayer.Update(user, offset, grid, levelDrawManager);
 
 
+
+
+            for(var i=0; i < lootBags.Count; i++)
+            {
+                lootBags[i].Update(offset);
+
+                if (lootBags[i].done)
+                {
+                    lootBags.RemoveAt(i);
+                    i--;
+                }
+            }
 
 
             for (var i = 0; i < projectiles.Count; i++)
@@ -221,6 +235,12 @@ public class World
             aIPlayer.gold += (int)packet.value;
         }
 
+    }
+
+    public virtual void AddLootBag(object INFO)
+    {
+        var tempBag = (LootBag)INFO;
+        lootBags.Add(tempBag);
     }
 
     public virtual void AddMob(object INFO)
@@ -349,6 +369,11 @@ public class World
         }
         user = new User(1, tempElement);
 
+        if(user.hero != null)
+        {
+            GameGlobals.AddInventory = user.hero.AddToInventory;
+        }
+
         tempElement = null;
         if (xml.Element("Root").Element("AIPlayer") != null)
         {
@@ -386,6 +411,12 @@ public class World
     {
         bkg.Draw(offset);
         grid.DrawGrid(offset);
+
+        for(var i=0; i < lootBags.Count; i++)
+        {
+            lootBags[i].Draw(offset);
+        }
+
         user.Draw(offset);
         aIPlayer.Draw(offset);
 

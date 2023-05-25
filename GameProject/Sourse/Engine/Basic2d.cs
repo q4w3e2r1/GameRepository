@@ -20,6 +20,8 @@ namespace GameProject
     {
         public float rot;
 
+        public string modelStr;
+
         public Vector2 pos, dims, frameSize;
 
         public Texture2D model;
@@ -32,7 +34,8 @@ namespace GameProject
             this.dims = new Vector2(dims.X, dims.Y);
             rot = 0.0f;
 
-            model = Globals.content.Load<Texture2D>(path);
+            modelStr = path;
+            model = Globals.content.Load<Texture2D>(modelStr);
         }
 
         public Basic2d() 
@@ -63,6 +66,18 @@ namespace GameProject
             return false;
         }
 
+        public virtual bool HoverFirst(Vector2 OFFSET)
+        {
+            var mousePos = new Vector2(Globals.mouse.firstMousePos.X, Globals.mouse.firstMousePos.Y);
+
+            if (mousePos.X >= pos.X + OFFSET.X - dims.X / 2 && mousePos.X <= pos.X + OFFSET.X + dims.X / 2
+                && mousePos.Y >= pos.Y + OFFSET.Y - dims.Y / 2 && mousePos.Y <= pos.Y + OFFSET.Y + dims.Y / 2)
+            {
+                return true;
+            }
+            return false;
+        }
+
 
         public virtual void Draw(Vector2 OFFSET)
         {
@@ -79,6 +94,21 @@ namespace GameProject
             //           rot, new Vector2(model.Bounds.Width / 2, model.Bounds.Height / 2), SpriteEffects.FlipHorizontally, 0);
 
             //}
+        }
+
+        public virtual void Draw(Vector2 OFFSET, Color COLOR)
+        {
+
+            if (model != null)
+            {
+                if (!flipped)
+                    Globals.spriteBatch.Draw(model, new Rectangle((int)(pos.X + OFFSET.X), (int)(pos.Y + OFFSET.Y), (int)dims.X, (int)dims.Y), null, Color.Gray,
+                           rot, new Vector2(model.Bounds.Width / 2, model.Bounds.Height / 2), SpriteEffects.None, 0);
+                else
+                    Globals.spriteBatch.Draw(model, new Rectangle((int)(pos.X + OFFSET.X), (int)(pos.Y + OFFSET.Y), (int)dims.X, (int)dims.Y), null, Color.Gray,
+                       rot, new Vector2(model.Bounds.Width / 2, model.Bounds.Height / 2), SpriteEffects.FlipHorizontally, 0);
+
+            }
         }
 
         public virtual void Draw(Vector2 OFFSET, Vector2 ORIGIN, Color COLOR)

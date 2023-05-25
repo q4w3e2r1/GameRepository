@@ -113,10 +113,19 @@ namespace GameProject
 
             base.Draw(OFFSET);
 
-            if (font != null) {
+            if (font != null) 
+            {
+                Globals.normalEffect.Parameters["xSize"].SetValue(1.0f);
+                Globals.normalEffect.Parameters["ySize"].SetValue(1.0f);
+                Globals.normalEffect.Parameters["xDraw"].SetValue(1.0f);
+                Globals.normalEffect.Parameters["yDraw"].SetValue(1.0f);
+                Globals.normalEffect.Parameters["filterColor"].SetValue(Color.White.ToVector4());
+                Globals.normalEffect.CurrentTechnique.Passes[0].Apply();
+
+
+
                 var strDims = font.MeasureString(text);
-                Globals.spriteBatch.DrawString(font, text,
-                   pos + OFFSET + new Vector2(-strDims.X / 2, -strDims.Y / 2), Color.Blue);
+                Globals.spriteBatch.DrawString(font, text, pos + OFFSET + new Vector2(-strDims.X / 2, -strDims.Y / 2), Color.Black);
             }
         }
     }

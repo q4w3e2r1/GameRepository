@@ -35,6 +35,12 @@ public class CharacterMenu : Menu2d
     public override void Update()
     {
         base.Update();
+
+        for (var i = 0; i < hero.inventorySlots.Count; i++)
+        {
+            var tempVec = new Vector2(150 + 54 * (i % 6), 400 + 54 * (i / 6));
+            hero.inventorySlots[i].Update(topLeft + tempVec);
+        }
     }
 
     public override void Draw()
@@ -47,7 +53,7 @@ public class CharacterMenu : Menu2d
             Globals.normalEffect.Parameters["ySize"].SetValue(1.0f);
             Globals.normalEffect.Parameters["xDraw"].SetValue(1.0f);
             Globals.normalEffect.Parameters["yDraw"].SetValue(1.0f);
-            Globals.normalEffect.Parameters["filterColor"].SetValue(Color.Black.ToVector4());
+            Globals.normalEffect.Parameters["filterColor"].SetValue(Color.Gray.ToVector4());
             Globals.normalEffect.CurrentTechnique.Passes[0].Apply();
 
             var tempStr = "" + hero.name;
@@ -55,6 +61,12 @@ public class CharacterMenu : Menu2d
             Globals.spriteBatch.DrawString(font, tempStr, topLeft + new Vector2(bkg.dims.X/2 - strDims.X/2, 40), Color.Black);
 
             textZone.Draw(topLeft + new Vector2(10, 100));
+
+            for(var i=0; i < hero.inventorySlots.Count;i++)
+            {
+                var tempVec =new Vector2(150 + 54 * (i%6), 400 + 54 * (i/6));
+                hero.inventorySlots[i].Draw(topLeft + tempVec);
+            }
         }
     }
 }

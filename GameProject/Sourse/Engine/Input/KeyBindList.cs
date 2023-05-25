@@ -46,6 +46,19 @@ public class KeyBindList
         return "";
     }
 
+    public virtual KeyBind GetKeyBindByName(string NAME)
+    {
+        for (var i = 0; i < keyBinds.Count; i++)
+        {
+            if (keyBinds[i].name == NAME)
+            {
+                return keyBinds[i];
+            }
+        }
+
+        return null;
+    }
+
     public virtual XElement ReturnXML()
     {
         var xml = new XElement("Keys", "");

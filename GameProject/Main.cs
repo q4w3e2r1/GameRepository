@@ -79,17 +79,9 @@ public class Main : Game
         Globals.keyboard = new Keyboard();
         Globals.mouse = new MouseControl();
 
-        mainMenu = new MainMenu(ChangeGameState, ExitGame);
-        gamePlay = new GamePlay(ChangeGameState);
 
-       
 
-        Globals.soundControl = new SoundControl("Audio\\BackGroundMusic");
-
-        Globals.soundControl.AddSound("Shoot", "Audio\\Sounds\\Projectiles\\Shoot", .1f);
-        Globals.soundControl.AddSound("Hit", "Audio\\Sounds\\Projectiles\\Hit2", .1f);
-
-        if(File.Exists(Globals.appDataFilePath + "\\" + Globals.save.gameName + "\\XML\\KeyBinds.xml"))
+        if (File.Exists(Globals.appDataFilePath + "\\" + Globals.save.gameName + "\\XML\\KeyBinds.xml"))
         {
             GameGlobals.keyBinds = new KeyBindList(Globals.save.GetFile("XML\\KeyBinds.xml"));
         }
@@ -100,7 +92,20 @@ public class Main : Game
             Globals.save.HandleSaveFormates(keybindXML, "KeyBinds.xml");
 
             GameGlobals.keyBinds = new KeyBindList(Globals.save.GetFile("XML\\KeyBinds.xml"));
-       }
+        }
+
+
+        mainMenu = new MainMenu(ChangeGameState, ExitGame);
+        gamePlay = new GamePlay(ChangeGameState);
+
+       
+
+        Globals.soundControl = new SoundControl("Audio\\BackGroundMusic");
+
+        Globals.soundControl.AddSound("Shoot", "Audio\\Sounds\\Projectiles\\Shoot", .1f);
+        Globals.soundControl.AddSound("Hit", "Audio\\Sounds\\Projectiles\\Hit2", .1f);
+
+        Globals.dragAndDropPacket = new DragAndDropPacket(new Vector2(40, 40));
 
     }
 
@@ -158,6 +163,11 @@ public class Main : Game
         }
 
 
+        if(Globals.dragAndDropPacket != null)
+        {
+            Globals.dragAndDropPacket.Update();
+        }
+
         Globals.keyboard.UpdateOld();
         Globals.mouse.UpdateOld();
 
@@ -185,6 +195,8 @@ public class Main : Game
         if (Convert.ToInt32(fullScreenOption.value, Globals.culture) == 1)
         {
             graphics.IsFullScreen = true;
+            graphics.PreferredBackBufferWidth = 1980;
+            graphics.PreferredBackBufferHeight = Globals.screenHeight;
         }
         else
         {
@@ -239,6 +251,11 @@ public class Main : Game
         for(var i =0; i< Globals.msgList.Count; i++)
         {
             Globals.msgList[i].Draw();
+        }
+
+        if (Globals.dragAndDropPacket != null)
+        {
+            Globals.dragAndDropPacket.Draw();
         }
 
         cursor.Draw(new Vector2(Globals.mouse.newMousePos.X, Globals.mouse.newMousePos.Y), new Vector2(0, 0), Color.White);

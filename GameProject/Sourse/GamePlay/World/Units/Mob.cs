@@ -54,9 +54,10 @@ public class Mob : Unit
                     currentlyPathing = true;
 
                     pathNodes = FindPath(GRID, GRID.GetSlotFromPixel(ENEMY.hero.pos, Vector2.Zero));
-
+                    if (pathNodes != null)
+                    {
                         pathNodes.RemoveAt(0);
-
+                    }
                         rePathTimer.ResetToZero();
 
                         currentlyPathing = false;
@@ -81,7 +82,31 @@ public class Mob : Unit
 
     }
 
-  
+    public override void GetHit(AttackableObject ATTACKER, float DAMAGE)
+    {
+        if (ATTACKER.ownerId != ownerId)
+        {
+
+            health -= DAMAGE;
+            throbing = true;
+
+            if (health <= 0)
+            {
+                dead = true;
+                GameGlobals.PassGold(new PlayerValuePacket(ATTACKER.ownerId, killValue));
+
+                int num = Globals.random.Next(0, 2 + 1);
+
+                if(num == 0)
+                {
+                    LootBag tempBag = new LootBag("2d\\Loot\\LootBag", new Vector2(pos.X, pos.Y), null);
+                    tempBag.items.Add(new TestItem());
+
+                    GameGlobals.PassLootBag(tempBag);
+                }
+            }
+        }
+    }
 
 
     public override void Draw(Vector2 OFFSET)

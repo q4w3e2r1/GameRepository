@@ -24,7 +24,7 @@ namespace GameProject
         public static int score = 0;
 
         public static KeyBindList keyBinds;
-        public static PassObject PassProjectile, PassEffect, PassGold, PassMob, PassBuilding, PassSpawnPoint, CheckScroll;
+        public static PassObject PassProjectile, PassEffect, PassGold, PassMob, PassLootBag, AddInventory, PassBuilding, PassSpawnPoint, CheckScroll;
 
     }
 }

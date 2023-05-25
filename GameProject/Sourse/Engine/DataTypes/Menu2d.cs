@@ -21,6 +21,8 @@ public class Menu2d
 {
     private bool active;
 
+    public bool hasCloseBtn;
+
     public Vector2 pos, dims, topLeft;
     public Animated2d bkg;
 
@@ -30,6 +32,7 @@ public class Menu2d
 
     public Menu2d(Vector2 POS, Vector2 DIMS, PassObject CLOSEACTION)
     {
+        hasCloseBtn = true;
         pos = POS;
         dims = DIMS;
         CloseAction = CLOSEACTION;
@@ -63,8 +66,12 @@ public class Menu2d
         {
             topLeft = pos - dims / 2;
 
+            if (hasCloseBtn)
+            {
+                closeBtn.Update(pos);
+            }
 
-            closeBtn.Update(pos);
+            
         }
        
     }
@@ -80,7 +87,10 @@ public class Menu2d
         {
             bkg.Draw(pos);
 
-            closeBtn.Draw(pos);
+            if (hasCloseBtn)
+            {
+                closeBtn.Draw(pos);
+            }
         }
 
     }
