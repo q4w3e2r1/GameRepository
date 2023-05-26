@@ -77,6 +77,15 @@
 			<mob rate ="50">Wizard</mob>
 			<timerAdd>0</timerAdd>
 		</SpawnPoint>
+		<SpawnPoint>
+			<type>Portal</type>
+			<Pos>
+				<x>11560</x>
+				<y>1000</y>
+			</Pos>
+			<mob rate ="50">Wizard</mob>
+			<timerAdd>0</timerAdd>
+		</SpawnPoint>
 	</AIPlayer>
 
 

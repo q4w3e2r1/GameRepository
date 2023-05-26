@@ -50,7 +50,7 @@
 		<SpawnPoint>
 			<type>Portal</type>
 			<Pos>
-				<x>650</x>
+				<x>1200</x>
 				<y>1000</y>
 			</Pos>
 			<mob rate ="75">Wizard</mob>
@@ -59,10 +59,43 @@
 		<SpawnPoint>
 			<type>Portal</type>
 			<Pos>
-				<x>1000</x>
+				<x>1900</x>
 				<y>1000</y>
 			</Pos>
 			<mob rate ="50">Wizard</mob>
+			<timerAdd>0</timerAdd>
+		</SpawnPoint>
+	<SpawnPoint>
+			<type>Portal</type>
+			<Pos>
+				<x>1500</x>
+				<y>0</y>
+			</Pos>
+			<mob rate ="50">Imp</mob>
+			<mob rate ="40">Spider</mob>
+			<mob rate ="11">Wizard</mob>
+			<timerAdd>0</timerAdd>
+		</SpawnPoint>
+	<SpawnPoint>
+			<type>Portal</type>
+			<Pos>
+				<x>2000</x>
+				<y>500</y>
+			</Pos>
+			<mob rate ="50">Imp</mob>
+			<mob rate ="40">Spider</mob>
+			<mob rate ="11">Wizard</mob>
+			<timerAdd>0</timerAdd>
+		</SpawnPoint>
+	<SpawnPoint>
+			<type>Portal</type>
+			<Pos>
+				<x>200</x>
+				<y>1900</y>
+			</Pos>
+			<mob rate ="50">Imp</mob>
+			<mob rate ="40">Spider</mob>
+			<mob rate ="11">Wizard</mob>
 			<timerAdd>0</timerAdd>
 		</SpawnPoint>
 	</AIPlayer>
