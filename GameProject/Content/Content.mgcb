@@ -217,6 +217,18 @@
 /processorParam:TextureFormat=Color
 /build:2d/Misc/Guide.png
 
+#begin 2d/Misc/Hint.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:2d/Misc/Hint.png
+
 #begin 2d/Misc/Obelisk1.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -252,6 +264,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:2d/Misc/portal.png
+
+#begin 2d/Misc/PortalHint.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:2d/Misc/PortalHint.png
 
 #begin 2d/Misc/shade.png
 /importer:TextureImporter
@@ -397,6 +421,18 @@
 /processorParam:TextureFormat=Color
 /build:2d/Projectiles/Fireball2.png
 
+#begin 2d/UI/BackGrounds/magma.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:2d/UI/BackGrounds/magma.png
+
 #begin 2d/UI/BackGrounds/MainMenu.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -432,6 +468,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:2d/UI/BackGrounds/StandardGrass.png
+
+#begin 2d/UI/BackGrounds/StandardGrass1.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:2d/UI/BackGrounds/StandardGrass1.png
 
 #begin 2d/UI/BackGrounds/StandardSnow.png
 /importer:TextureImporter
@@ -517,6 +565,30 @@
 /processorParam:TextureFormat=Color
 /build:2d/UI/Scene/OakTree1.png
 
+#begin 2d/UI/Scene/OldTree.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:2d/UI/Scene/OldTree.png
+
+#begin 2d/UI/Scene/WinterTree.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:2d/UI/Scene/WinterTree.png
+
 #begin 2d/Units/HeroSheet.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -601,6 +673,18 @@
 /processorParam:TextureFormat=Color
 /build:2d/Units/Mobs/spider.png
 
+#begin 2d/Units/Mobs/spider1.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:2d/Units/Mobs/spider1.png
+
 #begin 2d/Units/Mobs/zombie.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -612,6 +696,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:2d/Units/Mobs/zombie.png
+
+#begin 2d/Units/SpiderSheet.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:2d/Units/SpiderSheet.png
 
 #begin 2d/Units/Wizard.png
 /importer:TextureImporter

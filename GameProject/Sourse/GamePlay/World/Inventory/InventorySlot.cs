@@ -31,6 +31,35 @@ public class InventorySlot : Animated2d
         {
             item.Update(OFFSET);
         }
+
+        if(Globals.dragAndDropPacket != null && Globals.dragAndDropPacket.type == "InventoryItem" && Globals.dragAndDropPacket.IsDropped() && Hover(OFFSET))
+        {
+            TransferItem((InventoryItem)Globals.dragAndDropPacket.item);
+        }
+    }
+
+    public virtual void TransferItem(InventoryItem ITEM)
+    {
+        if(ITEM != null)
+        {
+            var oldSlot = ITEM.slot;
+
+            var currentItem = item;
+
+            ITEM.slot = this;
+
+            item = ITEM;
+
+            if(currentItem != null)
+            {
+                currentItem.slot = oldSlot;
+            }
+
+            if(oldSlot != null)
+            {
+                oldSlot.item = currentItem;
+            }
+        }
     }
 
     public override void Draw(Vector2 OFFSET)

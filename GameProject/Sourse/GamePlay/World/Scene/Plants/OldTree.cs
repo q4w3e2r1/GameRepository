@@ -17,11 +17,11 @@ using GameProject;
 
 namespace GameProject
 {
-    public class OldTree : SceneItem
+    public class OakTree : SceneItem
     {
       
-        public OldTree(Vector2 POS, Vector2 SCALE)
-            : base("2d\\UI\\Scene\\OldTree", POS, new Vector2(200, 200) * SCALE, new Vector2(1, 1), SCALE)
+        public OakTree(Vector2 POS, Vector2 SCALE)
+            : base("2d\\UI\\Scene\\OakTree1", POS, new Vector2(200, 200) * SCALE, new Vector2(1, 1), SCALE)
         {
 
         }

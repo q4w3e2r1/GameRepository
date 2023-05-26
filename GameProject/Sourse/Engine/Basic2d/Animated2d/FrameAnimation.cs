@@ -153,7 +153,6 @@ namespace GameProject
            var render = new Render(ROT, pos, dims, myModel, color, sheetFrame);
            render.Draw(imageDims, screenShift, spriteEffect);
 
-           //Globals.spriteBatch.Draw(myModel, new Rectangle((int)((pos.X + screenShift.X)), (int)((pos.Y + screenShift.Y)), (int)Math.Ceiling(dims.X), (int)Math.Ceiling(dims.Y)), new Rectangle((int)(sheetFrame.X * imageDims.X), (int)(sheetFrame.Y * imageDims.Y), (int)imageDims.X, (int)imageDims.Y), color, ROT, imageDims / 2, spriteEffect, 0);
         }
 
     }

@@ -34,8 +34,8 @@ public class Tower : Building
         base.Update(OFFSET, ENEMY, GRID, LEVELDRAWMANAGER);
     }
 
-    public override void Draw(Vector2 OFFSET)
-    {
-        base.Draw(OFFSET);
-    }
+    //public override void Draw(Vector2 OFFSET)
+    //{
+    //    base.Draw(OFFSET);
+    //}
 }

@@ -59,7 +59,7 @@ namespace GameProject
 
                     DrawSlot tempSlot = null;
 
-                    for (int i = 0; i < drawables.Count; i++)
+                    for (int i = 0; i < drawables.Count - 1; i++)
                     {
 
                         //Resort based on draw layer

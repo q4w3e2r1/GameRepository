@@ -41,6 +41,15 @@ public class DragAndDropPacket
     
     }
 
+    public virtual bool IsDropped()
+    {
+        if (Globals.mouse.LeftClickRelease())
+        {
+            return true;
+        }
+        return false;
+    }
+
 
     public virtual void SetItem(object ITEM, string TYPE, string IMGSTRING)
     {

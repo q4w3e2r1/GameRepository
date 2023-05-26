@@ -16,4 +16,20 @@
 			<y>350</y>
 		</Pos>
 	</Level>
+	<Level id ="3">
+		<name>Level 3 Name</name>
+		<file>Level3</file>
+		<Pos>
+			<x>470</x>
+			<y>220</y>
+		</Pos>
+	</Level>
+	<Level id ="4">
+		<name>Level 4 Name</name>
+		<file>Level4</file>
+		<Pos>
+			<x>600</x>
+			<y>120</y>
+		</Pos>
+	</Level>
 </Root>	

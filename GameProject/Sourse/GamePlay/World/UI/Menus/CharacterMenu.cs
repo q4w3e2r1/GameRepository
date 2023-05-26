@@ -64,7 +64,7 @@ public class CharacterMenu : Menu2d
 
             for(var i=0; i < hero.inventorySlots.Count;i++)
             {
-                var tempVec =new Vector2(150 + 54 * (i%6), 400 + 54 * (i/6));
+                var tempVec = new Vector2(150 + 54 * (i%6), 400 + 54 * (i/6));
                 hero.inventorySlots[i].Draw(topLeft + tempVec);
             }
         }

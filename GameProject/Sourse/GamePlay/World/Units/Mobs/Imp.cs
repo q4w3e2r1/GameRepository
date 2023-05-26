@@ -20,6 +20,7 @@ public class Imp : Mob
 
     public Imp(Vector2 POS, Vector2 FRAMES, int OWNERID) : base("2d\\Units\\ImpSheet", POS, new Vector2(40, 40), new Vector2(8, 1), OWNERID)
     {
+
         speed = 2.0f;
 
         frameAnimations = true;

@@ -78,8 +78,25 @@ public class World
         exitMenu = new ExitMenu(ExiLevel);
 
         ui = new UI(ResetWorld, user.hero);
+        if (levelId == 1)
+        {
+            bkg = new TileBkg2d("2d\\UI\\Backgrounds\\StandardDirt", new Vector2(-700, -500), new Vector2(120, 100), new Vector2(grid.totalPhysicalDims.X + 2000, grid.totalPhysicalDims.Y + 2000));
+        }
+        if(levelId == 2)
+        {
+            bkg = new TileBkg2d("2d\\UI\\Backgrounds\\StandardGrass", new Vector2(-700, -500), new Vector2(100, 100), new Vector2(grid.totalPhysicalDims.X + 2000, grid.totalPhysicalDims.Y + 2000));
 
-        bkg = new TileBkg2d("2d\\UI\\Backgrounds\\StandardDirt", new Vector2(-100, -100), new Vector2(120, 100), new Vector2(grid.totalPhysicalDims.X + 100, grid.totalPhysicalDims.Y + 100) );
+        }
+        if(levelId == 3)
+        {
+            bkg = new TileBkg2d("2d\\UI\\Backgrounds\\StandardSnow", new Vector2(-700, -500), new Vector2(100, 100), new Vector2(grid.totalPhysicalDims.X + 2000, grid.totalPhysicalDims.Y + 2000));
+
+        }
+        if(levelId == 4)
+        {
+            bkg = new TileBkg2d("2d\\UI\\Backgrounds\\magma", new Vector2(-700, -500), new Vector2(100, 100), new Vector2(grid.totalPhysicalDims.X + 2000, grid.totalPhysicalDims.Y + 2000));
+
+        }
     }
 
     public virtual void Update()
@@ -412,11 +429,7 @@ public class World
         bkg.Draw(offset);
         grid.DrawGrid(offset);
 
-        for(var i=0; i < lootBags.Count; i++)
-        {
-            lootBags[i].Draw(offset);
-        }
-
+       
         user.Draw(offset);
         aIPlayer.Draw(offset);
 
@@ -440,6 +453,10 @@ public class World
             effects[i].Draw(offset);
         }
 
+        for (var i = 0; i < lootBags.Count; i++)
+        {
+            lootBags[i].Draw(offset);
+        }
 
         ui.Draw(this);
 

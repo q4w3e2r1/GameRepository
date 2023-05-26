@@ -34,46 +34,43 @@
 				</Pos>
 				<mob rate ="50">Imp</mob>
 				<mob rate ="30">Spider</mob>
-				<mob rate ="100">Wizard</mob>
 				<timerAdd>500</timerAdd>
 		</SpawnPoint>
 		<SpawnPoint>
 			<type>Portal</type>
-				<Pos>
-					<x>1560</x>
-					<y>40</y>	 
-				</Pos>
-				<mob rate ="50">Imp</mob>
-				<mob rate ="40">Spider</mob>
-				<timerAdd>0</timerAdd>
-		</SpawnPoint>
-		<SpawnPoint>
-			<type>Portal</type>
 			<Pos>
-				<x>1560</x>
-				<y>400</y>
+				<x>0</x>
+				<y>1000</y>
 			</Pos>
 			<mob rate ="50">Imp</mob>
 			<mob rate ="40">Spider</mob>
+			<mob rate ="11">Wizard</mob>
 			<timerAdd>0</timerAdd>
 		</SpawnPoint>
 		<SpawnPoint>
 			<type>Portal</type>
 			<Pos>
-				<x>1560</x>
-				<y>800</y>
+				<x>650</x>
+				<y>1000</y>
 			</Pos>
-			<mob rate ="50">Imp</mob>
-			<mob rate ="40">Spider</mob>
+			<mob rate ="75">Wizard</mob>
+			<timerAdd>0</timerAdd>
+		</SpawnPoint>
+		<SpawnPoint>
+			<type>Portal</type>
+			<Pos>
+				<x>1000</x>
+				<y>1000</y>
+			</Pos>
+			<mob rate ="50">Wizard</mob>
 			<timerAdd>0</timerAdd>
 		</SpawnPoint>
 	</AIPlayer>
 
 
-
 	<Scene>
 		<SceneItem>
-			<type>OakTree</type>
+			<type>OldTree</type>
 			<Pos>
 				<x>-60</x>
 				<y>200</y>				
@@ -81,52 +78,76 @@
 			<scale>.8</scale>
 		</SceneItem>
 	<SceneItem>
-			<type>OakTree</type>
+			<type>OldTree</type>
 			<Pos>
-				<x>120</x>
-				<y>300</y>				
+				<x>90</x>
+				<y>500</y>				
+			</Pos>
+			<scale>1.2</scale>
+		</SceneItem>
+		<SceneItem>
+			<type>OldTree</type>
+			<Pos>
+				<x>700</x>
+				<y>800</y>				
+			</Pos>
+			<scale>1</scale>
+		</SceneItem>
+		<SceneItem>
+			<type>OldTree</type>
+			<Pos>
+				<x>100</x>
+				<y>-50</y>				
+			</Pos>
+			<scale>0.8</scale>
+		</SceneItem>
+		<SceneItem>
+			<type>OldTree</type>
+			<Pos>
+				<x>250</x>
+				<y>400</y>				
+			</Pos>
+			<scale>1</scale>
+		</SceneItem>
+		<SceneItem>
+			<type>OldTree</type>
+			<Pos>
+				<x>550</x>
+				<y>100</y>				
+			</Pos>
+			<scale>0.6</scale>
+		</SceneItem>
+		<SceneItem>
+			<type>OldTree</type>
+			<Pos>
+				<x>1000</x>
+				<y>100</y>				
+			</Pos>
+			<scale>0.7</scale>
+		</SceneItem>
+		<SceneItem>
+			<type>OldTree</type>
+			<Pos>
+				<x>1100</x>
+				<y>500</y>				
+			</Pos>
+			<scale>0.8</scale>
+		</SceneItem>
+		<SceneItem>
+			<type>OldTree</type>
+			<Pos>
+				<x>1300</x>
+				<y>750</y>				
 			</Pos>
 			<scale>1</scale>
 		</SceneItem>
 <SceneItem>
-			<type>OakTree</type>
+			<type>OldTree</type>
 			<Pos>
-				<x>700</x>
-				<y>500</y>				
-			</Pos>
-			<scale>.7</scale>
-		</SceneItem>
-		<SceneItem>
-			<type>OakTree</type>
-			<Pos>
-				<x>1200</x>
-				<y>-30</y>
-			</Pos>
-			<scale>.7</scale>
-		</SceneItem>
-		<SceneItem>
-			<type>OakTree</type>
-			<Pos>
-				<x>1400</x>
-				<y>450</y>
-			</Pos>
-			<scale>.9</scale>
-		</SceneItem>
-		<SceneItem>
-			<type>OakTree</type>
-			<Pos>
-				<x>1050</x>
-				<y>250</y>
+				<x>-100</x>
+				<y>450</y>				
 			</Pos>
 			<scale>1</scale>
-		</SceneItem>
-		<SceneItem>
-			<type>OakTree</type>
-			<Pos>
-				<x>450</x>
-				<y>300</y>
-			</Pos>
-			<scale>.7</scale>
 		</SceneItem>
 	</Scene>	
 

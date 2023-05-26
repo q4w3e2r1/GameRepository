@@ -20,7 +20,7 @@ public class AcidSplash : Projectile2d
 {
    
     public AcidSplash(Vector2 POS, AttackableObject owner, Vector2 TARGET) 
-        : base("2d\\Projectiles\\AcidBall", POS, new Vector2(20, 20), owner, TARGET)
+        : base("2d\\Projectiles\\Arrow", POS, new Vector2(20, 20), owner, TARGET)
     {
         speed = 4.0f;
         timer = new GameTimer(1800);

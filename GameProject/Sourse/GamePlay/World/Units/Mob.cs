@@ -54,7 +54,7 @@ public class Mob : Unit
                     currentlyPathing = true;
 
                     pathNodes = FindPath(GRID, GRID.GetSlotFromPixel(ENEMY.hero.pos, Vector2.Zero));
-                    if (pathNodes != null)
+                    if (pathNodes != null && pathNodes.Count > 0)
                     {
                         pathNodes.RemoveAt(0);
                     }

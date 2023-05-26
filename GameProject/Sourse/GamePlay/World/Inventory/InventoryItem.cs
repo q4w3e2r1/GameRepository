@@ -17,10 +17,14 @@ using SharpDX.Direct3D9;
 
 namespace GameProject;
 public class InventoryItem : Dragable2d
-{ 
+{
+    public InventorySlot slot;
+
     public InventoryItem(string PATH, Vector2 POS, Vector2 DIMS, Vector2 FRAMES, Color COLOR) : base(PATH, POS, DIMS, FRAMES, COLOR)
     {
         type = "InventoryItem";
+
+        slot = null;
     }
 
     

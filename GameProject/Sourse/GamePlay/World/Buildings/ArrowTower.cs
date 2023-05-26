@@ -20,14 +20,14 @@ public class ArrowTower : Building
 
     int range;
 
-    GameTimer shotTimer = new GameTimer(12000);
+    GameTimer shotTimer = new GameTimer(1200);
 
 
     public ArrowTower( Vector2 POS, Vector2 FRAMES, int OWNERID)
         : base("2d\\Buildings\\tower", POS, new Vector2(90, 90), FRAMES, OWNERID)
     {
         range = 220;
-        health = 10;
+        health = 5;
         healthMax = health;
 
         hitDist = 35.0f;
@@ -69,8 +69,8 @@ public class ArrowTower : Building
         }
     }
 
-    public override void Draw(Vector2 OFFSET)
-    {
-        base.Draw(OFFSET);
-    }
+    //public override void Draw(Vector2 OFFSET)
+    //{
+    //    base.Draw(OFFSET);
+    //}
 }

@@ -46,7 +46,10 @@ namespace GameProject
             {
                 if (inventorySlots[i].item == null)
                 {
-                    inventorySlots[i].item = (InventoryItem)INFO;
+                    var tempItem = (InventoryItem)INFO;
+                    tempItem.slot = inventorySlots[i];
+
+                    inventorySlots[i].item = tempItem;
                     added = true;
                     break;
                 }

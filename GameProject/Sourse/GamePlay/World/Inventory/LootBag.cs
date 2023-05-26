@@ -34,7 +34,7 @@ public class LootBag : Animated2d
         }
     }
 
-    public virtual void Update(Vector2 OFFSET)
+    public override void Update(Vector2 OFFSET)
     {
 
 

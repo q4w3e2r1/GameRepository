@@ -105,9 +105,7 @@ namespace GameProject
         {
 
             if (frameAnimations && frameAnimationList[currentAnimation].Frames > 0)
-            {
-               // Globals.spriteBatch.Draw(model, new Rectangle((int)(pos.X+screenShift.X), (int)(pos.Y+screenShift.Y), (int)dims.X, (int)dims.Y), new Rectangle((int)((currentFrame.X-1)*dims.X), (int)((currentFrame.Y-1)*dims.Y), (int)(currentFrame.X*dims.X), (int)(currentFrame.Y*dims.Y)), color, rot, new Vector2(myModel.Bounds.Width/2, myModel.Bounds.Height/2), new SpriteEffects(), 0);
-               
+            {               
                if(flipped)
                     frameAnimationList[currentAnimation].Draw(model, dims, frameSize, screenShift, pos, rot, color, SpriteEffects.FlipHorizontally);
                 else

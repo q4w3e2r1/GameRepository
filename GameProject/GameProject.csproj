@@ -84,6 +84,8 @@
       <None Remove="XML\Levels.xml" />
       <None Remove="XML\Levels\Level1.xml" />
       <None Remove="XML\Levels\Level2.xml" />
+      <None Remove="XML\Levels\Level3.xml" />
+      <None Remove="XML\Levels\Level4.xml" />
     </ItemGroup>
     <ItemGroup>
       <Content Include="Content\bin\Windows\2d\CursorArrow.xnb">
@@ -258,6 +260,12 @@
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Content>
       <Content Include="XML\Levels.xml">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="XML\Levels\Level4.xml">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="XML\Levels\Level3.xml">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Content>
       <Content Include="XML\Levels\Level2.xml">

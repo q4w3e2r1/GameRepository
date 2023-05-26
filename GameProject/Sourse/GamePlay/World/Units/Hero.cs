@@ -31,7 +31,7 @@ namespace GameProject
             speed = 2.0f;
             name = "Zed";
 
-            health = 5;
+            health = 50;
             healthMax = health;
 
             frameAnimations = true;
