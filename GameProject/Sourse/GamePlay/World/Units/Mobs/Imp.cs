@@ -44,10 +44,4 @@ public class Imp : Mob
         rot = 0;
         SetAnimationByName("Walk");
     }
-
-
-    public override void Draw(Vector2 OFFSET)
-    {
-        base.Draw(OFFSET);
-    }
 }

@@ -31,9 +31,4 @@ public class Arrow : Projectile2d
     {
        base.Update(OFFSET, UNITS);
     }
-
-    public override void Draw(Vector2 OFFSET)
-    {
-        base.Draw(OFFSET);
-    }
 }

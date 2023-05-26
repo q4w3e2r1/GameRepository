@@ -155,7 +155,7 @@ public class World
             {
                 sceneItems[i].Update(offset);
 
-                sceneItems[i].UpdateDraw(offset, levelDrawManager);
+                sceneItems[i].UpdateManager(offset, levelDrawManager);
             }
             //ui.Update(this);
 
@@ -337,27 +337,6 @@ public class World
 
             offset = new Vector2(offset.X, offset.Y - Math.Min(maxMovement, diff));
         }
-
-
-       /* if (tempPos.X < -offset.X + (Globals.screenWidth * .4f))
-        {
-            offset = new Vector2(offset.X + user.hero.speed * 2, offset.Y );
-        }
-
-        if (tempPos.X > -offset.X + (Globals.screenWidth * .6f))
-        {
-            offset = new Vector2(offset.X - user.hero.speed * 2, offset.Y);
-        }
-
-        if (tempPos.Y < -offset.Y + (Globals.screenHeight * .4f))
-        {
-            offset = new Vector2(offset.X, offset.Y + user.hero.speed * 2 );
-        }
-
-        if (tempPos.Y > -offset.Y + (Globals.screenHeight * .6f))
-        {
-            offset = new Vector2(offset.X, offset.Y - user.hero.speed * 2);
-        }*/
     }
 
     public virtual bool DontUpdate()
@@ -432,11 +411,6 @@ public class World
        
         user.Draw(offset);
         aIPlayer.Draw(offset);
-
-        //for(var i = 0; i < sceneItems.Count;i++)
-        //{
-        //    sceneItems[i].Draw(offset);
-        //}
 
         if(levelDrawManager != null)
         {

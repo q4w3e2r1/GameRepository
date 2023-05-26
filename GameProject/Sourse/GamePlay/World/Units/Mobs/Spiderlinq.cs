@@ -121,11 +121,4 @@ public class Spiderlinq : Mob
         }
 
     }
-
-    
-
-    public override void Draw(Vector2 OFFSET)
-    {
-        base.Draw(OFFSET);
-    }
 }

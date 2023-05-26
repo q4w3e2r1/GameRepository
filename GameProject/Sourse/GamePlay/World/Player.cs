@@ -165,25 +165,6 @@ public class Player
 
     public virtual void Draw(Vector2 OFFSET)
     {
-        //if(hero != null)
-        //{
-        //    hero.Draw(OFFSET);
-        //}
-
-        //for (var i = 0; i < buildings.Count; i++)
-        //{
-        //    buildings[i].Draw(OFFSET);
-        //}
-
-        //for (var i = 0; i < spawnPoints.Count; i++)
-        //{
-        //    spawnPoints[i].Draw(OFFSET);
-        //}
-
-        //for (var i = 0; i < units.Count; i++)
-        //{
-        //    units[i].Draw(OFFSET);
-        //}  
     }
 
 }

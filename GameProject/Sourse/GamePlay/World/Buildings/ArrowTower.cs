@@ -68,9 +68,4 @@ public class ArrowTower : Building
             GameGlobals.PassProjectile(new Arrow(new Vector2(pos.X, pos.Y), this, new Vector2(closest.pos.X, closest.pos.Y)));
         }
     }
-
-    //public override void Draw(Vector2 OFFSET)
-    //{
-    //    base.Draw(OFFSET);
-    //}
 }

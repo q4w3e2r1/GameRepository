@@ -21,7 +21,7 @@ public class Tower : Building
     public Tower( Vector2 POS, Vector2 FRAMES, int OWNERID)
         : base("2d\\Buildings\\Obelisk1", POS, new Vector2(90, 90), FRAMES , OWNERID)
     {
-        health = 20;
+        health = 30;
         healthMax = health;
 
         hitDist = 35.0f;
@@ -33,9 +33,4 @@ public class Tower : Building
 
         base.Update(OFFSET, ENEMY, GRID, LEVELDRAWMANAGER);
     }
-
-    //public override void Draw(Vector2 OFFSET)
-    //{
-    //    base.Draw(OFFSET);
-    //}
 }

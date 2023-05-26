@@ -107,10 +107,4 @@ public class Mob : Unit
             }
         }
     }
-
-
-    public override void Draw(Vector2 OFFSET)
-    {
-        base.Draw(OFFSET);
-    }
 }

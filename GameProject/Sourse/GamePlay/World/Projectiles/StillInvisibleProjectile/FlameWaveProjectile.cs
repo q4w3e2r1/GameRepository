@@ -41,10 +41,5 @@ namespace GameProject
         {
             return false;
         }
-
-        public override void Draw(Vector2 OFFSET)
-        {
-
-        }
     }
 }

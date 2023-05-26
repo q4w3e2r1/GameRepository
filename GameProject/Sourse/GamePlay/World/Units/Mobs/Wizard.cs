@@ -71,10 +71,4 @@ public class Wizard : Mob
             base.AI(ENEMY, GRID);
         }
     }
-
-
-    public override void Draw(Vector2 OFFSET)
-    {
-        base.Draw(OFFSET);
-    }
 }

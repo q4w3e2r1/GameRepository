@@ -62,9 +62,4 @@ public class Spider : Mob
     {
         GameGlobals.PassSpawnPoint(new SpiderEggsSac(new Vector2(pos.X, pos.Y), new Vector2(1, 1), ownerId, null));
     }
-
-    public override void Draw(Vector2 OFFSET)
-    {
-        base.Draw(OFFSET);
-    }
 }
