@@ -190,20 +190,20 @@ public class Main : Game
 
     public void SetFullScreen()
     {
-        FormOption fullScreenOption = Globals.optionsMenu.GetOptionValue("Full Screen");
+    //    FormOption fullScreenOption = Globals.optionsMenu.GetOptionValue("Full Screen");
 
-        if (Convert.ToInt32(fullScreenOption.value, Globals.culture) == 1)
-        {
-            graphics.IsFullScreen = true;
-            graphics.PreferredBackBufferWidth = 1980;
-            graphics.PreferredBackBufferHeight = Globals.screenHeight;
-        }
-        else
-        {
-            graphics.IsFullScreen = false;
-        }
+    //    if (Convert.ToInt32(fullScreenOption.value, Globals.culture) == 1)
+    //    {
+    //        graphics.IsFullScreen = true;
+    //        graphics.PreferredBackBufferWidth = 1980;
+    //        graphics.PreferredBackBufferHeight = Globals.screenHeight;
+    //    }
+    //    else
+    //    {
+    //        graphics.IsFullScreen = false;
+    //    }
 
-        graphics.ApplyChanges();
+    //    graphics.ApplyChanges();
     }
 
     public virtual void ChangeGameState(object INFO)

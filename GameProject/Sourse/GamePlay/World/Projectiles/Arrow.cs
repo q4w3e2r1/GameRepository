@@ -20,7 +20,7 @@ public class Arrow : Projectile2d
 {
    
     public Arrow(Vector2 POS, AttackableObject owner, Vector2 TARGET) 
-        : base("2d\\Projectiles\\Arrow", POS, new Vector2(30, 30), owner, TARGET)
+        : base("2d\\Projectiles\\Arrow", POS, new Vector2(60, 60), owner, TARGET)
     {
         speed = 7.5f;
 

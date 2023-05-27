@@ -28,8 +28,8 @@
 		<name>Level 4 Name</name>
 		<file>Level4</file>
 		<Pos>
-			<x>600</x>
-			<y>120</y>
+			<x>700</x>
+			<y>250</y>
 		</Pos>
 	</Level>
 </Root>	
